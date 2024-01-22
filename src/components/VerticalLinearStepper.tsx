@@ -17,7 +17,7 @@ const steps = [
   },
   {
     label: 'Осень',
-    description: <></>,
+    description: <Autumn/>,
     active: true,
   },
   {

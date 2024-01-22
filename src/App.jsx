@@ -11,11 +11,11 @@ export default function App() {
   return (
     <ThemeProvider theme={rawTheme}>
       <CssBaseline enableColorScheme />
-      <NavBar/>
+      <NavBar />
       <Container fixed >
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Home />}></Route>
+            <Route path='/katyusha-project-client' element={<Home />}></Route>
           </Routes>
         </BrowserRouter>
       </Container>
