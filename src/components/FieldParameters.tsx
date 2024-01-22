@@ -4,8 +4,23 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SelectRegion from "./fields/SelectRegion";
 import { Box } from "@mui/material";
-import SiderMoisture from "./fields/SiderMoisture";
 import store from "../stores/calculationStore"
+import CustomSlider from "./fields/CustomSlider";
+
+const moisture = [
+  {
+    value: 200,
+    label: "200",
+  },
+  {
+    value: 500,
+    label: "500",
+  },
+  {
+    value: 800,
+    label: "800",
+  },
+];
 
 export default function FieldParameters() {
   return (
@@ -77,7 +92,15 @@ export default function FieldParameters() {
         </Grid>
         <Grid item xs={12} sm={6}></Grid>
         <Grid item xs={12} sm={6}>
-          <SiderMoisture />
+          <CustomSlider
+                  label={"Влагообеспеченность предприятия, мм"}
+                  max={800}
+                  min={200}
+                  step={10}
+                  defaultValue={500}
+                  units={'мм'}
+                  marks={moisture}
+              />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField

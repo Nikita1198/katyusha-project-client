@@ -38,32 +38,33 @@ export default function NavBar() {
             </IconButton>
           </Tooltip>
           <Typography
-            variant="h6"
+            variant="h4"
             noWrap
             component="a"
             href="/"
             sx={{
               ml: 2,
-              display: { xs: "none", md: "flex" },
+              display: { xs: "flex" },
               fontWeight: 400,
-              letterSpacing: ".2rem",
+              fontFamily: "Marck Script",
+              letterSpacing: ".1rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
-            КАТЮША
+            Катюша
           </Typography>
         </Toolbar>
       </AppBar>
       <Tabs
-        sx={{backgroundColor: "secondary.light"}}
+        sx={{ backgroundColor: "secondary.light" }}
         value={value}
         onChange={handleChange}
         textColor="secondary"
         indicatorColor="secondary"
         aria-label="secondary tabs example"
       >
-        <Tab value="one" label="Озимая пшеница" />
+        <Tab value="one" label="Озимая пшеница"/>
       </Tabs>
     </>
   );
