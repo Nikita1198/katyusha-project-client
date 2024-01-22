@@ -17,12 +17,12 @@ const steps = [
   },
   {
     label: 'Осень',
-    description: <Autumn/>,
+    description: <></>,
     active: true,
   },
   {
     label: 'Весна',
-    description: <Autumn/>,
+    description: 'new',
     active: true,
   },
 ];
