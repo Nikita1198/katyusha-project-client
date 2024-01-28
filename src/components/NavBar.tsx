@@ -63,7 +63,7 @@ export default function NavBar(props) {
       <HideOnScroll {...props}>
         <AppBar component="nav">
           <Container maxWidth="xl">
-            <Toolbar disableGutters>
+            <Toolbar sx={{ justifyContent: 'center' }}>
               <Typography
                 variant="h4"
                 noWrap
@@ -150,7 +150,7 @@ export default function NavBar(props) {
                     }}
                     sx={{ my: 2, color: "white", display: "block" }}
                   >
-                    {page.title}
+                    <Typography textAlign="center" sx={{pt: '3px'}}>{page.title}</Typography>
                   </Button>
                 ))}
               </Box>

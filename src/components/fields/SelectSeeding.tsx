@@ -4,6 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import store from "../../stores/calculationStore";
 
 const seedingRate = [
     {value: 2},
@@ -16,10 +17,17 @@ const seedingRate = [
 ]
 
 export default function SelectSeeding() {
-  const [rate, setRate] = React.useState(0);
+  const [rate, setRate] = React.useState(4);
+
+  React.useEffect(() => {
+    const step2Data = store.getStep2();
+    setRate(step2Data.seedingRate)
+  },[])
 
   const handleChange = (event) => {
     setRate(event.target.value);
+    store.updateStep2Field('seedingRate', event.target.value);
+    console.log(event.target.value)
   };
 
   return (
@@ -32,7 +40,7 @@ export default function SelectSeeding() {
           name="seedingRate"
           label="Норма высева, млн"
           required
-          defaultValue={4}
+          value={rate}
           onChange={handleChange}
         >
         {seedingRate.map((item) => {

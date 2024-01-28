@@ -4,7 +4,7 @@ import VerticalLinearStepper from '../components/VerticalLinearStepper'
 
 export default function WheatCalculatorOld(){
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
         <VerticalLinearStepper/>
     </Container>
   )

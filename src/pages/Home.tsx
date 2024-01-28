@@ -1,16 +1,13 @@
 import * as React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
-  Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Container,
   Grid,
   Divider,
   Typography,
-  makeStyles,
   CardActionArea,
 } from "@mui/material";
 
@@ -40,13 +37,13 @@ export default function Home() {
           variant="h4"
           align="center"
           color="textPrimary"
-          sx={{fontFamily: 'Merriweather'}}
+          sx={{fontFamily: 'Comfortaa'}}
           gutterBottom
         >
           Культура
         </Typography>
         <Typography 
-          sx={{fontFamily: 'Merriweather'}} variant="h5" align="center" color="textSecondary" paragraph >
+          sx={{fontFamily: 'Comfortaa'}} variant="h5" align="center" color="textSecondary" paragraph >
           Выберите культуру для расчета урожайности
         </Typography>
       </Container>

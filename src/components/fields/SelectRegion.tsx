@@ -4,31 +4,42 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import data from '../../assets/regions.json'
+import data from "../../assets/regions.json";
+import store from "../../stores/calculationStore";
 
 export default function SelectRegion() {
-  const [region, setRegion] = React.useState("");
+  const [value, setValue] = React.useState("");
 
-  const handleChange = (event) => {
-    setRegion(event.target.value);
+  React.useEffect(() => {
+    const step1Data = store.getStep1();
+    setValue(step1Data.region)
+  }, []);
+
+  const handleChange = (e) => {
+    store.updateStep1Field("region", e.target.value);
+    
+    setValue(e.target.value)
   };
 
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth required>
-        <InputLabel id="region">Регион</InputLabel>
+        <InputLabel>Регион</InputLabel>
         <Select
           labelId="region"
           id="region"
           name="region"
           label="Регион"
           required
-          defaultValue={0}
+          value={value}
           onChange={handleChange}
         >
-        <MenuItem value={0}>Не выбрано</MenuItem>
-        {data.regions.map((item) => {
-              return <MenuItem key={item.name} value={item.code}>{item.name}</MenuItem>
+          {data.regions.map((item) => {
+            return (
+              <MenuItem key={item.name} value={item.name}>
+                {item.name}
+              </MenuItem>
+            );
           })}
         </Select>
       </FormControl>

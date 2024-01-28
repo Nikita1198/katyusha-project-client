@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import FieldParameters from "./FieldParameters.jsx";
 import Autumn from "./Autumn.jsx";
+import { Box } from "@mui/material";
 
 const steps = [
   {
@@ -57,7 +58,9 @@ export default function VerticalLinearStepper() {
               {step.label}
             </StepLabel>
             <StepContent>
-              <Typography component={"span"}>{step.description}</Typography>
+              <Box sx={{ m: 1 }}>
+                <Typography component={"span"}>{step.description}</Typography>
+              </Box>
             </StepContent>
           </Step>
         ))}
