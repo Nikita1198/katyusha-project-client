@@ -9,6 +9,8 @@ import {
   Divider,
   Typography,
   CardActionArea,
+  Zoom,
+  Grow,
 } from "@mui/material";
 
 const cards = [
@@ -37,42 +39,44 @@ export default function Home() {
           variant="h4"
           align="center"
           color="textPrimary"
-          sx={{fontFamily: 'Comfortaa'}}
+          sx={{ fontFamily: 'Comfortaa' }}
           gutterBottom
         >
           Культура
         </Typography>
-        <Typography 
-          sx={{fontFamily: 'Comfortaa'}} variant="h5" align="center" color="textSecondary" paragraph >
+        <Typography
+          sx={{ fontFamily: 'Comfortaa' }} variant="h5" align="center" color="textSecondary" paragraph >
           Выберите культуру для расчета урожайности
         </Typography>
       </Container>
       <Divider />
-      <Container sx={{ py: 2}} maxWidth="md">
+      <Container sx={{ py: 2, mt: 0 }} maxWidth="md">
         <Grid container spacing={4} justifyContent="center">
           {cards.map((item) => (
             <Grid item key={item.id} xs={12} sm={6} md={4}>
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <CardActionArea component={RouterLink} to={item.component}>
-                  <CardMedia
-                    sx={{ pt: "66.25%" }}
-                    image={item.img}
-                    title="Image title"
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {item.label}
-                    </Typography>
-                    <Typography>{item.displayText}</Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+              <Grow in={true} timeout={item.id !== 1 ? 2000 : 1000 }>
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <CardActionArea component={RouterLink} to={item.component}>
+                    <CardMedia
+                      sx={{ pt: { xs: "36.25%", md: "66.25%" } }}
+                      image={item.img}
+                      title="Image title"
+                    />
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {item.label}
+                      </Typography>
+                      <Typography>{item.displayText}</Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grow >
             </Grid>
           ))}
         </Grid>

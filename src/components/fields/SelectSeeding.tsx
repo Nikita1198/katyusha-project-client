@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 import store from "../../stores/calculationStore";
 
 const seedingRate = [
+    {value: "Не выбрано"},
     {value: 2},
     {value: 2.5},
     {value: 3},
@@ -17,7 +18,7 @@ const seedingRate = [
 ]
 
 export default function SelectSeeding() {
-  const [rate, setRate] = React.useState(4);
+  const [rate, setRate] = React.useState('');
 
   React.useEffect(() => {
     const step2Data = store.getStep2();
@@ -27,7 +28,6 @@ export default function SelectSeeding() {
   const handleChange = (event) => {
     setRate(event.target.value);
     store.updateStep2Field('seedingRate', event.target.value);
-    console.log(event.target.value)
   };
 
   return (

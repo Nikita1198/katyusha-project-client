@@ -1,32 +1,45 @@
-import { makeAutoObservable } from "mobx";
+import { observable, reaction, makeAutoObservable } from 'mobx';
 import dayjs from 'dayjs';
 
 class Store {
-    calculation = {
+    calculation = observable({
         step1: {
             company: "",
             region: "Не выбрано",
             variety: "",
             field: "",
-            square: 0,
+            square: "",
             predecessor: "",
-            moisture: 500,
-            plannedYield: 80
+            moisture: "",
+            plannedYield: ""
         },
         step2: {
-            seedingRate: 4,
+            seedingRate: "Не выбрано",
             date: dayjs('2022-04-17'),
-            complexFertilizers: 230,
-            ammoniumNitrate: 80,
-            comment: ""
+            complexFertilizers: "",
+            ammoniumNitrate: "",
+            comment: "",
+            nitrateNitrogen: ''
         },
         step3: {
-            nitrateNitrogen: 80
         }
-    }
+    })
+
+    plannedFirstYield = { value: "", display: false };
 
     constructor() {
         makeAutoObservable(this);
+
+        reaction(
+            () => [
+                this.calculation.step2.seedingRate,
+                this.calculation.step2.complexFertilizers,
+                this.calculation.step2.ammoniumNitrate
+            ],
+            () => {
+                this.calculateFirstYield();
+            }
+        );
     }
 
     // Методы для получения данных каждого шага
@@ -42,6 +55,10 @@ class Store {
         return this.calculation.step3;
     }
 
+    getPlannedFirstYield() {
+        return this.plannedFirstYield;
+    }
+
     // Методы для изменения полей объекта calculation для step1
     updateStep1Field(field, value) {
         this.calculation.step1[field] = value;
@@ -55,6 +72,19 @@ class Store {
     // Методы для изменения поля объекта calculation для step3
     updateStep3Field(field, value) {
         this.calculation.step3[field] = value;
+    }
+
+    updatePlannedFirstYieldValue(value) {
+        this.plannedFirstYield.value = value;
+    }
+
+    updatePlannedFirstYield() {
+        let { plannedYield, moisture } = this.calculation.step1;
+
+        // Влагообеспеченность
+        const moistureDeviation = (500 - moisture) / 10;
+        this.plannedFirstYield.value = plannedYield - 1.5 * moistureDeviation;
+        console.log(plannedYield, moisture, this.plannedFirstYield.value)
     }
 
     // Метод проверки, что все поля в заданном шаге заполнены
@@ -92,6 +122,50 @@ class Store {
         return true;
     }
 
+    calculateFirstYield() {
+        // Проверяем, что все необходимые поля заполнены (не равны пустой строке)
+        if (this.calculation.step2.seedingRate !== "" &&
+            this.calculation.step2.complexFertilizers !== "" &&
+            this.calculation.step2.ammoniumNitrate !== "") {
+            
+            // Переменные для расчетов
+            let { moisture } = this.calculation.step1;
+            const { seedingRate, complexFertilizers, ammoniumNitrate } = this.calculation.step2;
+            let plannedFirstYield = this.plannedFirstYield.value ? parseFloat(this.plannedFirstYield.value) : 0; // Если plannedFirstYield.value уже есть, используем его, иначе начинаем с 0
+    
+            // Влагообеспеченность
+            const moistureDeviation = (500 - moisture) / 10;
+            plannedFirstYield -= 1.5 * moistureDeviation;
+    
+            // Норма высева
+            const seedingRateDeviation = seedingRate - 4.0;
+            if (seedingRateDeviation > 0) {
+                plannedFirstYield -= seedingRateDeviation * 4; // 2ц за каждые 0.5 млн
+            }
+    
+            // Аммофос 12:52
+            const fertilizerNorm = (plannedFirstYield * 1.5) / 52;
+            const fertilizerDeviation = fertilizerNorm - complexFertilizers;
+            if (fertilizerDeviation > 0) {
+                plannedFirstYield -= plannedFirstYield * (0.14 * (fertilizerDeviation / fertilizerNorm)); // Пересчет процентного уменьшения
+            }
+    
+            // Аммиачная селитра
+            if (ammoniumNitrate < 80 || ammoniumNitrate > 100) {
+                const ammoniumNitrateDeviation = (ammoniumNitrate - 80) / 10;
+                plannedFirstYield += ammoniumNitrateDeviation; // Добавляем или вычитаем в зависимости от отклонения
+            }
+    
+            // Обновляем plannedFirstYield
+            this.plannedFirstYield.value = Math.round(plannedFirstYield).toString(); // Приведение результата к строке, если необходимо
+            this.plannedFirstYield.display = true; // Показываем результат
+        } else {
+            // Если какие-либо из полей пустые, можно установить display в false, чтобы не показывать результат
+            this.plannedFirstYield.display = false;
+        }
+    }
+    
+
     // Метод расчета урожайности
     calculateYield() {
         let { plannedYield, moisture } = this.calculation.step1;
@@ -120,8 +194,8 @@ class Store {
             const ammoniumNitrateDeviation = (ammoniumNitrate - 80) / 10;
             plannedYield += ammoniumNitrateDeviation; // Добавляем или вычитаем в зависимости от отклонения
         }
-        
-        console.log(fertilizerNorm,ammoniumNitrate,  plannedYield)
+
+        console.log(fertilizerNorm, ammoniumNitrate, plannedYield)
 
         // Весенняя доза азота (примерный расчет, нужны дополнительные данные)
         // Здесь можно добавить логику, если она вам известна
@@ -148,9 +222,9 @@ class Store {
                 complexFertilizers: 0,
                 ammoniumNitrate: 0,
                 comment: "",
+                nitrateNitrogen: 0
             },
             step3: {
-                nitrateNitrogen: 0,
             },
         };
     }

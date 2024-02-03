@@ -23,8 +23,8 @@ export default function App() {
             <Route path='/wheatcalculatorv1' element={<WheatCalculatorOld />}></Route>
             <Route path='/wheatcalculatorv2' element={<WheatCalculator />}></Route>
           </Routes>
+          <Copyright sx={{ my: 3 }} />
         </BrowserRouter>
-        <Copyright sx={{ my: 4 }} />
       </Container>
     </ThemeProvider>
   )

@@ -44,6 +44,7 @@ export default function Autumn() {
           label="Развитие с осени"
           id='comment'
           multiline
+          required
           fullWidth
           rows={8}
           defaultValue={step2Data.comment}

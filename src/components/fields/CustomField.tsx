@@ -39,6 +39,8 @@ export default function CustomField({
         variant="outlined"
         onChange={handleInputChange}
         onBlur={handleBlur}
+        placeholder="0"
+        InputLabelProps={{ shrink: true }}
         InputProps={{
           inputProps: { step: step, min: min, max: max },
           endAdornment: <InputAdornment position="end">{units}</InputAdornment>,

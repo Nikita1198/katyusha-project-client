@@ -38,7 +38,9 @@ export default function CustomFieldTwo({
         value={value}
         variant="outlined"
         onChange={handleInputChange}
+        placeholder="0"
         onBlur={handleBlur}
+        InputLabelProps={{ shrink: true }}
         InputProps={{
           inputProps: { step: step, min: min, max: max },
           endAdornment: <InputAdornment position="end">{units}</InputAdornment>,

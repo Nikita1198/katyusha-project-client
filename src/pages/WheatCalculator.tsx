@@ -8,31 +8,39 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FieldParameters from "../components/FieldParameters";
-import Autumn from "../components/Autumn";
-import Spring from "../components/Spring";
 import store from "../stores/calculationStore";
 import CustomizedSnackbars from "../components/CustomizedSnackbars";
+import SeasonsParametrs from "../components/SeasonsParametrs";
+import { Breadcrumbs, Link } from "@mui/material";
+import Result from "../components/Result";
+import { useReactToPrint } from 'react-to-print';
 
-const steps = ["Параметры поля", "Осень", "Весна"];
+const steps = ["Поле", "Осень/Весна", "Расчет"];
 
 function getStepContent(step: number) {
   switch (step) {
     case 0:
       return <FieldParameters />;
     case 1:
-      return <Autumn />;
+      return <SeasonsParametrs />;
     case 2:
-      return <Spring />;
+      return <Result />;
     default:
-      throw new Error("Unknown step");
+      throw new Error("Что-то пошло не так! Попробуйте перезагрузить страницу");
   }
 }
 
 export default function WheatCalculator() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(1);
   const [error, setError] = React.useState(false);
   const [reasult, setResult] = React.useState(0);
 
+  // для печати компоненты
+  const componentRef = React.useRef(null)
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+  
   const handleNext = () => {
     if(activeStep === steps.length - 1)
     {
@@ -49,6 +57,11 @@ export default function WheatCalculator() {
         setError(false);
       }, 5000);
     }
+
+    if(activeStep === 0)
+    {
+      store.updatePlannedFirstYield();
+    }
   };
 
   const handleBack = () => {
@@ -56,24 +69,21 @@ export default function WheatCalculator() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ my: 12 }}>
+    <Container maxWidth="md" sx={{ mt: 12, mb: 4 }} ref={componentRef}>
+      <Breadcrumbs aria-label="breadcrumb" sx={{mb: 2}}>
+        <Link underline="hover" color="inherit" href="/home">
+          Культура
+        </Link>
+        <Typography color="text.primary">Озимая пшеница</Typography>
+      </Breadcrumbs>
       <Paper
         variant="outlined"
-        sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+        sx={{ p: { xs: 2, md: 3 } }}
       >
-        <Typography
-          sx={{ typography: { sm: "h4", xs: "h5" } }}
-          component="h1"
-          variant="h4"
-          align="center"
-        >
-          Озимая пшеница
-        </Typography>
         <Stepper
           activeStep={activeStep}
           sx={{
-            pt: 3,
-            pb: 5,
+            py: 2,
           }}
         >
           {steps.map((label) => (
@@ -94,7 +104,7 @@ export default function WheatCalculator() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Box sx={{ m: 1, minHeight: "360px" }}>
+              <Box sx={{ m: 1, minHeight: "537px" }}>
                 {getStepContent(activeStep)}
               </Box>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
