@@ -31,7 +31,7 @@ function getStepContent(step: number) {
 }
 
 export default function WheatCalculator() {
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
   const [error, setError] = React.useState(false);
   const [reasult, setResult] = React.useState(0);
 
