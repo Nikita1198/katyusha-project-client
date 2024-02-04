@@ -13,6 +13,7 @@ import CustomizedSnackbars from "../components/CustomizedSnackbars";
 import SeasonsParametrs from "../components/SeasonsParametrs";
 import { Breadcrumbs, Link } from "@mui/material";
 import Result from "../components/Result";
+import { Link as RouterLink } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 
 const steps = ["Поле", "Осень/Весна", "Расчет"];
@@ -33,7 +34,7 @@ function getStepContent(step: number) {
 export default function WheatCalculator() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [error, setError] = React.useState(false);
-  const [reasult, setResult] = React.useState(0);
+  const [reasult, setResult] = React.useState(0)
 
   // для печати компоненты
   const componentRef = React.useRef(null)
@@ -60,7 +61,7 @@ export default function WheatCalculator() {
 
     if(activeStep === 0)
     {
-      store.updatePlannedFirstYield();
+      store.updateResultStep1();
     }
   };
 
@@ -69,9 +70,9 @@ export default function WheatCalculator() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ mt: 12, mb: 4 }} ref={componentRef}>
+    <Container maxWidth="md" sx={{ mt: 10, mb: 4 }} ref={componentRef}>
       <Breadcrumbs aria-label="breadcrumb" sx={{mb: 2}}>
-        <Link underline="hover" color="inherit" href="/home">
+        <Link underline="hover" color="inherit" component={RouterLink} to="/home">
           Культура
         </Link>
         <Typography color="text.primary">Озимая пшеница</Typography>
@@ -104,7 +105,7 @@ export default function WheatCalculator() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Box sx={{ m: 1, minHeight: "537px" }}>
+              <Box sx={{ m: 1, minHeight: "58vh" }}>
                 {getStepContent(activeStep)}
               </Box>
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -118,7 +119,7 @@ export default function WheatCalculator() {
                   onClick={handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
-                  {activeStep === steps.length - 1 ? "Рассчитать" : "Далее"}
+                  {activeStep === steps.length - 2 ? "Рассчитать" : "Далее"}
                 </Button>
               </Box>
             </React.Fragment>

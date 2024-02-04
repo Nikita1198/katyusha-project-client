@@ -19,14 +19,14 @@ const cards = [
     label: "Озимая пшеница",
     displayText: "",
     component: "/wheatcalculatorv2",
-    img: "https://www.syngenta.ru/sites/g/files/kgtney371/files/styles/main_media_large/public/media/image/2022/10/21/Culture_whreat_large_01-min.png?itok=MbdpW7CG",
+    img: "/images/whreat.png",
   },
   {
     id: 2,
     label: "Картофель",
     displayText: "",
     component: "/wheatcalculatorv1",
-    img: "https://ethnomir.ru/upload/medialibrary/c0a/potato1.jpg",
+    img: "/images/potato.jpg",
   },
 ];
 
@@ -66,7 +66,7 @@ export default function Home() {
                     <CardMedia
                       sx={{ pt: { xs: "36.25%", md: "66.25%" } }}
                       image={item.img}
-                      title="Image title"
+                      title={item.label}
                     />
                     <CardContent sx={{ flexGrow: 1 }}>
                       <Typography gutterBottom variant="h5" component="h2">

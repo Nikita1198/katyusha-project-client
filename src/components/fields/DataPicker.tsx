@@ -7,6 +7,8 @@ import { ruRU } from "@mui/x-date-pickers/locales";
 import store from "../../stores/calculationStore";
 
 export default function DateOfGermination() {
+  const date = store.getStep2();
+
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
@@ -20,6 +22,7 @@ export default function DateOfGermination() {
         onChange={(newValue) => {
           store.updateStep2Field('date', newValue);
         }}
+        value={date.date}
         slotProps={{
           textField: {
             required: true,
@@ -30,3 +33,7 @@ export default function DateOfGermination() {
     </LocalizationProvider>
   );
 }
+function dayjs(arg0: string): any {
+  throw new Error("Function not implemented.");
+}
+

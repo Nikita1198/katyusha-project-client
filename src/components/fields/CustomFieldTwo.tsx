@@ -10,6 +10,7 @@ export default function CustomFieldTwo({
   step,
   defaultValue,
   units,
+  disabled
 }) {
   const [value, setValue] = React.useState(defaultValue);
 
@@ -19,11 +20,13 @@ export default function CustomFieldTwo({
     store.updateStep2Field(e.target.id, newValue);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e) => {
     if (value < min) {
       setValue(min);
+      store.updateStep2Field(e.target.id, min);
     } else if (value > max) {
       setValue(max);
+      store.updateStep2Field(e.target.id, max);
     }
   };
 
@@ -35,6 +38,7 @@ export default function CustomFieldTwo({
         id={id}
         label={label}
         type="number"
+        disabled={disabled}
         value={value}
         variant="outlined"
         onChange={handleInputChange}

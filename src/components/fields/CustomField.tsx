@@ -19,11 +19,13 @@ export default function CustomField({
     store.updateStep1Field(e.target.id, newValue);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e) => {
     if (value < min) {
       setValue(min);
+      store.updateStep1Field(e.target.id, min);
     } else if (value > max) {
       setValue(max);
+      store.updateStep1Field(e.target.id, max);
     }
   };
 

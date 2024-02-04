@@ -26,6 +26,7 @@ export default function Autumn() {
           step={10}
           defaultValue={step2Data.complexFertilizers}
           units={"кг/га"}
+          disabled={false}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
@@ -37,6 +38,7 @@ export default function Autumn() {
           step={10}
           defaultValue={step2Data.ammoniumNitrate}
           units={"кг/га"}
+          disabled={false}
         />
       </Grid>
       <Grid item xs={12}>
