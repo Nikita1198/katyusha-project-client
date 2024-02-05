@@ -67,6 +67,10 @@ class Store {
         return this.calculation.step3;
     }
 
+    getCalculation() {
+        return this.calculation;
+    }
+
     getPlannedFirstYield() {
         return this.plannedFirstYield;
     }
@@ -176,6 +180,7 @@ class Store {
             if (plannedFirstYield >= 0) { 
                 this.plannedFirstYield.value = Math.round(plannedFirstYield).toString();
                 this.calculation.step3.step2result = this.plannedFirstYield.value;
+                this.calculation.step3.totalresult = this.plannedFirstYield.value;
                 this.plannedFirstYield.display = true;
             } else {
                 this.plannedFirstYield.display = false;

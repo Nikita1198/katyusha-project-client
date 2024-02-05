@@ -42,7 +42,7 @@ export default function SelectNitrate({ disabled }) {
           labelId="nitrateNitrogen"
           id="nitrateNitrogen"
           name="nitrateNitrogen"
-          label="Доза нитратного азота в почве (слой 0-40см)"
+          label="Доза нитратного азота в почве (слой 0-40см), кг"
           required
           disabled={!disabled}
           onChange={handleChange}

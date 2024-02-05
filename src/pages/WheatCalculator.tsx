@@ -13,8 +13,9 @@ import CustomizedSnackbars from "../components/CustomizedSnackbars";
 import SeasonsParametrs from "../components/SeasonsParametrs";
 import { Breadcrumbs, Link } from "@mui/material";
 import Result from "../components/Result";
-import { Link as RouterLink } from 'react-router-dom';
-import { useReactToPrint } from 'react-to-print';
+import { Link as RouterLink } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
+import PrintIcon from "@mui/icons-material/Print";
 
 const steps = ["Поле", "Осень/Весна", "Расчет"];
 
@@ -32,19 +33,18 @@ function getStepContent(step: number) {
 }
 
 export default function WheatCalculator() {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(2);
   const [error, setError] = React.useState(false);
-  const [reasult, setResult] = React.useState(0)
+  const [reasult, setResult] = React.useState(0);
 
   // для печати компоненты
-  const componentRef = React.useRef(null)
+  const componentRef = React.useRef(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  
+
   const handleNext = () => {
-    if(activeStep === steps.length - 1)
-    {
+    if (activeStep === steps.length - 1) {
       let calculation = store.calculateYield();
       setResult(calculation);
     }
@@ -59,8 +59,7 @@ export default function WheatCalculator() {
       }, 5000);
     }
 
-    if(activeStep === 0)
-    {
+    if (activeStep === 0) {
       store.updateResultStep1();
     }
   };
@@ -71,16 +70,18 @@ export default function WheatCalculator() {
 
   return (
     <Container maxWidth="md" sx={{ mt: 10, mb: 4 }} ref={componentRef}>
-      <Breadcrumbs aria-label="breadcrumb" sx={{mb: 2}}>
-        <Link underline="hover" color="inherit" component={RouterLink} to="/home">
+      <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
+        <Link
+          underline="hover"
+          color="inherit"
+          component={RouterLink}
+          to="/home"
+        >
           Культура
         </Link>
         <Typography color="text.primary">Озимая пшеница</Typography>
       </Breadcrumbs>
-      <Paper
-        variant="outlined"
-        sx={{ p: { xs: 2, md: 3 } }}
-      >
+      <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 } }}>
         <Stepper
           activeStep={activeStep}
           sx={{
@@ -94,36 +95,35 @@ export default function WheatCalculator() {
           ))}
         </Stepper>
         <Box>
-          {activeStep === steps.length ? (
-            <React.Fragment>
-              <Typography variant="h5" gutterBottom>
-                Спасибо за расчет!
-              </Typography>
-              <Typography variant="subtitle1">
-                Ваша урожайность: {reasult}
-              </Typography>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <Box sx={{ m: 1, minHeight: "58vh" }}>
-                {getStepContent(activeStep)}
-              </Box>
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                    Назад
-                  </Button>
-                )}
-                <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  {activeStep === steps.length - 2 ? "Рассчитать" : "Далее"}
-                </Button>
-              </Box>
-            </React.Fragment>
-          )}
+          <Box sx={{ m: 1, minHeight: "57.5vh" }}>
+            {getStepContent(activeStep)}
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            {activeStep !== 0 && (
+              <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                Назад
+              </Button>
+            )}
+            {activeStep <= steps.length - 2  && (
+              <Button
+                variant="contained"
+                onClick={handleNext}
+                sx={{ mt: 3, ml: 1 }}
+              >
+                {activeStep < 1 ? "Далее" : "Рассчитать"}
+              </Button>
+            )}
+            {activeStep === steps.length - 1 && (
+              <Button
+                variant="contained"
+                onClick={handlePrint}
+                startIcon={<PrintIcon />}
+                sx={{ mt: 3, ml: 1 }}
+              >
+                Печать
+              </Button>
+            )}
+          </Box>
         </Box>
       </Paper>
       <CustomizedSnackbars toggle={error} />

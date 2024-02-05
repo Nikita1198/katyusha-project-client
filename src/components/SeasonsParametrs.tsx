@@ -82,7 +82,7 @@ export default observer(function SeasonsParametrs() {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ mt: 3 }}>
+      <Box sx={{ mt: 2 }}>
         <Typography variant="h6" sx={{ mb: 2 }}>
           Весна
         </Typography>
