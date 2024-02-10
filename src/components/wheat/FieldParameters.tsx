@@ -2,9 +2,9 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import SelectRegion from "./fields/SelectRegion";
-import store from "../stores/calculationStore";
-import CustomField from "./fields/CustomField";
+import SelectRegion from "../wheat/fields/SelectRegion";
+import store from "../../stores/calculationStore";
+import CustomField from "../wheat/fields/CustomField";
 import { observer } from 'mobx-react-lite';
 import { Box, Typography } from "@mui/material";
 
@@ -102,7 +102,7 @@ export default observer(function FieldParameters() {
         <Grid item xs={12} sm={6}>
           <CustomField
             id={"moisture"}
-            label={"Влагообеспеченность предприятия, мм"}
+            label={"Годовая влагообеспеченность предприятия, мм"}
             max={800}
             min={200}
             step={10}

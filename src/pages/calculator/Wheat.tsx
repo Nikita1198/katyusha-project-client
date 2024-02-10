@@ -7,12 +7,12 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FieldParameters from "../components/FieldParameters";
-import store from "../stores/calculationStore";
-import CustomizedSnackbars from "../components/CustomizedSnackbars";
-import SeasonsParametrs from "../components/SeasonsParametrs";
+import FieldParameters from "../../components/wheat/FieldParameters";
+import store from "../../stores/calculationStore";
+import CustomizedSnackbars from "../../components/common/CustomizedSnackbars";
+import SeasonsParametrs from "../../components/wheat/SeasonsParametrs";
 import { Breadcrumbs, Link } from "@mui/material";
-import Result from "../components/Result";
+import Result from "../../components/wheat/Result";
 import { Link as RouterLink } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
@@ -33,7 +33,7 @@ function getStepContent(step: number) {
 }
 
 export default function WheatCalculator() {
-  const [activeStep, setActiveStep] = React.useState(2);
+  const [activeStep, setActiveStep] = React.useState(0);
   const [error, setError] = React.useState(false);
   const [reasult, setResult] = React.useState(0);
 
@@ -75,7 +75,7 @@ export default function WheatCalculator() {
           underline="hover"
           color="inherit"
           component={RouterLink}
-          to="/home"
+          to="/cultures"
         >
           Культура
         </Link>
@@ -104,7 +104,7 @@ export default function WheatCalculator() {
                 Назад
               </Button>
             )}
-            {activeStep <= steps.length - 2  && (
+            {activeStep <= steps.length - 2 && (
               <Button
                 variant="contained"
                 onClick={handleNext}

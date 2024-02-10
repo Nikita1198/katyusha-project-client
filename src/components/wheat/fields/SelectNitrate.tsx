@@ -4,7 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import store from "../../stores/calculationStore";
+import store from "../../../stores/calculationStore";
 
 export default function SelectNitrate({ disabled }) {
   const [value, setValue] = React.useState("Не выбрано");

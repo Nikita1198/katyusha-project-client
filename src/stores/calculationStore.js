@@ -203,10 +203,13 @@ class Store {
         const nitrogenToAdd = requiredNitrogen - soilNitrate;
         
         // Пересчет в количество аммиачной селитры, используя содержание азота в аммиачной селитре (34.4%)
-        const ammoniumNitrateRequired = nitrogenToAdd / 0.344;
+        let ammoniumNitrateRequired = nitrogenToAdd / 0.344;
         
+        if(ammoniumNitrateRequired < 0) {
+            ammoniumNitrateRequired = 0;
+        }
+
         this.calculation.step2.ammoniumNitrateRequired = Math.round(ammoniumNitrateRequired).toString();
-        console.log(ammoniumNitrateRequired);
     }
 
     // Метод расчета урожайности

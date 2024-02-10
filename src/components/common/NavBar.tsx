@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 
-const pages = [{ title: "Калькулятор удобрений", component: "/home" }];
+const pages = [{ title: "Калькулятор урожайности", component: "/cultures" }];
 const settings = ["Результаты"];
 
 function HideOnScroll(props) {

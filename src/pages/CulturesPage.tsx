@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink  } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -18,19 +18,19 @@ const cards = [
     id: 1,
     label: "Озимая пшеница",
     displayText: "",
-    component: "/wheatcalculatorv2",
+    component: "/calculator/wheat",
     img: "/images/whreat.png",
   },
   {
     id: 2,
     label: "Картофель",
     displayText: "",
-    component: "/wheatcalculatorv1",
+    component: "/",
     img: "/images/potato.jpg",
   },
 ];
 
-export default function Home() {
+export default function CulturesPage() {
   return (
     <>
       <Container maxWidth="md">
@@ -83,7 +83,4 @@ export default function Home() {
       </Container>
     </>
   );
-}
-function useStyles() {
-  throw new Error("Function not implemented.");
 }

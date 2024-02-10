@@ -1,12 +1,12 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import SelectSeeding from "./fields/SelectSeeding";
-import DateOfGermination from "./fields/DataPicker";
-import CustomFieldTwo from "./fields/CustomFieldTwo";
-import store from "../stores/calculationStore";
+import DateOfGermination from "../wheat/fields/DataPicker";
+import CustomFieldTwo from "../wheat/fields/CustomFieldTwo";
+import store from "../../stores/calculationStore";
 import { observer } from "mobx-react-lite";
-import SelectNitrate from "./fields/SelectNitrate";
 import { InputAdornment, Box, TextField, Typography } from "@mui/material";
+import SelectNitrate from "../wheat/fields/SelectNitrate";
+import SelectSeeding from "../wheat/fields/SelectSeeding";
 
 export default observer(function SeasonsParametrs() {
   const step2Data = store.getStep2();
@@ -27,7 +27,7 @@ export default observer(function SeasonsParametrs() {
           <Grid item xs={12} sm={6}>
             <CustomFieldTwo
               id={"complexFertilizers"}
-              label={"Норма сложных удобрений, кг/га"}
+              label={"Норма сложных удобрений (Аммофос 12:52), кг/га"}
               max={250}
               min={50}
               step={10}
