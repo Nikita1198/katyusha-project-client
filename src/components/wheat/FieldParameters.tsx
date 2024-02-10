@@ -10,7 +10,7 @@ import { Box, Typography } from "@mui/material";
 
 export default observer(function FieldParameters() {
   const step1Data = store.getStep1();
-
+  const invalidFields: string[] = store.getInvalidFields();
   return (
     <Box>
       <Typography variant="h6" sx={{ mb: 2 }}>
@@ -26,6 +26,7 @@ export default observer(function FieldParameters() {
             type="text"
             fullWidth
             value={step1Data.company}
+            error={invalidFields.includes("company")}
             variant="outlined"
             onChange={(e) => {
               store.updateStep1Field(e.target.id, e.target.value);
@@ -33,7 +34,7 @@ export default observer(function FieldParameters() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <SelectRegion />
+          <SelectRegion error={invalidFields.includes("region")}/>
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -43,6 +44,7 @@ export default observer(function FieldParameters() {
             required
             type="text"
             value={step1Data.variety}
+            error={invalidFields.includes("variety")}
             onChange={(e) => {
               store.updateStep1Field(e.target.id, e.target.value);
             }}
@@ -57,6 +59,7 @@ export default observer(function FieldParameters() {
             name="field"
             type="text"
             value={step1Data.field}
+            error={invalidFields.includes("field")}
             label="Поле №:"
             onChange={(e) => {
               store.updateStep1Field(e.target.id, e.target.value);
@@ -72,6 +75,7 @@ export default observer(function FieldParameters() {
             name="square"
             label="Площадь, га"
             value={step1Data.square}
+            error={invalidFields.includes("square")}
             type="number"
             InputProps={{
               inputMode: "numeric",
@@ -92,6 +96,7 @@ export default observer(function FieldParameters() {
             label="Предшественник"
             fullWidth
             value={step1Data.predecessor}
+            error={invalidFields.includes("predecessor")}
             type="text"
             onChange={(e) => {
               store.updateStep1Field(e.target.id, e.target.value);
@@ -107,6 +112,7 @@ export default observer(function FieldParameters() {
             min={200}
             step={10}
             defaultValue={step1Data.moisture}
+            error={invalidFields.includes("moisture")}
             units={"мм"}
           />
         </Grid>
@@ -118,6 +124,7 @@ export default observer(function FieldParameters() {
             label="Планируемая урожайность, ц/га"
             type="number"
             defaultValue={step1Data.plannedYield}
+            error={invalidFields.includes("plannedYield")}
             InputProps={{
               inputMode: "numeric",
               endAdornment: <InputAdornment position="end">ц/га</InputAdornment>,

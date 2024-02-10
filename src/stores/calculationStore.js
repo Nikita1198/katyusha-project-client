@@ -18,6 +18,7 @@ class Store {
             complexFertilizers: "",
             ammoniumNitrate: "",
             comment: "",
+            plannedFirstYield: { value: "", display: false },
             nitrateNitrogen: "Не выбрано",
             ammoniumNitrateRequired: 0,
         },
@@ -25,22 +26,34 @@ class Store {
             step1result: 0,
             step2result: 0,
             totalresult: 0
-        }
+        },
+        invalidFields: []
     })
-
-    plannedFirstYield = { value: "", display: false };
 
     constructor() {
         makeAutoObservable(this);
 
         reaction(
             () => [
+                this.calculation.step1.moisture,
+                this.calculation.step1.plannedYield
+            ],
+            () => {
+                this.updateResultStep1();
+            }
+        );
+
+
+        reaction(
+            () => [
+                this.calculation.step3.step1result,
                 this.calculation.step2.seedingRate,
                 this.calculation.step2.complexFertilizers,
                 this.calculation.step2.ammoniumNitrate
             ],
             () => {
                 this.calculateFirstYield();
+                this.calculateRequiredAmmoniumNitrate();
             }
         );
 
@@ -71,10 +84,6 @@ class Store {
         return this.calculation;
     }
 
-    getPlannedFirstYield() {
-        return this.plannedFirstYield;
-    }
-
     // Методы для изменения полей объекта calculation для step1
     updateStep1Field(field, value) {
         this.calculation.step1[field] = value;
@@ -83,15 +92,6 @@ class Store {
     // Методы для изменения полей объекта calculation для step2
     updateStep2Field(field, value) {
         this.calculation.step2[field] = value;
-    }
-
-    // Методы для изменения поля объекта calculation для step3
-    updateStep3Field(field, value) {
-        this.calculation.step3[field] = value;
-    }
-
-    updatePlannedFirstYieldValue(value) {
-        this.plannedFirstYield.value = value;
     }
 
     updateResultStep1() {
@@ -118,22 +118,70 @@ class Store {
             default:
                 return false;
         }
-    
+
         for (let key in fields) {
             const value = fields[key];
-    
+
             // Проверяем, что строковые поля не пустые и не равны "Не выбрано"
             if (typeof value === 'string' && (value.trim() === '' || value === "Не выбрано")) return false;
-    
+
             // Проверяем, что числовые поля не равны 0 и не NaN
             if (typeof value === 'number' && (value === 0 || isNaN(value))) return false;
-    
+
             // Проверяем, что поля с объектами (например, даты) не null и не undefined
             if (typeof value === 'object' && (value === null || value === undefined)) return false;
         }
-    
+
         // Все поля заполнены корректно
         return true;
+    }
+
+    getEmptyFields(step) {
+        let fields = {};
+        switch (step) {
+            case 0:
+                fields = this.calculation.step1;
+                break;
+            case 1:
+                fields = this.calculation.step2;
+                break;
+            case 2:
+                fields = this.calculation.step3;
+                break;
+            default:
+                // Возвращаем пустой массив, так как неизвестный шаг не содержит полей для проверки
+                return [];
+        }
+
+        const invalidFields = [];
+
+        for (let key in fields) {
+            const value = fields[key];
+
+            // Добавляем условия проверки и добавляем название поля в массив invalidFields, если оно не соответствует условиям
+            if (typeof value === 'string' && (value.trim() === '' || value === "Не выбрано")) {
+                invalidFields.push(key);
+                continue;
+            }
+
+            if (typeof value === 'number' && (value === 0 || isNaN(value))) {
+                invalidFields.push(key);
+                continue;
+            }
+
+            if (typeof value === 'object' && (value === null || value === undefined)) {
+                invalidFields.push(key);
+                continue;
+            }
+        }
+
+        this.calculation.invalidFields = invalidFields;
+
+        return invalidFields;
+    }
+
+    getInvalidFields() {
+        return this.calculation.invalidFields;
     }
 
     // Метод расчета предварительной урожайности во втором шаге
@@ -177,39 +225,42 @@ class Store {
             }
 
             // Обновляем plannedFirstYield
-            if (plannedFirstYield >= 0) { 
-                this.plannedFirstYield.value = Math.round(plannedFirstYield).toString();
-                this.calculation.step3.step2result = this.plannedFirstYield.value;
-                this.calculation.step3.totalresult = this.plannedFirstYield.value;
-                this.plannedFirstYield.display = true;
+            if (plannedFirstYield >= 0) {
+                this.calculation.step2.plannedFirstYield.value = Math.round(plannedFirstYield).toString();
+                this.calculation.step3.step2result = this.calculation.step2.plannedFirstYield.value;
+                this.calculation.step3.totalresult = this.calculation.step2.plannedFirstYield.value;
+                this.calculation.step2.plannedFirstYield.display = true;
             } else {
-                this.plannedFirstYield.display = false;
+                this.calculation.step2.plannedFirstYield.display = false;
             }
         } else {
-            // Если какие-либо из полей пустые, можно установить display в false, чтобы не показывать результат
-            this.plannedFirstYield.display = false;
+            this.calculation.step2.plannedFirstYield.display = false;
+            this.calculation.step2.ammoniumNitrateRequired = "";
+            this.calculation.step2.nitrateNitrogen = "Не выбрано";
         }
     }
 
     // Метод расчета требуемого количества аммиачной селитры
     calculateRequiredAmmoniumNitrate() {
-        const plannedYield = this.calculation.step3.step2result;
-        const soilNitrate = this.calculation.step2.nitrateNitrogen;
-        
-        // Расчет необходимого количества азота для достижения планируемой урожайности
-        const requiredNitrogen = plannedYield * 3; // На каждые 10 центнеров урожая требуется 30 кг азота
-        
-        // Вычисляем сколько азота нужно добавить, исходя из того, что уже есть в почве
-        const nitrogenToAdd = requiredNitrogen - soilNitrate;
-        
-        // Пересчет в количество аммиачной селитры, используя содержание азота в аммиачной селитре (34.4%)
-        let ammoniumNitrateRequired = nitrogenToAdd / 0.344;
-        
-        if(ammoniumNitrateRequired < 0) {
-            ammoniumNitrateRequired = 0;
-        }
+        if (this.calculation.step2.nitrateNitrogen !== "Не выбрано") {
+            const plannedYield = this.calculation.step3.step2result;
+            const soilNitrate = this.calculation.step2.nitrateNitrogen;
 
-        this.calculation.step2.ammoniumNitrateRequired = Math.round(ammoniumNitrateRequired).toString();
+            // Расчет необходимого количества азота для достижения планируемой урожайности
+            const requiredNitrogen = plannedYield * 3; // На каждые 10 центнеров урожая требуется 30 кг азота
+
+            // Вычисляем сколько азота нужно добавить, исходя из того, что уже есть в почве
+            const nitrogenToAdd = requiredNitrogen - soilNitrate;
+
+            // Пересчет в количество аммиачной селитры, используя содержание азота в аммиачной селитре (34.4%)
+            let ammoniumNitrateRequired = nitrogenToAdd / 0.344;
+
+            if (ammoniumNitrateRequired < 0) {
+                ammoniumNitrateRequired = 0;
+            }
+
+            this.calculation.step2.ammoniumNitrateRequired = Math.round(ammoniumNitrateRequired).toString();
+        }
     }
 
     // Метод расчета урожайности
@@ -254,24 +305,29 @@ class Store {
         this.calculation = {
             step1: {
                 company: "",
-                region: "",
+                region: "Не выбрано",
                 variety: "",
                 field: "",
-                square: 0,
+                square: "",
                 predecessor: "",
-                moisture: 0,
-                plannedYield: 0,
+                moisture: "",
+                plannedYield: ""
             },
             step2: {
-                seedingRate: 0,
+                seedingRate: "Не выбрано",
                 date: null,
-                complexFertilizers: 0,
-                ammoniumNitrate: 0,
+                complexFertilizers: "",
+                ammoniumNitrate: "",
                 comment: "",
-                nitrateNitrogen: 0
+                plannedFirstYield: { value: "", display: false },
+                nitrateNitrogen: "Не выбрано",
+                ammoniumNitrateRequired: 0,
             },
             step3: {
-            },
+                step1result: 0,
+                step2result: 0,
+                totalresult: 0
+            }
         };
     }
 }

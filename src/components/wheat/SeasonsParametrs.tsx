@@ -10,7 +10,7 @@ import SelectSeeding from "../wheat/fields/SelectSeeding";
 
 export default observer(function SeasonsParametrs() {
   const step2Data = store.getStep2();
-
+  const invalidFields: string[] = store.getInvalidFields();
   return (
     <>
       <Box>
@@ -19,7 +19,7 @@ export default observer(function SeasonsParametrs() {
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <SelectSeeding />
+            <SelectSeeding/>
           </Grid>
           <Grid item xs={12} sm={6}>
             <DateOfGermination />
@@ -56,6 +56,7 @@ export default observer(function SeasonsParametrs() {
               required
               fullWidth
               rows={8}
+              error={invalidFields.includes("comment")}
               defaultValue={step2Data.comment}
               InputLabelProps={{ shrink: true }}
               placeholder="Укажите развитие посевов с оcени"
@@ -65,17 +66,17 @@ export default observer(function SeasonsParametrs() {
               }}
               inputProps={{
                 style: {
-                  height: "80px",
+                  height: "45px",
                 },
               }}
             />
           </Grid>
           <Grid item xs={12}>
             <Typography variant="subtitle2" sx={{minHeight: 22}}>
-              {store.plannedFirstYield.display && (
+              {step2Data.plannedFirstYield.display && (
                 <>
                   Предварительная урожайность c Осени:{" "}
-                  {store.plannedFirstYield.value} ц/га
+                  {step2Data.plannedFirstYield.value} ц/га
                 </>
               )}
             </Typography>
@@ -88,7 +89,7 @@ export default observer(function SeasonsParametrs() {
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <SelectNitrate disabled={store.plannedFirstYield.display}/>
+            <SelectNitrate disabled={step2Data.plannedFirstYield.display}/>
           </Grid>
           <Grid item xs={12} sm={6}>
           <TextField
@@ -96,6 +97,7 @@ export default observer(function SeasonsParametrs() {
               id="ammoniumNitrateRequired"
               type="number"
               value={step2Data.ammoniumNitrateRequired}
+              error={invalidFields.includes("ammoniumNitrateRequired")}
               InputLabelProps={{ shrink: true }}
               fullWidth
               disabled={store.calculation.step2.nitrateNitrogen != ""}

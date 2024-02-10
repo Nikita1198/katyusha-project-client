@@ -7,16 +7,10 @@ import Select from "@mui/material/Select";
 import store from "../../../stores/calculationStore";
 
 export default function SelectNitrate({ disabled }) {
-  const [value, setValue] = React.useState("Не выбрано");
-
-  React.useEffect(() => {
-    const step2Data = store.getStep2();
-    setValue(step2Data.nitrateNitrogen);
-  }, []);
+  const step2Datav = store.getStep2();
 
   const handleChange = (e) => {
     store.updateStep2Field("nitrateNitrogen", e.target.value);
-    setValue(e.target.value);
   };
 
   const range = [
@@ -46,7 +40,7 @@ export default function SelectNitrate({ disabled }) {
           required
           disabled={!disabled}
           onChange={handleChange}
-          value={value}
+          value={step2Datav.nitrateNitrogen}
         >
           {range.map((item) => {
             return (

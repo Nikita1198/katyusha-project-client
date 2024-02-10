@@ -35,7 +35,6 @@ function getStepContent(step: number) {
 export default function WheatCalculator() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [error, setError] = React.useState(false);
-  const [reasult, setResult] = React.useState(0);
 
   // для печати компоненты
   const componentRef = React.useRef(null);
@@ -44,23 +43,10 @@ export default function WheatCalculator() {
   });
 
   const handleNext = () => {
-    if (activeStep === steps.length - 1) {
-      let calculation = store.calculateYield();
-      setResult(calculation);
-    }
-
-    if (store.isStepComplete(activeStep)) {
-      setError(false);
+    if (store.getEmptyFields(activeStep).length == 0) {
       setActiveStep(activeStep + 1);
     } else {
       setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 5000);
-    }
-
-    if (activeStep === 0) {
-      store.updateResultStep1();
     }
   };
 
@@ -99,20 +85,23 @@ export default function WheatCalculator() {
             {getStepContent(activeStep)}
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            {activeStep !== 0 && (
+            {/* Кнопка "Назад" отображается всегда, кроме первого шага */}
+            {activeStep > 0 && (
               <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                 Назад
               </Button>
             )}
-            {activeStep <= steps.length - 2 && (
+            {/* Кнопка "Далее" или "Рассчитать" отображается на всех шагах, кроме последнего */}
+            {activeStep < steps.length - 1 && (
               <Button
                 variant="contained"
                 onClick={handleNext}
                 sx={{ mt: 3, ml: 1 }}
               >
-                {activeStep < 1 ? "Далее" : "Рассчитать"}
+                {activeStep === steps.length - 2 ? "Рассчитать" : "Далее"}
               </Button>
             )}
+            {/* Кнопка "Печать" отображается только на последнем шаге */}
             {activeStep === steps.length - 1 && (
               <Button
                 variant="contained"
@@ -126,7 +115,7 @@ export default function WheatCalculator() {
           </Box>
         </Box>
       </Paper>
-      <CustomizedSnackbars toggle={error} />
+      <CustomizedSnackbars toggle={error} handleClose={() => setError(false)} />
     </Container>
   );
 }

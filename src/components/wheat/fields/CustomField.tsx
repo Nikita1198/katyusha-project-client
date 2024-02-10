@@ -9,6 +9,7 @@ export default function CustomField({
   step,
   defaultValue,
   units,
+  error
 }) {
   const [value, setValue] = React.useState(defaultValue);
 
@@ -37,6 +38,7 @@ export default function CustomField({
         label={label}
         type="number"
         value={value}
+        error={error}
         variant="outlined"
         onChange={handleInputChange}
         onBlur={handleBlur}

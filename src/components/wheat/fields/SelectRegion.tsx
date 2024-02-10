@@ -7,7 +7,7 @@ import Select from "@mui/material/Select";
 import data from "../../../assets/regions.json";
 import store from "../../../stores/calculationStore";
 
-export default function SelectRegion() {
+export default function SelectRegion({error}) {
   const [value, setValue] = React.useState("");
 
   React.useEffect(() => {
@@ -23,14 +23,15 @@ export default function SelectRegion() {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth required>
-        <InputLabel>Регион</InputLabel>
+      <FormControl fullWidth required error={error}>
+        <InputLabel error={error}>Регион</InputLabel>
         <Select
           labelId="region"
           id="region"
           name="region"
           label="Регион"
           required
+          error={error}
           value={value}
           onChange={handleChange}
         >
