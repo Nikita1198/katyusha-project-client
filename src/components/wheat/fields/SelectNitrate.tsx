@@ -30,7 +30,7 @@ export default function SelectNitrate({ disabled }) {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth required>
+      <FormControl fullWidth required >
         <InputLabel>Доза нитратного азота в почве (слой 0-40см)</InputLabel>
         <Select
           labelId="nitrateNitrogen"

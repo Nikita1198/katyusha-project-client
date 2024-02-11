@@ -17,7 +17,7 @@ const seedingRate = [
     {value: 5},
 ]
 
-export default function SelectSeeding() {
+export default function SelectSeeding({error}) {
   const [rate, setRate] = React.useState('');
 
   React.useEffect(() => {
@@ -29,10 +29,10 @@ export default function SelectSeeding() {
     setRate(event.target.value);
     store.updateStep2Field('seedingRate', event.target.value);
   };
-
+  
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth required>
+      <FormControl fullWidth required error={error}>
         <InputLabel id="seedingRate">Норма высева, млн</InputLabel>
         <Select
           labelId="seedingRate"

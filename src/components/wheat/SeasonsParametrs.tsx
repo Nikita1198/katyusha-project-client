@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite";
 import { InputAdornment, Box, TextField, Typography } from "@mui/material";
 import SelectNitrate from "../wheat/fields/SelectNitrate";
 import SelectSeeding from "../wheat/fields/SelectSeeding";
+import SelectMoistureSpring from "./fields/SelectMoistureSpring";
 
 export default observer(function SeasonsParametrs() {
   const step2Data = store.getStep2();
@@ -19,10 +20,10 @@ export default observer(function SeasonsParametrs() {
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <SelectSeeding/>
+            <SelectSeeding error={invalidFields.includes("seedingRate")} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <DateOfGermination />
+            <DateOfGermination error={invalidFields.includes("date")} />
           </Grid>
           <Grid item xs={12} sm={6}>
             <CustomFieldTwo
@@ -33,6 +34,7 @@ export default observer(function SeasonsParametrs() {
               step={10}
               defaultValue={step2Data.complexFertilizers}
               units={"кг/га"}
+              error={invalidFields.includes("complexFertilizers")}
               disabled={false}
             />
           </Grid>
@@ -45,6 +47,7 @@ export default observer(function SeasonsParametrs() {
               step={10}
               defaultValue={step2Data.ammoniumNitrate}
               units={"кг/га"}
+              error={invalidFields.includes("ammoniumNitrate")}
               disabled={false}
             />
           </Grid>
@@ -71,33 +74,38 @@ export default observer(function SeasonsParametrs() {
               }}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="subtitle2" sx={{minHeight: 22}}>
-              {step2Data.plannedFirstYield.display && (
-                <>
-                  Предварительная урожайность c Осени:{" "}
-                  {step2Data.plannedFirstYield.value} ц/га
-                </>
-              )}
-            </Typography>
-          </Grid>
         </Grid>
       </Box>
-      <Box sx={{ mt: 2 }}>
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          Весна
-        </Typography>
+      <Box sx={{ mt: 4 }}>
+        <Box
+          display="flex"
+          flexDirection={{ xs: 'column', sm: 'row' }} 
+          justifyContent="space-between"
+          alignItems={{ xs: 'flex-start', sm: 'center' }}
+          sx={{ mb: 2, width: '100%' }}
+        >
+          <Typography variant="h6" sx={{ textAlign: { xs: 'left', sm: 'left' } }}>
+            Весна
+          </Typography>
+          <Typography variant="subtitle2" sx={{ textAlign: { xs: 'left', sm: 'right' }, my: { xs: 2, sm: 0 } }}>
+            {step2Data.plannedFirstYield.display && (
+              <>
+                Предварительная урожайность c Осени: {step2Data.plannedFirstYield.value} ц/га
+              </>
+            )}
+          </Typography>
+        </Box>
+
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <SelectNitrate disabled={step2Data.plannedFirstYield.display}/>
+            <SelectNitrate disabled={step2Data.plannedFirstYield.display} />
           </Grid>
           <Grid item xs={12} sm={6}>
-          <TextField
+            <TextField
               label="Требуемое количество аммиачной селитры, кг/га"
               id="ammoniumNitrateRequired"
               type="number"
               value={step2Data.ammoniumNitrateRequired}
-              error={invalidFields.includes("ammoniumNitrateRequired")}
               InputLabelProps={{ shrink: true }}
               fullWidth
               disabled={store.calculation.step2.nitrateNitrogen != ""}
@@ -109,6 +117,9 @@ export default observer(function SeasonsParametrs() {
                 endAdornment: <InputAdornment position="end">кг/га</InputAdornment>,
               }}
             />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <SelectMoistureSpring disabled={step2Data.plannedFirstYield.display} />
           </Grid>
         </Grid>
       </Box>

@@ -9,7 +9,8 @@ export default function CustomFieldTwo({
   step,
   defaultValue,
   units,
-  disabled
+  disabled, 
+  error
 }) {
   const [value, setValue] = React.useState(defaultValue);
 
@@ -39,6 +40,7 @@ export default function CustomFieldTwo({
         type="number"
         disabled={disabled}
         value={value}
+        error={error}
         variant="outlined"
         onChange={handleInputChange}
         placeholder="0"

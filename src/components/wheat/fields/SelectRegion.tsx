@@ -24,14 +24,13 @@ export default function SelectRegion({error}) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth required error={error}>
-        <InputLabel error={error}>Регион</InputLabel>
+        <InputLabel >Регион</InputLabel>
         <Select
           labelId="region"
           id="region"
           name="region"
           label="Регион"
           required
-          error={error}
           value={value}
           onChange={handleChange}
         >

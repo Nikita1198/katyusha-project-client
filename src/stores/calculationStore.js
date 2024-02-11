@@ -21,6 +21,7 @@ class Store {
             plannedFirstYield: { value: "", display: false },
             nitrateNitrogen: "Не выбрано",
             ammoniumNitrateRequired: 0,
+            moistureSpring:  { level: 'Не выбрано', coefficient: 0 },
         },
         step3: {
             step1result: 0,
@@ -67,7 +68,6 @@ class Store {
         );
     }
 
-    // Методы для получения данных каждого шага
     getStep1() {
         return this.calculation.step1;
     }
@@ -84,12 +84,10 @@ class Store {
         return this.calculation;
     }
 
-    // Методы для изменения полей объекта calculation для step1
     updateStep1Field(field, value) {
         this.calculation.step1[field] = value;
     }
 
-    // Методы для изменения полей объекта calculation для step2
     updateStep2Field(field, value) {
         this.calculation.step2[field] = value;
     }
@@ -97,7 +95,6 @@ class Store {
     updateResultStep1() {
         let { plannedYield, moisture } = this.calculation.step1;
 
-        // Влагообеспеченность
         const moistureDeviation = (500 - moisture) / 10;
         this.calculation.step3.step1result = plannedYield - 1.5 * moistureDeviation;
     }

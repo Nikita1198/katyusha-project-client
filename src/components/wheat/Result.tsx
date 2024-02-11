@@ -87,6 +87,12 @@ export default observer(function Result() {
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
+                Запас продуктивной влаги в метровом слое:
+              </TableCell>
+              <TableCell align="center">{`${result.step2.moistureSpring.level} мм`}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell component="th" scope="row">
                 Требуемое количество аммиачной селитры:
               </TableCell>
               <TableCell align="center">{`${result.step2.ammoniumNitrateRequired} кг`}</TableCell>

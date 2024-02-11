@@ -6,7 +6,7 @@ import "dayjs/locale/ru";
 import { ruRU } from "@mui/x-date-pickers/locales";
 import store from "../../../stores/calculationStore";
 
-export default function DateOfGermination() {
+export default function DateOfGermination({error}) {
   const date = store.getStep2();
 
   return (
@@ -27,13 +27,10 @@ export default function DateOfGermination() {
           textField: {
             required: true,
             fullWidth: true,
+            error
           },
         }}
       />
     </LocalizationProvider>
   );
 }
-function dayjs(arg0: string): any {
-  throw new Error("Function not implemented.");
-}
-
