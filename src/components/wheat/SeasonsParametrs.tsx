@@ -76,7 +76,7 @@ export default observer(function SeasonsParametrs() {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ mt: 4 }}>
+      <Box sx={{ mt: 3}}>
         <Box
           display="flex"
           flexDirection={{ xs: 'column', sm: 'row' }} 

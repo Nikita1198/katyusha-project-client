@@ -59,7 +59,6 @@ export default function NavBar(props) {
   };
 
   return (
-    <React.Fragment>
       <HideOnScroll {...props}>
         <AppBar component="nav">
           <Container maxWidth="xl">
@@ -192,6 +191,5 @@ export default function NavBar(props) {
           </Container>
         </AppBar>
       </HideOnScroll>
-    </React.Fragment>
   );
 }
