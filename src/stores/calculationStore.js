@@ -36,17 +36,6 @@ class Store {
 
         reaction(
             () => [
-                this.calculation.step1.moisture,
-                this.calculation.step1.plannedYield
-            ],
-            () => {
-                this.updateResultStep1();
-            }
-        );
-
-
-        reaction(
-            () => [
                 this.calculation.step3.step1result,
                 this.calculation.step2.seedingRate,
                 this.calculation.step2.complexFertilizers,
@@ -78,6 +67,17 @@ class Store {
                 this.calculateYield();
             }
         );
+
+        reaction(
+            () => this.calculation.step2.plannedFirstYield.value,
+            (newValue, oldValue) => {
+                
+               if (newValue !== oldValue) {
+                this.calculateRequiredAmmoniumNitrate();
+                this.calculateYield();
+                }
+            }
+        );
     }
 
     getStep1() {
@@ -104,45 +104,9 @@ class Store {
         this.calculation.step2[field] = value;
     }
 
-    updateResultStep1() {
-        let { plannedYield, moisture } = this.calculation.step1;
-
-        const moistureDeviation = (500 - moisture) / 10;
-        this.calculation.step3.step1result = plannedYield - 1.5 * moistureDeviation;
-    }
-
-    // Метод проверки, что все поля в заданном шаге заполнены
     isStepComplete(step) {
-        let fields = {};
-        switch (step) {
-            case 0:
-                fields = this.calculation.step1;
-                break;
-            case 1:
-                fields = this.calculation.step2;
-                break;
-            case 2:
-                fields = this.calculation.step3;
-                break;
-            default:
-                return false;
-        }
-
-        for (let key in fields) {
-            const value = fields[key];
-
-            // Проверяем, что строковые поля не пустые и не равны "Не выбрано"
-            if (typeof value === 'string' && (value.trim() === '' || value === "Не выбрано")) return false;
-
-            // Проверяем, что числовые поля не равны 0 и не NaN
-            if (typeof value === 'number' && (value === 0 || isNaN(value))) return false;
-
-            // Проверяем, что поля с объектами (например, даты) не null и не undefined
-            if (typeof value === 'object' && (value === null || value === undefined)) return false;
-        }
-
-        // Все поля заполнены корректно
-        return true;
+        const fields = this.calculation[`step${step + 1}`];
+        return Object.values(fields).every(value => value !== "" && value !== "Не выбрано" && value !== null);
     }
 
     getEmptyFields(step) {
@@ -261,6 +225,7 @@ class Store {
             this.calculation.step2.plannedFirstYield.display = false;
             this.calculation.step2.ammoniumNitrateRequired = "";
             this.calculation.step2.nitrateNitrogen = "Не выбрано";
+            this.calculation.step2.moistureSpring = "Не выбрано";
         }
     }
 
@@ -330,16 +295,17 @@ class Store {
                 plannedFirstYield: { value: "", display: false },
                 nitrateNitrogen: "Не выбрано",
                 ammoniumNitrateRequired: 0,
-                moistureSpring: 'Не выбрано', 
+                moistureSpring: 'Не выбрано',
             },
             step3: {
                 step1result: 0,
                 step2result: 0,
                 totalresult: 0
             },
-            invalidFields: [] 
+            invalidFields: []
         };
     }
+
 }
 
 const store = new Store();
