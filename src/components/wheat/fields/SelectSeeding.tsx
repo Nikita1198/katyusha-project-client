@@ -7,29 +7,22 @@ import Select from "@mui/material/Select";
 import store from "../../../stores/calculationStore";
 
 const seedingRate = [
-    {value: "Не выбрано"},
-    {value: 2},
-    {value: 2.5},
-    {value: 3},
-    {value: 3.5},
-    {value: 4},
-    {value: 4.5},
-    {value: 5},
-]
+  { value: "Не выбрано" },
+  { value: 2 },
+  { value: 2.5 },
+  { value: 3 },
+  { value: 3.5 },
+  { value: 4 },
+  { value: 4.5 },
+  { value: 5 },
+  { value: 5.5 },
+];
 
-export default function SelectSeeding({error}) {
-  const [rate, setRate] = React.useState('');
-
-  React.useEffect(() => {
-    const step2Data = store.getStep2();
-    setRate(step2Data.seedingRate)
-  },[])
-
+export default function SelectSeeding({ error, value }) {
   const handleChange = (event) => {
-    setRate(event.target.value);
-    store.updateStep2Field('seedingRate', event.target.value);
+    store.updateStep2Field("seedingRate", event.target.value);
   };
-  
+
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth required error={error}>
@@ -40,11 +33,17 @@ export default function SelectSeeding({error}) {
           name="seedingRate"
           label="Норма высева, млн"
           required
-          value={rate}
+          size="small"
+          renderValue={(value) => value !== "Не выбрано" ? `${value} млн` : "Не выбрано"}
+          value={value}
           onChange={handleChange}
         >
-        {seedingRate.map((item) => {
-              return <MenuItem key={item.value} value={item.value}>{item.value}</MenuItem>
+          {seedingRate.map((item) => {
+            return (
+              <MenuItem key={item.value} value={item.value}>
+                {item.value}
+              </MenuItem>
+            );
           })}
         </Select>
       </FormControl>

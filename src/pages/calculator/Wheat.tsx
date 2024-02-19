@@ -71,7 +71,8 @@ export default function WheatCalculator() {
         <Stepper
           activeStep={activeStep}
           sx={{
-            py: 2,
+            pt: 1,
+            pb: 1.5,
           }}
         >
           {steps.map((label) => (
@@ -81,7 +82,7 @@ export default function WheatCalculator() {
           ))}
         </Stepper>
         <Box>
-          <Box sx={{ m: 1, minHeight: "57.5vh" }}>
+          <Box sx={{ m: 1, minHeight: "58.5vh" }}>
             {getStepContent(activeStep)}
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

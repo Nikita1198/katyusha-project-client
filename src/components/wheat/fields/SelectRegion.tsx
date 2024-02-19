@@ -7,18 +7,10 @@ import Select from "@mui/material/Select";
 import data from "../../../assets/regions.json";
 import store from "../../../stores/calculationStore";
 
-export default function SelectRegion({error}) {
-  const [value, setValue] = React.useState("");
-
-  React.useEffect(() => {
-    const step1Data = store.getStep1();
-    setValue(step1Data.region)
-  }, []);
+export default function SelectRegion({error, value}) {
 
   const handleChange = (e) => {
     store.updateStep1Field("region", e.target.value);
-    
-    setValue(e.target.value)
   };
 
   return (

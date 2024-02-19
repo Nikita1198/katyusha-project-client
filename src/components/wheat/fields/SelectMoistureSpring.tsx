@@ -11,21 +11,17 @@ type MoistureLevel = {
   coefficient: number;
 };
 
-export default function SelectMoistureSpring({ disabled }) {
-  const [value, setValue] = React.useState<MoistureLevel | undefined>({ level: 'Не выбрано', coefficient: 0 });
+export default function SelectMoistureSpring({ disabled, value }) {
 
   const handleChange = (e) => {
-    const item = moistureLevels.find(x => x.coefficient === e.target.value);
-    store.updateStep2Field("moistureSpring", item); 
-    console.log(step2Datav.moistureSpring)
-    setValue(item)
+    store.updateStep2Field("moistureSpring", e.target.value); 
   };
   
   const step2Datav = store.getStep2();
 
   const moistureLevels = [
     { level: 'Не выбрано', coefficient: 0 },
-    { level: '200 и выше', coefficient: 1.2 },
+    { level: '200', coefficient: 1.2 },
     { level: '190', coefficient: 1.1 },
     { level: '180', coefficient: 1.05 },
     { level: '170', coefficient: 1.0 },
@@ -52,10 +48,12 @@ export default function SelectMoistureSpring({ disabled }) {
           required
           disabled={!disabled}
           onChange={handleChange}
-          value={value?.coefficient}
+          size="small"
+          renderValue={(value) => value !== "Не выбрано" ? `${value} мм` : "Не выбрано"}
+          value={value}
         >
           {moistureLevels.map((item) => (
-            <MenuItem key={item.level} value={item.coefficient}>
+            <MenuItem key={item.level} value={item.level}>
               {item.level}
             </MenuItem>
           ))}

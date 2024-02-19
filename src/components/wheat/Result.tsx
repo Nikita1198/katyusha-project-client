@@ -27,7 +27,7 @@ export default observer(function Result() {
           <TableHead>
             <TableRow sx={{ backgroundColor: rowColor }}>
               <TableCell colSpan={1}>
-                <Typography variant="h6">Поле</Typography>
+                <Typography sx={{fontSize: 14}} >Поле №{`${result.step1.field}`}</Typography>
               </TableCell>
               <TableCell colSpan={1} sx={{ minWidth: 100 }}></TableCell>
             </TableRow>
@@ -51,17 +51,11 @@ export default observer(function Result() {
           <TableHead>
             <TableRow>
               <TableCell colSpan={2} sx={{ backgroundColor: rowColor }}>
-                <Typography variant="h6">Осень</Typography>
+                <Typography sx={{fontSize: 14}}>Осень</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row">
-                Норма высева:
-              </TableCell>
-              <TableCell align="center">{`${result.step2.seedingRate} млн`}</TableCell>
-            </TableRow>
             <TableRow>
               <TableCell>Норма сложных удобрений (Аммофос 12:52):</TableCell>
               <TableCell align="center">{`${result.step2.complexFertilizers} кг/га`}</TableCell>
@@ -70,27 +64,41 @@ export default observer(function Result() {
               <TableCell>Норма аммиачной селитры:</TableCell>
               <TableCell align="center">{`${result.step2.ammoniumNitrate} кг/га`}</TableCell>
             </TableRow>
+            <TableRow>
+              <TableCell component="th" scope="row">
+                Норма высева:
+              </TableCell>
+              <TableCell align="center">{`${result.step2.seedingRate} млн`}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell component="th" scope="row">
+              Прогнозируемая урожайность согласно влагообеспеченности
+                  хозяйства и уровня азотно фосфорного питания:
+              </TableCell>
+              <TableCell align="center">{`${result.step2.plannedFirstYield.value} ц/га`}</TableCell>
+            </TableRow>
           </TableBody>
           <TableHead>
             <TableRow>
               <TableCell colSpan={2} sx={{ backgroundColor: rowColor }}>
-                <Typography variant="h6">Весна</Typography>
+                <Typography sx={{fontSize: 14}}>Весна</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
               <TableCell component="th" scope="row">
+                Запас продуктивной влаги в метровом слое:
+              </TableCell>
+              <TableCell align="center">{`${result.step2.moistureSpring} мм`}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell component="th" scope="row">
                 Доза нитратного азота в почве (слой 0-40см):
               </TableCell>
               <TableCell align="center">{`${result.step2.nitrateNitrogen} кг`}</TableCell>
             </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">
-                Запас продуктивной влаги в метровом слое:
-              </TableCell>
-              <TableCell align="center">{`${result.step2.moistureSpring.level} мм`}</TableCell>
-            </TableRow>
+
             <TableRow>
               <TableCell component="th" scope="row">
                 Требуемое количество аммиачной селитры:
@@ -98,18 +106,16 @@ export default observer(function Result() {
               <TableCell align="center">{`${result.step2.ammoniumNitrateRequired} кг`}</TableCell>
             </TableRow>
           </TableBody>
-          <TableHead>
-            <TableRow sx={{ borderTop: 1, backgroundColor: rowColor }}>
+          <TableBody>
+            <TableRow sx={{ borderTop: 1, backgroundColor: rowColor, fontWeight: 'bold' }}>
               <TableCell colSpan={1}>
-                <Typography variant="h6">
-                  Итоговая урожайность
-                </Typography>
+                <Typography >Итоговая урожайность</Typography>
               </TableCell>
-              <TableCell colSpan={1} align="center" >
-                <Typography variant="h6">{`${result.step3.totalresult} ц/га`}</Typography>
+              <TableCell colSpan={1} align="center">
+                <Typography>{`${result.step3.totalresult} ц/га`}</Typography>
               </TableCell>
             </TableRow>
-          </TableHead>
+          </TableBody>
         </Table>
       </TableContainer>
     </Box>

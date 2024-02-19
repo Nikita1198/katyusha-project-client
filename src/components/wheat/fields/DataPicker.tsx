@@ -27,6 +27,7 @@ export default function DateOfGermination({error}) {
           textField: {
             required: true,
             fullWidth: true,
+            size: 'small',
             error
           },
         }}

@@ -5,7 +5,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SelectRegion from "../wheat/fields/SelectRegion";
 import store from "../../stores/calculationStore";
 import CustomField from "../wheat/fields/CustomField";
-import { observer } from 'mobx-react-lite';
+import { observer } from "mobx-react-lite";
 import { Box, Typography } from "@mui/material";
 
 export default observer(function FieldParameters() {
@@ -34,7 +34,10 @@ export default observer(function FieldParameters() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <SelectRegion error={invalidFields.includes("region")}/>
+          <SelectRegion
+            value={step1Data.region}
+            error={invalidFields.includes("region")}
+          />
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
@@ -127,7 +130,9 @@ export default observer(function FieldParameters() {
             error={invalidFields.includes("plannedYield")}
             InputProps={{
               inputMode: "numeric",
-              endAdornment: <InputAdornment position="end">ц/га</InputAdornment>,
+              endAdornment: (
+                <InputAdornment position="end">ц/га</InputAdornment>
+              ),
             }}
             placeholder="0"
             InputLabelProps={{ shrink: true }}
@@ -141,4 +146,4 @@ export default observer(function FieldParameters() {
       </Grid>
     </Box>
   );
-})
+});

@@ -114,6 +114,7 @@ export default function NavBar(props) {
                       key={page.title}
                       onClick={handleCloseNavMenu}
                       component={RouterLink}
+                      sx={{fontFamily: "Comfortaa" }}
                       to={{
                         pathname: page.component,
                       }}
@@ -147,7 +148,7 @@ export default function NavBar(props) {
                     to={{
                       pathname: page.component,
                     }}
-                    sx={{ my: 2, color: "white", display: "block" }}
+                    sx={{ my: 2, color: "white", display: "block", fontFamily: "Comfortaa" }}
                   >
                     <Typography textAlign="center" sx={{pt: '3px'}}>{page.title}</Typography>
                   </Button>

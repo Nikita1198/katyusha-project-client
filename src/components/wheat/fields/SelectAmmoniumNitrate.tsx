@@ -6,42 +6,39 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import store from "../../../stores/calculationStore";
 
-export default function SelectNitrate({ disabled, value }) {
-
+export default function SelectAmmoniumNitrate({ error, value }) {
   const handleChange = (e) => {
-    store.updateStep2Field("nitrateNitrogen", e.target.value);
+    store.updateStep2Field("ammoniumNitrate", e.target.value);
   };
 
   const range = [
     { value: "Не выбрано" },
-    { value: "0" },
+    { value: "10" },
     { value: "20" },
+    { value: "30" },
     { value: "40" },
+    { value: "50" },
     { value: "60" },
+    { value: "70" },
     { value: "80" },
+    { value: "90" },
     { value: "100" },
-    { value: "120" },
-    { value: "140" },
-    { value: "160" },
-    { value: "180" },
-    { value: "200" },
   ];
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth required >
-        <InputLabel>Доза нитратного азота в почве (слой 0-40см), кг</InputLabel>
+      <FormControl fullWidth required error={error}>
+        <InputLabel>Норма аммиачной селитры, кг/га</InputLabel>
         <Select
-          labelId="nitrateNitrogen"
-          id="nitrateNitrogen"
-          name="nitrateNitrogen"
-          label="Доза нитратного азота в почве (слой 0-40см), кг"
+          labelId="ammoniumNitrate"
+          id="ammoniumNitrate"
+          name="ammoniumNitrate"
+          size="small"
+          label="Норма аммиачной селитры, кг/га"
           required
-          disabled={!disabled}
           onChange={handleChange}
           value={value}
-          size="small"
-          renderValue={(value) => value !== "Не выбрано" ? `${value} кг` : "Не выбрано"}
+          renderValue={(value) => value !== "Не выбрано" ? `${value} кг/га` : "Не выбрано"}
         >
           {range.map((item) => {
             return (
