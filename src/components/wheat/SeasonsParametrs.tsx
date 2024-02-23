@@ -1,17 +1,13 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import DateOfGermination from "../wheat/fields/DataPicker";
-import CustomFieldTwo from "../wheat/fields/CustomFieldTwo";
+import CustomDataPicker from "./fields/CustomDataPicker.tsx";
 import store from "../../stores/calculationStore";
 import { observer } from "mobx-react-lite";
-import { InputAdornment, Box, TextField, Typography } from "@mui/material";
-import SelectNitrate from "../wheat/fields/SelectNitrate";
-import SelectSeeding from "../wheat/fields/SelectSeeding";
-import SelectMoistureSpring from "./fields/SelectMoistureSpring";
-import SelectСomplexFertilizers from "./fields/SelectСomplexFertilizers";
-import SelectAmmoniumNitrate from "./fields/SelectAmmoniumNitrate";
+import { Box, TextField, Typography } from "@mui/material";
 import { rawTheme } from "../../themes/theme.tsx";
 import Collapse from "@mui/material/Collapse";
+import { ammoniumNitrate, moisturevalues, nitrateNitrogen, seedingRate, complexFertilizers } from "./constants/ranges";
+import CustomSelect from "./fields/CustomSelect.tsx";
 
 export default observer(function SeasonsParametrs() {
   const step2Data = store.getStep2();
@@ -29,25 +25,46 @@ export default observer(function SeasonsParametrs() {
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <SelectСomplexFertilizers
+            <CustomSelect
               value={step2Data.complexFertilizers}
               error={invalidFields.includes("complexFertilizers")}
+              range={complexFertilizers}
+              disabled={false}
+              id="complexFertilizers"
+              label="Норма сложных удобрений (Аммофос 12:52)"
+              size="small"
+              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+              units="кг/га"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <SelectAmmoniumNitrate
+            <CustomSelect
               value={step2Data.ammoniumNitrate}
               error={invalidFields.includes("ammoniumNitrate")}
+              range={ammoniumNitrate}
+              disabled={false}
+              id="ammoniumNitrate"
+              label="Норма аммиачной селитры"
+              size="small"
+              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+              units="кг/га"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <SelectSeeding
+            <CustomSelect
               value={step2Data.seedingRate}
               error={invalidFields.includes("seedingRate")}
+              range={seedingRate}
+              disabled={false}
+              id="seedingRate"
+              label="Норма высева"
+              size="small"
+              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+              units="млн"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <DateOfGermination error={invalidFields.includes("date")} />
+            <CustomDataPicker error={invalidFields.includes("date")} />
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -112,41 +129,55 @@ export default observer(function SeasonsParametrs() {
 
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6}>
-              <SelectMoistureSpring
+              <CustomSelect
                 value={step2Data.moistureSpring}
-                disabled={step2Data.plannedFirstYield.display}
+                disabled={!step2Data.plannedFirstYield.display}
+                error={invalidFields.includes("moistureSpring")}
+                range={moisturevalues}
+                id="moistureSpring"
+                label="Запас продуктивной влаги в метровом слое"
+                size="small"
+                onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+                units="мм"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <SelectNitrate
+              <CustomSelect
                 value={step2Data.nitrateNitrogen}
-                disabled={step2Data.plannedFirstYield.display}
+                disabled={!step2Data.plannedFirstYield.display}
+                error={invalidFields.includes("nitrateNitrogen")}
+                range={nitrateNitrogen}
+                id="nitrateNitrogen"
+                label="Доза нитратного азота в почве (слой 0-40см)"
+                size="small"
+                onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+                units="кг"
               />
             </Grid>
             <Grid item xs={12} sx={{ pt: "16px !important" }}>
               <Collapse in={step2Data.nitrateNitrogen !== "Не выбрано" && step2Data.moistureSpring !== "Не выбрано"}>
-              <Box
-                sx={{
-                  borderRadius: "4px",
-                  border: "1px solid rgba(0, 0, 0, 0.12)",
-                  backgroundColor: rowColor,
-                }}
-              >
-                <Typography
-                  variant="subtitle2"
+                <Box
                   sx={{
-                    textAlign: { xs: "center", sm: "left" },
-                    my: { xs: 1, sm: 0 },
-                    p: 1,
+                    borderRadius: "4px",
+                    border: "1px solid rgba(0, 0, 0, 0.12)",
+                    backgroundColor: rowColor,
                   }}
                 >
-                  Требуемое количество аммиачной селитры:{" "}
-                  {step2Data.ammoniumNitrateRequired} кг/га <br/>
-                  Прогнозируемая урожайность согласно весенней влагообеспеченности:{" "}
-                  {step3Data.totalresult} ц/га 
-                </Typography>
-              </Box>
-            </Collapse>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      textAlign: { xs: "center", sm: "left" },
+                      my: { xs: 1, sm: 0 },
+                      p: 1,
+                    }}
+                  >
+                    Требуемое количество аммиачной селитры:{" "}
+                    {step2Data.ammoniumNitrateRequired} кг/га <br />
+                    Прогнозируемая урожайность согласно весенней влагообеспеченности:{" "}
+                    {step3Data.totalresult} ц/га
+                  </Typography>
+                </Box>
+              </Collapse>
             </Grid>
           </Grid>
         </Box>

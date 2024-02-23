@@ -6,7 +6,7 @@ import "dayjs/locale/ru";
 import { ruRU } from "@mui/x-date-pickers/locales";
 import store from "../../../stores/calculationStore";
 
-export default function DateOfGermination({error}) {
+export default function CustomDataPicker({error}) {
   const date = store.getStep2();
 
   return (

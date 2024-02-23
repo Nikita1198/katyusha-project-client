@@ -1,6 +1,7 @@
 import * as React from "react";
 import { InputAdornment, Box, TextField } from "@mui/material";
 import store from "../../../stores/calculationStore";
+
 export default function CustomField({
   id,
   label,

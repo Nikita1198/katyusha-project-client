@@ -2,11 +2,12 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import SelectRegion from "../wheat/fields/SelectRegion";
 import store from "../../stores/calculationStore";
 import CustomField from "../wheat/fields/CustomField";
 import { observer } from "mobx-react-lite";
 import { Box, Typography } from "@mui/material";
+import { regions } from "./constants/ranges";
+import CustomSelect from "../wheat/fields/CustomSelect";
 
 export default observer(function FieldParameters() {
   const step1Data = store.getStep1();
@@ -34,9 +35,16 @@ export default observer(function FieldParameters() {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <SelectRegion
+          <CustomSelect
             value={step1Data.region}
             error={invalidFields.includes("region")}
+            range={regions}
+            disabled={false}
+            id="region"
+            label="Регион"
+            size="medium"
+            onUpdate={(id, newValue) => store.updateStep1Field(id, newValue)}
+            units=""
           />
         </Grid>
         <Grid item xs={12} sm={4}>
