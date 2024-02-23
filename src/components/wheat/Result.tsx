@@ -14,7 +14,6 @@ import { rawTheme } from "../../themes/theme.tsx";
 export default observer(function Result() {
   const result = store.getCalculation();
   const rowColor = rawTheme.palette.secondary.light;
-
   return (
     <Box>
       <Typography variant="h6" sx={{ mb: 1 }}>
@@ -109,7 +108,7 @@ export default observer(function Result() {
           <TableBody>
             <TableRow sx={{ borderTop: 1, backgroundColor: rowColor, fontWeight: 'bold' }}>
               <TableCell colSpan={1}>
-                <Typography >Итоговая урожайность</Typography>
+                <Typography >Итоговая биологическая урожайность</Typography>
               </TableCell>
               <TableCell colSpan={1} align="center">
                 <Typography>{`${result.step3.totalresult} ц/га`}</Typography>

@@ -41,6 +41,7 @@ class Store {
                 this.calculation.step2.complexFertilizers,
                 this.calculation.step2.ammoniumNitrate,
                 this.calculation.step2.date,
+                this.calculation.step1.moisture,
                 this.calculation.step2.comment,
 
             ],
@@ -171,11 +172,11 @@ class Store {
             const { seedingRate, complexFertilizers, ammoniumNitrate } = this.calculation.step2;
             const { moisture } = this.calculation.step1;
 
-            // Аммофос 12:52
+            // Аммофос 12:52 (фосфор в действующем веществе)
             const fertilizerYieldMap = {
-                70: 38, 80: 42, 90: 46, 100: 50, 110: 54, 120: 58,
-                130: 62, 140: 66, 150: 70, 160: 74, 170: 78, 180: 82,
-                190: 86, 200: 90,
+                35: 38, 40: 42, 45: 46, 50: 50, 55: 54, 60: 58,
+                65: 62, 70: 66, 75: 70, 80: 74, 85: 78, 90: 82,
+                95: 86, 100: 90,
             };
 
             const selectedFertilizerAmount = complexFertilizers;
@@ -235,13 +236,10 @@ class Store {
             const plannedYield = this.calculation.step3.totalresult;
             const soilNitrate = this.calculation.step2.nitrateNitrogen;
 
-            // Расчет необходимого количества азота для достижения планируемой урожайности
-            const requiredNitrogen = plannedYield * 3; // На каждые 10 центнеров урожая требуется 30 кг азота
+            const requiredNitrogen = plannedYield * 3; 
 
-            // Вычисляем сколько азота нужно добавить, исходя из того, что уже есть в почве
             const nitrogenToAdd = requiredNitrogen - soilNitrate;
 
-            // Пересчет в количество аммиачной селитры, используя содержание азота в аммиачной селитре (34.4%)
             let ammoniumNitrateRequired = nitrogenToAdd / 0.344;
 
             if (ammoniumNitrateRequired < 0) {
@@ -260,14 +258,18 @@ class Store {
             const moistureSpring = this.calculation.step2.moistureSpring;
 
             const moistureLevelsMap = {
-                '200': 1.2, '190': 1.1, '180': 1.05, '170': 1.0,
-                '160': 0.9, '150': 0.85, '140': 0.75, '130': 0.65,
-                '120': 0.5, '110': 0.45, '100': 0.4, '90': 0.35, '80': 0.3,
+                '200': 1.3, '190': 1.25, '180': 1.2, '170': 1.15,
+                '160': 1.1, '150': 1.0, '140': 0.95, '130': 0.85,
+                '120': 0.8, '110': 0.7, '100': 0.6, '90': 0.5, '80': 0.4,
             };
 
             const coefficient = moistureLevelsMap[moistureSpring];
 
-            const updatedYield = parseFloat(plannedYieldAutumn) * coefficient;
+            let updatedYield = parseFloat(plannedYieldAutumn) * coefficient;
+            if (updatedYield > 120) {
+                updatedYield = 120;
+            }
+
             this.calculation.step3.totalresult = Math.round(updatedYield).toString();
         }
     }

@@ -4,8 +4,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { FormHelperText } from "@mui/material";
 
-export default function CustomSelect({ value, range, id, label, error, size,  disabled, units, onUpdate }) {
+export default function CustomSelect({ value, range, id, label, error, size,  disabled, units, onUpdate, helperText="" }) {
   const handleChange = (e) => {
     onUpdate(id, e.target.value);
   };
@@ -15,11 +16,11 @@ export default function CustomSelect({ value, range, id, label, error, size,  di
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth required error={error} disabled={disabled}>
-        <InputLabel>{`${label}, ${units}`}</InputLabel>
+        <InputLabel>{`${label}`}</InputLabel>
         <Select
           labelId={`${id}_label`}
           id={id}
-          label={`${label}, ${units}`}
+          label={`${label}`}
           size={size}
           required
           onChange={handleChange}
@@ -32,6 +33,7 @@ export default function CustomSelect({ value, range, id, label, error, size,  di
             </MenuItem>
           ))}
         </Select>
+        <FormHelperText>{helperText}</FormHelperText>
       </FormControl>
     </Box>
   );

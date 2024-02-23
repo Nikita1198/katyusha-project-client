@@ -118,7 +118,7 @@ export default observer(function FieldParameters() {
         <Grid item xs={12} sm={6}>
           <CustomField
             id={"moisture"}
-            label={"Годовая влагообеспеченность предприятия, мм"}
+            label={"Годовая влагообеспеченность предприятия"}
             max={800}
             min={200}
             step={10}
@@ -132,7 +132,7 @@ export default observer(function FieldParameters() {
             required
             id="plannedYield"
             name="plannedYield"
-            label="Планируемая урожайность, ц/га"
+            label="Планируемая урожайность"
             type="number"
             defaultValue={step1Data.plannedYield}
             error={invalidFields.includes("plannedYield")}

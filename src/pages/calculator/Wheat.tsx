@@ -82,7 +82,7 @@ export default function WheatCalculator() {
           ))}
         </Stepper>
         <Box>
-          <Box sx={{ m: 1, minHeight: "58.5vh" }}>
+          <Box sx={{ m: 1, minHeight: "59vh" }}>
             {getStepContent(activeStep)}
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

@@ -2,12 +2,12 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import CustomDataPicker from "./fields/CustomDataPicker.tsx";
 import store from "../../stores/calculationStore";
+import Collapse from "@mui/material/Collapse";
+import CustomSelect from "./fields/CustomSelect.tsx";
 import { observer } from "mobx-react-lite";
 import { Box, TextField, Typography } from "@mui/material";
 import { rawTheme } from "../../themes/theme.tsx";
-import Collapse from "@mui/material/Collapse";
 import { ammoniumNitrate, moisturevalues, nitrateNitrogen, seedingRate, complexFertilizers } from "./constants/ranges";
-import CustomSelect from "./fields/CustomSelect.tsx";
 
 export default observer(function SeasonsParametrs() {
   const step2Data = store.getStep2();
@@ -24,19 +24,20 @@ export default observer(function SeasonsParametrs() {
           Осень
         </Typography>
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6}>
-            <CustomSelect
-              value={step2Data.complexFertilizers}
-              error={invalidFields.includes("complexFertilizers")}
-              range={complexFertilizers}
-              disabled={false}
-              id="complexFertilizers"
-              label="Норма сложных удобрений (Аммофос 12:52)"
-              size="small"
-              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
-              units="кг/га"
-            />
-          </Grid>
+            <Grid item xs={12} sm={6}>
+              <CustomSelect
+                value={step2Data.complexFertilizers}
+                error={invalidFields.includes("complexFertilizers")}
+                range={complexFertilizers}
+                disabled={false}
+                id="complexFertilizers"
+                label="Норма сложных удобрений (Аммофос 12:52)"
+                helperText="* Фосфор в действующем веществе"
+                size="small"
+                onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+                units="кг/га"
+              />
+            </Grid>
           <Grid item xs={12} sm={6}>
             <CustomSelect
               value={step2Data.ammoniumNitrate}

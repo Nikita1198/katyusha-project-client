@@ -397,20 +397,20 @@ export const seedingRate = [
 
 export const complexFertilizers = [
     { value: "Не выбрано" },
+    { value: "35" },
+    { value: "40" },
+    { value: "45" },
+    { value: "50" },
+    { value: "55" },
+    { value: "60" },
+    { value: "65" },
     { value: "70" },
+    { value: "75" },
     { value: "80" },
+    { value: "85" },
     { value: "90" },
+    { value: "95" },
     { value: "100" },
-    { value: "110" },
-    { value: "120" },
-    { value: "130" },
-    { value: "140" },
-    { value: "150" },
-    { value: "160" },
-    { value: "170" },
-    { value: "180" },
-    { value: "190" },
-    { value: "200" },
 ];
 
 export default {regions, ammoniumNitrate,moisturevalues,nitrateNitrogen, seedingRate, complexFertilizers  };
