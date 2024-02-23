@@ -19,7 +19,7 @@ export default function App() {
           <NavBar />
           <Routes>
             <Route path="/katyusha-project-client" element={<Navigate to="/cultures" />} />
-            <Route path="/katyusha-project-client/cultures" element={<CulturesPage />} />
+            <Route path="/cultures" element={<CulturesPage />} />
             <Route path='/calculator' element={<Calculator />}>
               <Route path='wheat' element={<Wheat />} />
             </Route>
