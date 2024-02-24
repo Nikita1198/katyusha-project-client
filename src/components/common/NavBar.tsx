@@ -59,139 +59,139 @@ export default function NavBar(props) {
   };
 
   return (
-      <HideOnScroll {...props}>
-        <AppBar component="nav">
-          <Container maxWidth="xl">
-            <Toolbar sx={{ justifyContent: 'center' }}>
-              <Typography
-                variant="h4"
-                noWrap
-                component="a"
+    <HideOnScroll {...props}>
+      <AppBar component="nav">
+        <Container maxWidth="xl">
+          <Toolbar sx={{ justifyContent: 'center' }}>
+            <Typography
+              variant="h3"
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontWeight: 400,
+                fontFamily: "Marck Script",
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              <Box component="span" sx={{ color: "#ff914d", verticalAlign: "bottom" }}>К</Box>
+              <Box component="span" sx={{ verticalAlign: "bottom" }}>атюша</Box>
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
                 sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontWeight: 400,
-                  fontFamily: "Marck Script",
-                  letterSpacing: ".1rem",
-                  color: "inherit",
-                  textDecoration: "none",
+                  display: { xs: "block", md: "none" },
                 }}
               >
-                Катюша
-              </Typography>
-
-              <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: "block", md: "none" },
-                  }}
-                >
-                  {pages.map((page) => (
-                    <MenuItem
-                      key={page.title}
-                      onClick={handleCloseNavMenu}
-                      component={RouterLink}
-                      sx={{fontFamily: "Comfortaa" }}
-                      to={{
-                        pathname: page.component,
-                      }}
-                    >
-                      <Typography textAlign="center">{page.title}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-              <Typography
-                variant="h4"
-                noWrap
-                component="a"
-                sx={{
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontWeight: 400,
-                  fontFamily: "Marck Script",
-                  letterSpacing: ".1rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                Катюша
-              </Typography>
-              <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                 {pages.map((page) => (
-                  <Button
+                  <MenuItem
                     key={page.title}
+                    onClick={handleCloseNavMenu}
                     component={RouterLink}
+                    sx={{ fontFamily: "Comfortaa" }}
                     to={{
                       pathname: page.component,
                     }}
-                    sx={{ my: 2, color: "white", display: "block", fontFamily: "Comfortaa" }}
                   >
-                    <Typography textAlign="center" sx={{pt: '3px'}}>{page.title}</Typography>
-                  </Button>
+                    <Typography textAlign="center">{page.title}</Typography>
+                  </MenuItem>
                 ))}
-              </Box>
-
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Анализатор удобрений компании АМРИТЭКС">
-                  <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
-                    <Avatar
-                      alt="Анализатор удобрений"
-                      
-                      src="\images\logo.png"
-                      sx={{ width: 66, height: 66 }}
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+              </Menu>
+            </Box>
+            <Typography
+              variant="h4"
+              noWrap
+              component="a"
+              sx={{
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontWeight: 400,
+                fontFamily: "Marck Script",
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              <Box component="span" sx={{ color: "#ff914d", verticalAlign: "bottom" }}>К</Box>
+              <Box component="span" sx={{ verticalAlign: "bottom" }}>атюша</Box>
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              {pages.map((page) => (
+                <Button
+                  key={page.title}
+                  component={RouterLink}
+                  to={{
+                    pathname: page.component,
                   }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
+                  sx={{ my: 2, color: "white", display: "block", fontFamily: "Comfortaa" }}
                 >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
-      </HideOnScroll>
+                  <Typography textAlign="center" sx={{ pt: '3px' }}>{page.title}</Typography>
+                </Button>
+              ))}
+            </Box>
+
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Анализатор удобрений компании АМРИТЭКС">
+                <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
+                  <img
+                    alt="Анализатор удобрений"
+                    src="/images/logo.png"
+                    style={{ width: 100, height: 65 }}
+                  />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </HideOnScroll>
   );
 }
