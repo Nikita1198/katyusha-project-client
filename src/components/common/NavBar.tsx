@@ -91,6 +91,7 @@ export default function NavBar(props) {
                   alt="К"
                   src="/images/k.png"
                   style={{ height: '100%', width: 'auto' }}
+                  loading="lazy"
                 />
               </Box>
               <Box component="span" sx={{ lineHeight: 'normal', alignSelf: 'flex-end' }}>атюша</Box>
@@ -158,6 +159,7 @@ export default function NavBar(props) {
                   alt="К"
                   src="/images/k.png"
                   style={{ height: '100%', width: 'auto' }}
+                  loading="lazy"
                 />
               </Box>
               <Box component="span" sx={{ lineHeight: 'normal', alignSelf: 'flex-end' }}>атюша</Box>
