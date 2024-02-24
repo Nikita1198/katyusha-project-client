@@ -69,7 +69,7 @@ export default function NavBar(props) {
 
   return (
     <HideOnScroll {...props}>
-      <AppBar component="nav">
+      <AppBar component="nav" elevation={1}>
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: 'center' }}>
             <Typography

@@ -12,6 +12,7 @@ import {
   Zoom,
   Grow,
 } from "@mui/material";
+import { green } from "@mui/material/colors";
 
 const cards = [
   {
@@ -82,17 +83,20 @@ export default function CulturesPage() {
             <Grid item key={item.id} xs={12} sm={6} md={4}>
               <Grow in={true} timeout={item.id !== 1 ? 2000 : 1000}>
                 <Card
+                  elevation={1}
                   sx={{
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
+                    borderRadius: 6, 
+                    border: "1px solid rgba(0, 0, 0, 0.12)" 
                   }}
                 >
                   <CardActionArea
                     component={RouterLink}
                     to={item.component}
                     disabled={item.component == "/"}
-                    sx={{opacity: item.component == "/" ? 0.5 : 1}}
+                    sx={{ opacity: item.component == "/" ? 0.3 : 1 }}
                   >
                     <CardMedia
                       sx={{ pt: { xs: "36.25%", md: "66.25%" } }}
