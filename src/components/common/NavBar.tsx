@@ -161,7 +161,7 @@ export default function NavBar(props) {
                     <Avatar
                       alt="Анализатор удобрений"
                       
-                      src="https://static.tildacdn.com/tild3531-3966-4164-b866-343430646334/Armitex_2.png"
+                      src="\images\logo.png"
                       sx={{ width: 66, height: 66 }}
                     />
                   </IconButton>
