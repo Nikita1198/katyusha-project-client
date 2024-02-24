@@ -81,9 +81,9 @@ export default function CulturesPage() {
         <Grid container spacing={4} justifyContent="center">
           {cards.map((item) => (
             <Grid item key={item.id} xs={12} sm={6} md={4}>
-              <Grow in={true} timeout={item.id !== 1 ? 2000 : 1000}>
+              <Grow in={true} timeout={item.id * 1000}>
                 <Card
-                  elevation={1}
+                  elevation={item.component == "/" ? 0 : 2}
                   sx={{
                     height: "100%",
                     display: "flex",
@@ -96,7 +96,7 @@ export default function CulturesPage() {
                     component={RouterLink}
                     to={item.component}
                     disabled={item.component == "/"}
-                    sx={{ opacity: item.component == "/" ? 0.3 : 1 }}
+                    sx={{ opacity: item.component == "/" ? 0.25 : 1 }}
                   >
                     <CardMedia
                       sx={{ pt: { xs: "36.25%", md: "66.25%" } }}
