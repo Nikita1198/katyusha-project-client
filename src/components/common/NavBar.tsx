@@ -2,11 +2,11 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link as RouterLink } from "react-router-dom";
+import { styled } from '@mui/system';
 import {
   Box,
   Button,
@@ -33,6 +33,15 @@ function HideOnScroll(props) {
     </Slide>
   );
 }
+
+const CustomLogo = styled('img')({
+  width: 100,
+  height: 65,
+  '@media (max-width:900px)': {
+    width: 64,
+    height: 48,
+  },
+});
 
 HideOnScroll.propTypes = {
   children: PropTypes.element.isRequired,
@@ -159,10 +168,9 @@ export default function NavBar(props) {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Анализатор удобрений компании АМРИТЭКС">
                 <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
-                  <img
+                  <CustomLogo
                     alt="Анализатор удобрений"
                     src="/images/logo.png"
-                    style={{ width: 100, height: 65 }}
                   />
                 </IconButton>
               </Tooltip>
