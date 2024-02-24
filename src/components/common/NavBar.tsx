@@ -82,12 +82,18 @@ export default function NavBar(props) {
                 fontWeight: 400,
                 fontFamily: "Marck Script",
                 letterSpacing: ".1rem",
-                color: "inherit",
                 textDecoration: "none",
+                alignItems: "center"
               }}
             >
-              <Box component="span" sx={{ color: "#ff914d", verticalAlign: "bottom" }}>К</Box>
-              <Box component="span" sx={{ verticalAlign: "bottom" }}>атюша</Box>
+              <Box component="span" sx={{ display: 'inline-flex', height: '1em', alignItems: 'flex-end' }}>
+                <img
+                  alt="К"
+                  src="/images/k.png"
+                  style={{ height: '100%', width: 'auto' }}
+                />
+              </Box>
+              <Box component="span" sx={{ lineHeight: 'normal', alignSelf: 'flex-end' }}>атюша</Box>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -133,23 +139,30 @@ export default function NavBar(props) {
                 ))}
               </Menu>
             </Box>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <Typography
               variant="h4"
               noWrap
               component="a"
               sx={{
                 display: { xs: "flex", md: "none" },
-                flexGrow: 1,
                 fontWeight: 400,
                 fontFamily: "Marck Script",
                 letterSpacing: ".1rem",
-                color: "inherit",
                 textDecoration: "none",
+                alignItems: "center"
               }}
             >
-              <Box component="span" sx={{ color: "#ff914d", verticalAlign: "bottom" }}>К</Box>
-              <Box component="span" sx={{ verticalAlign: "bottom" }}>атюша</Box>
+              <Box component="span" sx={{ display: 'inline-flex', height: '1em', alignItems: 'flex-end' }}>
+                <img
+                  alt="К"
+                  src="/images/k.png"
+                  style={{ height: '100%', width: 'auto' }}
+                />
+              </Box>
+              <Box component="span" sx={{ lineHeight: 'normal', alignSelf: 'flex-end' }}>атюша</Box>
             </Typography>
+            </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
