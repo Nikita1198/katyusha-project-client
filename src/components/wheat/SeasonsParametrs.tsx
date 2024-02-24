@@ -6,13 +6,13 @@ import Collapse from "@mui/material/Collapse";
 import CustomSelect from "./fields/CustomSelect.tsx";
 import { observer } from "mobx-react-lite";
 import { Box, TextField, Typography } from "@mui/material";
-import { rawTheme } from "../../themes/theme.tsx";
 import { ammoniumNitrate, moisturevalues, nitrateNitrogen, seedingRate, complexFertilizers } from "./constants/ranges";
+import { lightTheme } from "../../themes/theme.tsx";
 
 export default observer(function SeasonsParametrs() {
   const step2Data = store.getStep2();
   const step3Data = store.getStep3();
-  const rowColor = rawTheme.palette.secondary.light;
+  const rowColor = lightTheme.palette.secondary.light;
   const invalidFields: string[] = store.getInvalidFields();
   return (
     <>

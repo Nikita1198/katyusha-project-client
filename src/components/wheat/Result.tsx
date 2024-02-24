@@ -3,17 +3,17 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
 import store from "../../stores/calculationStore";
-import { rawTheme } from "../../themes/theme.tsx";
+import { lightTheme } from "../../themes/theme";
 
 export default observer(function Result() {
   const result = store.getCalculation();
-  const rowColor = rawTheme.palette.secondary.light;
+  const rowColor = lightTheme.palette.secondary.light;
   return (
     <Box>
       <Typography variant="h6" sx={{ mb: 1 }}>
