@@ -9,7 +9,7 @@ import {
   Divider,
   Typography,
   CardActionArea,
-  Grow,
+  Grow
 } from "@mui/material";
 
 const cards = [
@@ -53,41 +53,43 @@ const cards = [
 export default function CulturesPage() {
   return (
     <>
+    <Grow in={true} timeout={500}>
       <Container maxWidth="md">
-        <Typography
-          component="h1"
-          variant="h4"
-          align="center"
-          color="textPrimary"
-          sx={{ fontFamily: "Comfortaa" }}
-          gutterBottom
-        >
-          Культура
-        </Typography>
-        <Typography
-          sx={{ fontFamily: "Comfortaa" }}
-          variant="h5"
-          align="center"
-          color="textSecondary"
-          paragraph
-        >
-          Выберите культуру для расчета урожайности
-        </Typography>
+          <Typography
+            component="h1"
+            variant="h4"
+            align="center"
+            color="textPrimary"
+            sx={{ fontFamily: "Comfortaa" }}
+            gutterBottom
+          >
+            Культура
+          </Typography>
+          <Typography
+            sx={{ fontFamily: "Comfortaa" }}
+            variant="h5"
+            align="center"
+            color="textSecondary"
+            paragraph
+          >
+            Выберите культуру для расчета урожайности
+          </Typography>
       </Container>
+        </Grow>
       <Divider />
       <Container sx={{ py: 2, mt: 0 }} maxWidth="md">
         <Grid container spacing={4} justifyContent="center">
           {cards.map((item) => (
             <Grid item key={item.id} xs={12} sm={6} md={4}>
-              <Grow in={true} timeout={item.id * 1000}>
+              <Grow in={true} timeout={item.id * 500}>
                 <Card
                   elevation={item.component == "/" ? 0 : 2}
                   sx={{
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    borderRadius: 6, 
-                    border: "1px solid rgba(0, 0, 0, 0.12)" 
+                    borderRadius: 6,
+                    border: "1px solid rgba(0, 0, 0, 0.12)"
                   }}
                 >
                   <CardActionArea

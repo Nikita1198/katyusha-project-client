@@ -1,4 +1,3 @@
-import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import CulturesPage from './pages/CulturesPage.tsx'
 import Calculator from './pages/calculator/Calculator.tsx'
