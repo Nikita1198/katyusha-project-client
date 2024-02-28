@@ -53,8 +53,8 @@ const cards = [
 export default function CulturesPage() {
   return (
     <>
-    <Grow in={true} timeout={500}>
-      <Container maxWidth="md">
+      <Grow in={true} timeout={500}>
+        <Container maxWidth="md">
           <Typography
             component="h1"
             variant="h4"
@@ -74,8 +74,8 @@ export default function CulturesPage() {
           >
             Выберите культуру для расчета урожайности
           </Typography>
-      </Container>
-        </Grow>
+        </Container>
+      </Grow>
       <Divider />
       <Container sx={{ py: 2, mt: 0 }} maxWidth="md">
         <Grid container spacing={4} justifyContent="center">
@@ -88,7 +88,7 @@ export default function CulturesPage() {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    borderRadius: 6,
+                    borderRadius: 10,
                     border: "1px solid rgba(0, 0, 0, 0.12)"
                   }}
                 >
@@ -103,8 +103,12 @@ export default function CulturesPage() {
                       image={item.img}
                       title={item.label}
                     />
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography gutterBottom variant="h5" component="h2">
+                    <CardContent sx={{ flexGrow: 1}}>
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        component="h2"
+                        align="center">
                         {item.label}
                       </Typography>
                       <Typography>{item.displayText}</Typography>
