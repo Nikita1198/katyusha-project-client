@@ -77,8 +77,8 @@ export default function CulturesPage() {
         </Container>
       </Grow>
       <Divider />
-      <Container sx={{ py: 2, mt: 0 }} maxWidth="md">
-        <Grid container spacing={4} justifyContent="center">
+      <Container sx={{ py: 3, mt: 0 }} maxWidth="md">
+        <Grid container spacing={3} justifyContent="center">
           {cards.map((item) => (
             <Grid item key={item.id} xs={12} sm={6} md={4}>
               <Grow in={true} timeout={item.id * 500}>
@@ -109,10 +109,10 @@ export default function CulturesPage() {
                         variant="h6"
                         component="h2"
                         align="center"
+                        sx={{ mb: 0 }}
                       >
                         {item.label}
                       </Typography>
-                      <Typography>{item.displayText}</Typography>
                     </CardContent>
                   </CardActionArea>
                 </Card>

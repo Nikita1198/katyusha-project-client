@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 
-const pages = [{ title: "Калькулятор урожайности", component: "/cultures" }];
+const pages = [{ title: "Главная", component: "/" }];
 const settings = ["Результаты"];
 
 function HideOnScroll(props) {
@@ -35,13 +35,19 @@ function HideOnScroll(props) {
 }
 
 const CustomLogo = styled("img")({
-  width: 100,
-  height: 65,
+  width: 85,
+  height: 55,
   "@media (max-width:900px)": {
     width: 64,
     height: 48,
   },
 });
+
+const styles = {
+  customizeToolbar: {
+    minHeight: 36,
+  },
+};
 
 HideOnScroll.propTypes = {
   children: PropTypes.element.isRequired,
@@ -71,41 +77,34 @@ export default function NavBar(props) {
     <HideOnScroll {...props}>
       <AppBar component="nav" elevation={1}>
         <Container maxWidth="xl">
-          <Toolbar sx={{ justifyContent: "center" }}>
+          <Toolbar
+            variant="dense"
+            disableGutters
+            sx={{ justifyContent: "center", minHeight: 20, height: 56 }}
+          >
             <Typography
               variant="h3"
               noWrap
-              component="a"
+              component={RouterLink}
+              to={{
+                pathname: "/",
+              }}
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontWeight: 400,
                 fontFamily: "Marck Script",
-                letterSpacing: ".1rem",
+                letterSpacing: ".05rem",
                 textDecoration: "none",
+                fontSize: 40,
                 alignItems: "center",
               }}
             >
               <Box
                 component="span"
-                sx={{
-                  display: "inline-flex",
-                  height: "1em",
-                  alignItems: "flex-end",
-                }}
-              >
-                <img
-                  alt="К"
-                  src="/images/k.png"
-                  style={{ height: "100%", width: "auto" }}
-                  loading="lazy"
-                />
-              </Box>
-              <Box
-                component="span"
                 sx={{ lineHeight: "normal", alignSelf: "flex-end" }}
               >
-                атюша
+                Катюша
               </Box>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -156,40 +155,35 @@ export default function NavBar(props) {
               <Typography
                 variant="h4"
                 noWrap
-                component="a"
+                component={RouterLink}
+                to={{
+                  pathname: "/",
+                }}
                 sx={{
                   display: { xs: "flex", md: "none" },
                   fontWeight: 400,
                   fontFamily: "Marck Script",
-                  letterSpacing: ".1rem",
+                  letterSpacing: ".05rem",
                   textDecoration: "none",
                   alignItems: "center",
                 }}
               >
                 <Box
                   component="span"
-                  sx={{
-                    display: "inline-flex",
-                    height: "1em",
-                    alignItems: "flex-end",
-                  }}
-                >
-                  <img
-                    alt="К"
-                    src="/images/k.png"
-                    style={{ height: "100%", width: "auto" }}
-                    loading="lazy"
-                  />
-                </Box>
-                <Box
-                  component="span"
                   sx={{ lineHeight: "normal", alignSelf: "flex-end" }}
                 >
-                  атюша
+                  Катюша
                 </Box>
               </Typography>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                flexDirection: "row-reverse",
+                display: { xs: "none", md: "flex" },
+                pr: 4,
+              }}
+            >
               {pages.map((page) => (
                 <Button
                   key={page.title}
@@ -204,7 +198,12 @@ export default function NavBar(props) {
                     fontFamily: "Comfortaa",
                   }}
                 >
-                  <Typography textAlign="center" sx={{ pt: "3px" }}>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      pt: "3px",
+                    }}
+                  >
                     {page.title}
                   </Typography>
                 </Button>

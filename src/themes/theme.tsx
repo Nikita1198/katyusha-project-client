@@ -6,28 +6,20 @@ export const lightTheme = createTheme(
   {
     palette: {
       primary: {
-        light: "#94F3A7",
-        main: "#007534",
-        dark: "#007534",
+        main: "#33691e",
+        contrastText: "#efefef",
+        light: "#b8eaa7",
       },
       secondary: {
-        light: "#fffde6",
-        main: "#db7638",
-        dark: "#d16320",
-      },
-      warning: {
-        main: "#ffc071",
-        dark: "#ffb25e",
+        main: "#ffa726",
+        light: "rgba(222,247,212,0.76)",
       },
       error: {
-        light: red[50],
-        main: red[500],
-        dark: red[700],
+        main: "#ff1100",
       },
-      success: {
-        light: green[50],
-        main: green[500],
-        dark: green[700],
+      background: {
+        default: "#fff8e8",
+        paper: "#ffffff",
       },
     },
     typography: {
@@ -38,13 +30,13 @@ export const lightTheme = createTheme(
       fontWeightMedium: 700, // Roboto Condensed
     },
   },
-  ruRU
+  ruRU,
 );
 
 export const darkTheme = createTheme(
   {
     palette: {
-      mode: 'dark', 
+      mode: "dark",
       primary: {
         light: "#6abf69",
         main: "#388e3c",
@@ -86,7 +78,7 @@ export const darkTheme = createTheme(
       fontWeightMedium: 700,
     },
   },
-  ruRU
+  ruRU,
 );
 
-export default {lightTheme, darkTheme };
+export default { lightTheme, darkTheme };

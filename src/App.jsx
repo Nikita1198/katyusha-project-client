@@ -7,17 +7,19 @@ import NavBar from './components/common/NavBar.tsx'
 import Container from '@mui/material/Container';
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme, darkTheme } from "./themes/theme.tsx";
+import Home from './pages/Home.tsx'
 
 export default function App() {
 
   return (
     <ThemeProvider theme={lightTheme}>
       <CssBaseline enableColorScheme />
-      <Container component="main" maxWidth="lg" sx={{ mt: 11 }}>
+      <Container component="main" maxWidth="lg" sx={{ mt: 9 }}>
         <BrowserRouter>
           <NavBar />
           <Routes>
-            <Route path="/" element={<Navigate to="/cultures" />} />
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/cultures" element={<CulturesPage />} />
             <Route path='/calculator' element={<Calculator />}>
               <Route path='wheat' element={<Wheat />} />
