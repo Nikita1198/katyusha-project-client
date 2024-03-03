@@ -73,17 +73,18 @@ function Features({}, ref) {
           <div
             className="mx-auto max-w-6xl px-6 lg:px-8"
             data-aos="fade-down"
-            data-aos-delay="500"
+            data-aos-delay="300"
           >
-            <div className="mt-16 flow-root sm:mt-24">
+            <div className="mt-16 flow-root sm:mt-24 flex justify-center">
               <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
                 <img
-                  src="/file-upload-preview.jpg"
+                  src="./images/wheat_resulltpage.png"
                   alt="uploading preview"
                   width={1419}
                   height={732}
                   className="rounded-md bg-white p-2 sm:p-8 md:p-20 shadow-2xl ring-1 ring-gray-900/10"
                 />
+                <div className="flex flex-col overflow-hidden"></div>
               </div>
             </div>
           </div>
