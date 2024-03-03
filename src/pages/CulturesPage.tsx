@@ -9,7 +9,7 @@ import {
   Divider,
   Typography,
   CardActionArea,
-  Grow
+  Grow,
 } from "@mui/material";
 
 const cards = [
@@ -89,7 +89,7 @@ export default function CulturesPage() {
                     display: "flex",
                     flexDirection: "column",
                     borderRadius: 10,
-                    border: "1px solid rgba(0, 0, 0, 0.12)"
+                    border: "1px solid rgba(0, 0, 0, 0.12)",
                   }}
                 >
                   <CardActionArea
@@ -103,12 +103,13 @@ export default function CulturesPage() {
                       image={item.img}
                       title={item.label}
                     />
-                    <CardContent sx={{ flexGrow: 1}}>
+                    <CardContent sx={{ flexGrow: 1 }}>
                       <Typography
                         gutterBottom
                         variant="h6"
                         component="h2"
-                        align="center">
+                        align="center"
+                      >
                         {item.label}
                       </Typography>
                       <Typography>{item.displayText}</Typography>

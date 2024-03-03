@@ -147,7 +147,15 @@ export default observer(function FieldParameters() {
             onChange={(e) => {
               store.updateStep1Field(e.target.id, e.target.value);
             }}
-            onFocus={(e) => e.target.addEventListener("wheel", function (e) { e.preventDefault() }, { passive: false })} // default убирает скролл 
+            onFocus={(e) =>
+              e.target.addEventListener(
+                "wheel",
+                function (e) {
+                  e.preventDefault();
+                },
+                { passive: false },
+              )
+            } // default убирает скролл
             fullWidth
             variant="outlined"
           />

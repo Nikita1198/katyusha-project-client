@@ -6,7 +6,13 @@ import Collapse from "@mui/material/Collapse";
 import CustomSelect from "./fields/CustomSelect.tsx";
 import { observer } from "mobx-react-lite";
 import { Box, TextField, Typography } from "@mui/material";
-import { ammoniumNitrate, moisturevalues, nitrateNitrogen, seedingRate, complexFertilizers } from "./constants/ranges";
+import {
+  ammoniumNitrate,
+  moisturevalues,
+  nitrateNitrogen,
+  seedingRate,
+  complexFertilizers,
+} from "./constants/ranges";
 import { lightTheme } from "../../themes/theme.tsx";
 
 export default observer(function SeasonsParametrs() {
@@ -24,20 +30,20 @@ export default observer(function SeasonsParametrs() {
           Осень
         </Typography>
         <Grid container spacing={4}>
-            <Grid item xs={12} sm={6}>
-              <CustomSelect
-                value={step2Data.complexFertilizers}
-                error={invalidFields.includes("complexFertilizers")}
-                range={complexFertilizers}
-                disabled={false}
-                id="complexFertilizers"
-                label="Норма сложных удобрений (Аммофос 12:52)"
-                helperText="* Фосфор в действующем веществе"
-                size="small"
-                onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
-                units="кг/га"
-              />
-            </Grid>
+          <Grid item xs={12} sm={6}>
+            <CustomSelect
+              value={step2Data.complexFertilizers}
+              error={invalidFields.includes("complexFertilizers")}
+              range={complexFertilizers}
+              disabled={false}
+              id="complexFertilizers"
+              label="Норма сложных удобрений (Аммофос 12:52)"
+              helperText="* Фосфор в действующем веществе"
+              size="small"
+              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+              units="кг/га"
+            />
+          </Grid>
           <Grid item xs={12} sm={6}>
             <CustomSelect
               value={step2Data.ammoniumNitrate}
@@ -138,7 +144,9 @@ export default observer(function SeasonsParametrs() {
                 id="moistureSpring"
                 label="Запас продуктивной влаги в метровом слое"
                 size="small"
-                onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+                onUpdate={(id, newValue) =>
+                  store.updateStep2Field(id, newValue)
+                }
                 units="мм"
               />
             </Grid>
@@ -151,12 +159,19 @@ export default observer(function SeasonsParametrs() {
                 id="nitrateNitrogen"
                 label="Доза нитратного азота в почве (слой 0-40см)"
                 size="small"
-                onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+                onUpdate={(id, newValue) =>
+                  store.updateStep2Field(id, newValue)
+                }
                 units="кг"
               />
             </Grid>
             <Grid item xs={12} sx={{ pt: "16px !important" }}>
-              <Collapse in={step2Data.nitrateNitrogen !== "Не выбрано" && step2Data.moistureSpring !== "Не выбрано"}>
+              <Collapse
+                in={
+                  step2Data.nitrateNitrogen !== "Не выбрано" &&
+                  step2Data.moistureSpring !== "Не выбрано"
+                }
+              >
                 <Box
                   sx={{
                     borderRadius: "4px",
@@ -174,8 +189,8 @@ export default observer(function SeasonsParametrs() {
                   >
                     Требуемое количество аммиачной селитры:{" "}
                     {step2Data.ammoniumNitrateRequired} кг/га <br />
-                    Прогнозируемая урожайность согласно весенней влагообеспеченности:{" "}
-                    {step3Data.totalresult} ц/га
+                    Прогнозируемая урожайность согласно весенней
+                    влагообеспеченности: {step3Data.totalresult} ц/га
                   </Typography>
                 </Box>
               </Collapse>

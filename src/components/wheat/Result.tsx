@@ -26,7 +26,9 @@ export default observer(function Result() {
           <TableHead>
             <TableRow sx={{ backgroundColor: rowColor }}>
               <TableCell colSpan={1}>
-                <Typography sx={{fontSize: 14}} >Поле №{`${result.step1.field}`}</Typography>
+                <Typography sx={{ fontSize: 14 }}>
+                  Поле №{`${result.step1.field}`}
+                </Typography>
               </TableCell>
               <TableCell colSpan={1} sx={{ minWidth: 100 }}></TableCell>
             </TableRow>
@@ -50,7 +52,7 @@ export default observer(function Result() {
           <TableHead>
             <TableRow>
               <TableCell colSpan={2} sx={{ backgroundColor: rowColor }}>
-                <Typography sx={{fontSize: 14}}>Осень</Typography>
+                <Typography sx={{ fontSize: 14 }}>Осень</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -71,8 +73,8 @@ export default observer(function Result() {
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
-              Прогнозируемая урожайность согласно влагообеспеченности
-                  хозяйства и уровня азотно фосфорного питания:
+                Прогнозируемая урожайность согласно влагообеспеченности
+                хозяйства и уровня азотно фосфорного питания:
               </TableCell>
               <TableCell align="center">{`${result.step2.plannedFirstYield.value} ц/га`}</TableCell>
             </TableRow>
@@ -80,7 +82,7 @@ export default observer(function Result() {
           <TableHead>
             <TableRow>
               <TableCell colSpan={2} sx={{ backgroundColor: rowColor }}>
-                <Typography sx={{fontSize: 14}}>Весна</Typography>
+                <Typography sx={{ fontSize: 14 }}>Весна</Typography>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -106,9 +108,15 @@ export default observer(function Result() {
             </TableRow>
           </TableBody>
           <TableBody>
-            <TableRow sx={{ borderTop: 1, backgroundColor: rowColor, fontWeight: 'bold' }}>
+            <TableRow
+              sx={{
+                borderTop: 1,
+                backgroundColor: rowColor,
+                fontWeight: "bold",
+              }}
+            >
               <TableCell colSpan={1}>
-                <Typography >Итоговая биологическая урожайность</Typography>
+                <Typography>Итоговая биологическая урожайность</Typography>
               </TableCell>
               <TableCell colSpan={1} align="center">
                 <Typography>{`${result.step3.totalresult} ц/га`}</Typography>

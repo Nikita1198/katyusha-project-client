@@ -6,7 +6,7 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link as RouterLink } from "react-router-dom";
-import { styled } from '@mui/system';
+import { styled } from "@mui/system";
 import {
   Box,
   Button,
@@ -34,10 +34,10 @@ function HideOnScroll(props) {
   );
 }
 
-const CustomLogo = styled('img')({
+const CustomLogo = styled("img")({
   width: 100,
   height: 65,
-  '@media (max-width:900px)': {
+  "@media (max-width:900px)": {
     width: 64,
     height: 48,
   },
@@ -71,7 +71,7 @@ export default function NavBar(props) {
     <HideOnScroll {...props}>
       <AppBar component="nav" elevation={1}>
         <Container maxWidth="xl">
-          <Toolbar sx={{ justifyContent: 'center' }}>
+          <Toolbar sx={{ justifyContent: "center" }}>
             <Typography
               variant="h3"
               noWrap
@@ -83,18 +83,30 @@ export default function NavBar(props) {
                 fontFamily: "Marck Script",
                 letterSpacing: ".1rem",
                 textDecoration: "none",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
-              <Box component="span" sx={{ display: 'inline-flex', height: '1em', alignItems: 'flex-end' }}>
+              <Box
+                component="span"
+                sx={{
+                  display: "inline-flex",
+                  height: "1em",
+                  alignItems: "flex-end",
+                }}
+              >
                 <img
                   alt="К"
                   src="/images/k.png"
-                  style={{ height: '100%', width: 'auto' }}
+                  style={{ height: "100%", width: "auto" }}
                   loading="lazy"
                 />
               </Box>
-              <Box component="span" sx={{ lineHeight: 'normal', alignSelf: 'flex-end' }}>атюша</Box>
+              <Box
+                component="span"
+                sx={{ lineHeight: "normal", alignSelf: "flex-end" }}
+              >
+                атюша
+              </Box>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
@@ -141,29 +153,41 @@ export default function NavBar(props) {
               </Menu>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <Typography
-              variant="h4"
-              noWrap
-              component="a"
-              sx={{
-                display: { xs: "flex", md: "none" },
-                fontWeight: 400,
-                fontFamily: "Marck Script",
-                letterSpacing: ".1rem",
-                textDecoration: "none",
-                alignItems: "center"
-              }}
-            >
-              <Box component="span" sx={{ display: 'inline-flex', height: '1em', alignItems: 'flex-end' }}>
-                <img
-                  alt="К"
-                  src="/images/k.png"
-                  style={{ height: '100%', width: 'auto' }}
-                  loading="lazy"
-                />
-              </Box>
-              <Box component="span" sx={{ lineHeight: 'normal', alignSelf: 'flex-end' }}>атюша</Box>
-            </Typography>
+              <Typography
+                variant="h4"
+                noWrap
+                component="a"
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                  fontWeight: 400,
+                  fontFamily: "Marck Script",
+                  letterSpacing: ".1rem",
+                  textDecoration: "none",
+                  alignItems: "center",
+                }}
+              >
+                <Box
+                  component="span"
+                  sx={{
+                    display: "inline-flex",
+                    height: "1em",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  <img
+                    alt="К"
+                    src="/images/k.png"
+                    style={{ height: "100%", width: "auto" }}
+                    loading="lazy"
+                  />
+                </Box>
+                <Box
+                  component="span"
+                  sx={{ lineHeight: "normal", alignSelf: "flex-end" }}
+                >
+                  атюша
+                </Box>
+              </Typography>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
@@ -173,9 +197,16 @@ export default function NavBar(props) {
                   to={{
                     pathname: page.component,
                   }}
-                  sx={{ my: 2, color: "white", display: "block", fontFamily: "Comfortaa" }}
+                  sx={{
+                    my: 2,
+                    color: "white",
+                    display: "block",
+                    fontFamily: "Comfortaa",
+                  }}
                 >
-                  <Typography textAlign="center" sx={{ pt: '3px' }}>{page.title}</Typography>
+                  <Typography textAlign="center" sx={{ pt: "3px" }}>
+                    {page.title}
+                  </Typography>
                 </Button>
               ))}
             </Box>

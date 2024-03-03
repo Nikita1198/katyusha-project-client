@@ -6,7 +6,7 @@ import Copyright from './components/common/Copyright.tsx'
 import NavBar from './components/common/NavBar.tsx'
 import Container from '@mui/material/Container';
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { lightTheme, darkTheme} from "./themes/theme.tsx";
+import { lightTheme, darkTheme } from "./themes/theme.tsx";
 
 export default function App() {
 

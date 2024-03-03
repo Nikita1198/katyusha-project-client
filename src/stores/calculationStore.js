@@ -72,10 +72,10 @@ class Store {
         reaction(
             () => this.calculation.step2.plannedFirstYield.value,
             (newValue, oldValue) => {
-                
-               if (newValue !== oldValue) {
-                this.calculateRequiredAmmoniumNitrate();
-                this.calculateYield();
+
+                if (newValue !== oldValue) {
+                    this.calculateRequiredAmmoniumNitrate();
+                    this.calculateYield();
                 }
             }
         );
@@ -236,7 +236,7 @@ class Store {
             const plannedYield = this.calculation.step3.totalresult;
             const soilNitrate = this.calculation.step2.nitrateNitrogen;
 
-            const requiredNitrogen = plannedYield * 3; 
+            const requiredNitrogen = plannedYield * 3;
 
             const nitrogenToAdd = requiredNitrogen - soilNitrate;
 
