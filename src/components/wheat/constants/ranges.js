@@ -1,6 +1,6 @@
 export const regions = [
     {
-        value : "Не выбрано",
+        value: "Не выбрано",
         code: "0"
     },
     {
@@ -397,6 +397,8 @@ export const seedingRate = [
 
 export const complexFertilizers = [
     { value: "Не выбрано" },
+    { value: "0" },
+    { value: "25" },
     { value: "35" },
     { value: "40" },
     { value: "45" },
@@ -413,4 +415,4 @@ export const complexFertilizers = [
     { value: "100" },
 ];
 
-export default {regions, ammoniumNitrate,moisturevalues,nitrateNitrogen, seedingRate, complexFertilizers  };
+export default { regions, ammoniumNitrate, moisturevalues, nitrateNitrogen, seedingRate, complexFertilizers };
