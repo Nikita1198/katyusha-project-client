@@ -1,11 +1,13 @@
+import { Button, Typography } from "@mui/material";
 import React, { forwardRef } from "react";
+import { Link } from "react-router-dom";
 
 function Features({}, ref) {
   return (
     <section ref={ref}>
       <div className="max-w-6xl mx-auto sm:px-6">
         {/* Feature section */}
-        <div className="mx-auto mb-32 mt-32 max-w-5xl sm:mt-56">
+        <div className="mx-auto mb-12 mt-32 max-w-5xl sm:mt-56">
           <div
             className="mb-12 px-6 lg:px-8"
             data-aos="fade-down"
@@ -86,6 +88,29 @@ function Features({}, ref) {
                 />
                 <div className="flex flex-col overflow-hidden"></div>
               </div>
+            </div>
+          </div>
+          <div className="max-w-xs mx-auto pt-16 sm:max-w-none sm:flex sm:justify-center">
+            <div data-aos="fade-up" data-aos-delay="400">
+              <Button
+                component={Link}
+                variant="contained"
+                to={{
+                  pathname: "/cultures",
+                }}
+                sx={{
+                  m: 1,
+                }}
+              >
+                <Typography
+                  textAlign="center"
+                  sx={{
+                    pt: "3px",
+                  }}
+                >
+                  Попробовать
+                </Typography>
+              </Button>
             </div>
           </div>
         </div>
