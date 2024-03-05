@@ -74,9 +74,6 @@ function Hero({ onClick }) {
                   to={{
                     pathname: "/cultures",
                   }}
-                  sx={{
-                    m: 1,
-                  }}
                 >
                   <Typography
                     textAlign="center"

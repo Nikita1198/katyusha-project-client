@@ -90,7 +90,7 @@ function Features({}, ref) {
               </div>
             </div>
           </div>
-          <div className="max-w-xs mx-auto pt-16 sm:max-w-none sm:flex sm:justify-center">
+          <div className="max-w-xs mx-auto pt-16 max-w-none flex justify-center">
             <div data-aos="fade-up" data-aos-delay="400">
               <Button
                 component={Link}
