@@ -21,7 +21,7 @@ function Features({}, ref) {
           </div>
 
           {/* steps */}
-          <ol className="my-8 space-y-4 pt-8 md:flex md:space-x-12 md:space-y-0">
+          <ol className="my-8 space-y-4 sm:pt-8 md:flex md:space-x-12 md:space-y-0">
             <li className="md:flex-1" data-aos="fade-down" data-aos-delay="300">
               <div className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
                 <span className="text-sm font-medium text-green-600">
@@ -90,7 +90,7 @@ function Features({}, ref) {
               </div>
             </div>
           </div>
-          <div className="max-w-xs mx-auto pt-16 max-w-none flex justify-center">
+          <div className="max-w-xs mx-auto pt-10 sm:pt-16 max-w-none flex justify-center">
             <div data-aos="fade-up" data-aos-delay="400">
               <Button
                 component={Link}
