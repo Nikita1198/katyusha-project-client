@@ -12,6 +12,7 @@ import {
   nitrateNitrogen,
   seedingRate,
   complexFertilizers,
+  phosphorusSupply,
 } from "./constants/ranges";
 import { lightTheme } from "../../themes/theme.tsx";
 
@@ -29,7 +30,7 @@ export default observer(function SeasonsParametrs() {
         >
           Осень
         </Typography>
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <CustomSelect
               value={step2Data.complexFertilizers}
@@ -72,6 +73,19 @@ export default observer(function SeasonsParametrs() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <CustomDataPicker error={invalidFields.includes("date")} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <CustomSelect
+              value={step2Data.phosphorusSupply}
+              error={invalidFields.includes("phosphorusSupply")}
+              range={phosphorusSupply}
+              disabled={false}
+              id="phosphorusSupply"
+              label="Запас фосфора в почве"
+              size="small"
+              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+              units="мг/кг"
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField

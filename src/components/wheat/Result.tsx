@@ -73,6 +73,12 @@ export default observer(function Result() {
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
+                Запас фосфора в почве:
+              </TableCell>
+              <TableCell align="center">{`${result.step2.phosphorusSupply} мг/кг`}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell component="th" scope="row">
                 Прогнозируемая урожайность согласно влагообеспеченности
                 хозяйства и уровня азотно фосфорного питания:
               </TableCell>
