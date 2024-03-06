@@ -16,7 +16,7 @@ import Result from "../../components/wheat/Result";
 import { Link as RouterLink } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
-import YM from "react-yandex-metrika";
+import ym from "react-yandex-metrika";
 
 const steps = ["Поле", "Осень/Весна", "Расчет"];
 
@@ -45,7 +45,7 @@ export default function WheatCalculator() {
 
   const handleNext = () => {
     if (activeStep == steps.length - 1) {
-      YM.reachGoal("button-result");
+      ym("reachGoal", "button-result");
     }
 
     if (store.getEmptyFields(activeStep).length == 0) {
