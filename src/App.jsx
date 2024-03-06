@@ -8,10 +8,16 @@ import Container from "@mui/material/Container";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme, darkTheme } from "./themes/theme.tsx";
 import Home from "./pages/Home.tsx";
+import { YMInitializer } from "react-yandex-metrika";
+import YOUR_COUNTER_ID from "../config.js";
 
 export default function App() {
   return (
     <ThemeProvider theme={lightTheme}>
+      <YMInitializer
+        accounts={[YOUR_COUNTER_ID]}
+        options={{ webvisor: true }}
+      />
       <CssBaseline enableColorScheme />
       <Container component="main" maxWidth="lg" sx={{ mt: 9 }}>
         <BrowserRouter>
