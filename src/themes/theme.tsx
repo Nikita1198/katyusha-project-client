@@ -25,9 +25,15 @@ export const lightTheme = createTheme(
     typography: {
       fontFamily: "'Work Sans', Comfortaa, sans-serif",
       fontSize: 14,
-      fontWeightLight: 300, // Work Sans
-      fontWeightRegular: 400, // Work Sans
-      fontWeightMedium: 700, // Roboto Condensed
+      fontWeightLight: 300,
+      fontWeightRegular: 400,
+      fontWeightMedium: 700,
+      h1: {
+        fontSize: "6rem",
+        "@media (max-width:600px)": {
+          fontSize: "5rem",
+        },
+      },
     },
   },
   ruRU,
