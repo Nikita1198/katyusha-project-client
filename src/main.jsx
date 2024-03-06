@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
-import { YMInitializer } from "react-yandex-metrika";
+import YMInitializer from "react-yandex-metrika";
 import YOUR_COUNTER_ID from "../config.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
