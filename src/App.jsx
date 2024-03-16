@@ -1,13 +1,17 @@
+import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import CulturesPage from "./pages/CulturesPage.tsx";
-import Calculator from "./pages/calculator/Calculator.tsx";
-import Wheat from "./pages/calculator/Wheat.tsx";
+const CulturesPage = React.lazy(() => import("./pages/CulturesPage.tsx"));
+const Calculator = React.lazy(() =>
+  import("./pages/calculator/Calculator.tsx"),
+);
+const Wheat = React.lazy(() => import("./pages/calculator/Wheat.tsx"));
+import Loader from "./components/common/Loader.tsx";
 import Copyright from "./components/common/Copyright.tsx";
 import NavBar from "./components/common/NavBar.tsx";
 import Container from "@mui/material/Container";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { lightTheme, darkTheme } from "./themes/theme.tsx";
-import Home from "./pages/Home.tsx";
+import { lightTheme } from "./themes/theme.tsx";
+const Home = React.lazy(() => import("./pages/Home.tsx"));
 import { YMInitializer } from "react-yandex-metrika";
 import YOUR_COUNTER_ID from "../config.js";
 
@@ -22,22 +26,24 @@ export default function App() {
       <Container component="main" maxWidth="lg" sx={{ mt: 9 }}>
         <BrowserRouter>
           <NavBar />
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route
-              path="/home"
-              element={
-                <>
-                  <Home />
-                  <Copyright sx={{ my: 3 }} />
-                </>
-              }
-            />
-            <Route path="/cultures" element={<CulturesPage />} />
-            <Route path="/calculator" element={<Calculator />}>
-              <Route path="wheat" element={<Wheat />} />
-            </Route>
-          </Routes>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" />} />
+              <Route
+                path="/home"
+                element={
+                  <>
+                    <Home />
+                    <Copyright sx={{ my: 3 }} />
+                  </>
+                }
+              />
+              <Route path="/cultures" element={<CulturesPage />} />
+              <Route path="/calculator" element={<Calculator />}>
+                <Route path="wheat" element={<Wheat />} />
+              </Route>
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </Container>
     </ThemeProvider>
