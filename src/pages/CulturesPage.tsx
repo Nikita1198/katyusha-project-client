@@ -11,6 +11,8 @@ import {
   CardActionArea,
   Grow,
 } from "@mui/material";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const cards = [
   {
@@ -18,7 +20,7 @@ const cards = [
     label: "Озимая пшеница",
     displayText: "",
     component: "/calculator/wheat",
-    img: "./images/whreat.png",
+    img: "./images/whreat.webp",
   },
   {
     id: 2,
@@ -102,11 +104,17 @@ export default function CulturesPage() {
                     disabled={item.component == "/"}
                     sx={{ opacity: item.component == "/" ? 0.25 : 1 }}
                   >
-                    <CardMedia
-                      sx={{ pt: { xs: "36.25%", md: "66.25%" } }}
-                      image={item.img}
-                      title={item.label}
-                    />
+                    <LazyLoadComponent>
+                      <div
+                        style={{
+                          height: 0,
+                          paddingTop: "66.25%",
+                          backgroundImage: `url(${item.img})`,
+                          backgroundSize: "cover",
+                          borderRadius: "4px 4px 0 0",
+                        }}
+                      />
+                    </LazyLoadComponent>
                     <CardContent sx={{ flexGrow: 1 }}>
                       <Typography
                         gutterBottom
