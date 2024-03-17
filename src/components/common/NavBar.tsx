@@ -212,7 +212,10 @@ export default function NavBar(props) {
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Анализатор удобрений компании АМРИТЭКС">
-                <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
+                <IconButton
+                  sx={{ p: 0 }}
+                  // onClick={handleOpenUserMenu}
+                >
                   <CustomLogo
                     alt="Анализатор удобрений"
                     src="/images/logo.png"
