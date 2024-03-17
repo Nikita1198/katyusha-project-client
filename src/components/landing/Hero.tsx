@@ -85,24 +85,6 @@ function Hero({ onClick }) {
                   </Typography>
                 </Button>
               </div>
-              {/* <div data-aos="fade-up" data-aos-delay="600">
-                <Button
-                  variant="outlined"
-                  onClick={onClick}
-                  sx={{
-                    m: 1,
-                  }}
-                >
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      pt: "3px",
-                    }}
-                  >
-                    Узнать больше
-                  </Typography>
-                </Button>
-              </div> */}
             </div>
           </div>
         </div>
@@ -114,7 +96,10 @@ function Hero({ onClick }) {
           justifyContent: "center",
         }}
       >
-        <div className="self-center mt-8 sm:mt-40 animate-bounce">
+        <div
+          className="self-center mt-8 sm:mt-40 animate-bounce"
+          style={{ cursor: "pointer" }}
+        >
           <div
             className="bg-white dark:bg-slate-800 p-2 w-14 h-14 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center"
             onClick={onClick}
