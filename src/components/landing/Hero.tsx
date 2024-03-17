@@ -1,10 +1,8 @@
 import { Button, Typography } from "@mui/material";
-import React, { forwardRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
-function Hero({ onClick }) {
-  const navigate = useNavigate();
-
+export default function Hero({ onClick }) {
   return (
     <section>
       <div className="max-w-6xl mx-auto pt-6 py-2 px-4 sm:px-6 relative">
@@ -121,5 +119,3 @@ function Hero({ onClick }) {
     </section>
   );
 }
-
-export default forwardRef(Hero);
