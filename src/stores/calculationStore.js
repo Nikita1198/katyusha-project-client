@@ -243,14 +243,14 @@ class Store {
       plannedFirstYield *= phosphorusSupplyCoefficient;
 
       // Влагообеспеченность
-      const moistureLevel = parseFloat(moisture); // Преобразуем уровень влаги в число
+      const parsedMoisture = parseFloat(moisture); // Преобразуем уровень влаги в число
+      const moistureLevel = Math.min(Math.max(parsedMoisture, 200), 800); // Корректируем уровень влаги в диапазоне от 200 до 800
+
       if (moistureLevel > 450) {
         const excessMoisture = moistureLevel - 450; // Рассчитываем избыток влаги свыше 450 мм
         const moistureAdjustment = Math.floor(excessMoisture / 10) * 1.5; // Увеличиваем урожайность на 1.5 ц/га за каждые 10 мм сверх 450
         plannedFirstYield += moistureAdjustment;
       } else if (moistureLevel < 450) {
-        // Здесь можно добавить логику для уменьшения урожайности, если требуется
-        // Например, если нужно уменьшать урожайность на 1.5 ц/га за каждые 10 мм ниже 450 мм
         const deficitMoisture = 450 - moistureLevel;
         const moistureDeduction = Math.floor(deficitMoisture / 10) * 1.5; // Уменьшаем урожайность на 1.5 ц/га за каждые 10 мм недостатка
         plannedFirstYield -= moistureDeduction;

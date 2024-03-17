@@ -120,7 +120,7 @@ export default observer(function FieldParameters() {
             id={"moisture"}
             label={"Годовая влагообеспеченность предприятия"}
             max={800}
-            min={200}
+            min={0}
             step={10}
             defaultValue={step1Data.moisture}
             error={invalidFields.includes("moisture")}

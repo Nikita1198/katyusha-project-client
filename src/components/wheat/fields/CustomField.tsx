@@ -6,28 +6,26 @@ export default function CustomField({
   id,
   label,
   max,
-  min,
+  min = 0, // Устанавливаем значение по умолчанию для min, если оно не предоставлено
   step,
   defaultValue,
   units,
-  error
+  error,
 }) {
-  const [value, setValue] = React.useState(defaultValue);
+  const [value, setValue] = React.useState(defaultValue.toString());
 
   const handleInputChange = (e) => {
-    let newValue = e.target.value === "" ? min : Number(e.target.value);
-    setValue(newValue);
-    store.updateStep1Field(e.target.id, newValue);
+    const inputValue = e.target.value;
+    setValue(inputValue);
   };
 
-  const handleBlur = (e) => {
-    if (value < min) {
-      setValue(min);
-      store.updateStep1Field(e.target.id, min);
-    } else if (value > max) {
-      setValue(max);
-      store.updateStep1Field(e.target.id, max);
-    }
+  const handleBlur = () => {
+    let adjustedValue = parseFloat(value);
+    adjustedValue = Math.max(adjustedValue, min);
+    adjustedValue =
+      max !== undefined ? Math.min(adjustedValue, max) : adjustedValue;
+    setValue(adjustedValue.toString());
+    store.updateStep1Field(id, adjustedValue);
   };
 
   return (
@@ -46,7 +44,11 @@ export default function CustomField({
         placeholder="0"
         InputLabelProps={{ shrink: true }}
         InputProps={{
-          inputProps: { step: step, min: min, max: max },
+          inputProps: {
+            step: step,
+            min: min,
+            max: max,
+          },
           endAdornment: <InputAdornment position="end">{units}</InputAdornment>,
         }}
       />
