@@ -51,6 +51,10 @@ const cards = [
 ];
 
 export default function CulturesPage() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Grow in={true} timeout={500}>
