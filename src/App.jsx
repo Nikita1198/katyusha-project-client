@@ -25,8 +25,8 @@ export default function App() {
       <CssBaseline enableColorScheme />
       <Container component="main" maxWidth="lg" sx={{ mt: 9 }}>
         <BrowserRouter>
+          <NavBar />
           <Suspense fallback={<Loader />}>
-            <NavBar />
             <Routes>
               <Route path="/" element={<Navigate to="/home" />} />
               <Route
