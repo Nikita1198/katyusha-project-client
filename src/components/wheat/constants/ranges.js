@@ -339,6 +339,7 @@ export const regions = [
 
 export const ammoniumNitrate = [
   { value: "Не выбрано" },
+  { value: "0" },
   { value: "10" },
   { value: "20" },
   { value: "30" },
@@ -426,6 +427,14 @@ export const phosphorusSupply = [
   { value: "35 и выше" },
 ];
 
+export const commentRange = [
+  { value: "Не выбрано" },
+  { value: "Всходы" },
+  { value: "2-3 листа" },
+  { value: "Начало кущения" },
+  { value: "Кущения 2-3 побега" },
+];
+
 export default {
   regions,
   ammoniumNitrate,
@@ -434,4 +443,5 @@ export default {
   seedingRate,
   complexFertilizers,
   phosphorusSupply,
+  commentRange,
 };

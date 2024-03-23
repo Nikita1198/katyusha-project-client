@@ -79,6 +79,12 @@ export default observer(function Result() {
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
+                Развитие посевов с оcени:
+              </TableCell>
+              <TableCell align="center">{`${result.step2.comment}`}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell component="th" scope="row">
                 Прогнозируемая урожайность согласно влагообеспеченности
                 хозяйства и уровня азотно фосфорного питания:
               </TableCell>

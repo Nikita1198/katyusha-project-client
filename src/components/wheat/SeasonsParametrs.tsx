@@ -5,7 +5,7 @@ import store from "../../stores/calculationStore";
 import Collapse from "@mui/material/Collapse";
 import CustomSelect from "./fields/CustomSelect.tsx";
 import { observer } from "mobx-react-lite";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import {
   ammoniumNitrate,
   moisturevalues,
@@ -13,6 +13,7 @@ import {
   seedingRate,
   complexFertilizers,
   phosphorusSupply,
+  commentRange,
 } from "./constants/ranges";
 import { lightTheme } from "../../themes/theme.tsx";
 
@@ -38,7 +39,7 @@ export default observer(function SeasonsParametrs() {
               range={complexFertilizers}
               disabled={false}
               id="complexFertilizers"
-              label="Норма сложных удобрений (Аммофос 12:52)"
+              label="Норма сложных удобрений"
               helperText="* Фосфор в действующем веществе"
               size="small"
               onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
@@ -87,28 +88,17 @@ export default observer(function SeasonsParametrs() {
               units="мг/кг"
             />
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Развитие с осени"
-              id="comment"
-              multiline
-              required
-              fullWidth
-              rows={8}
+          <Grid item xs={12} sm={6}>
+            <CustomSelect
+              value={step2Data.comment}
               error={invalidFields.includes("comment")}
-              defaultValue={step2Data.comment}
-              InputLabelProps={{ shrink: true }}
-              placeholder="Укажите развитие посевов с оcени"
+              range={commentRange}
+              disabled={false}
+              id="comment"
+              label="Укажите развитие посевов с оcени"
               size="small"
-              about="Укажите развитие посевов с оcени"
-              onChange={(e) => {
-                store.updateStep2Field(e.target.id, e.target.value);
-              }}
-              inputProps={{
-                style: {
-                  height: "45px",
-                },
-              }}
+              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+              units=""
             />
           </Grid>
           <Grid item xs={12} sx={{ pt: "16px !important" }}>

@@ -45,7 +45,9 @@ export default function CustomSelect({
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>{helperText}</FormHelperText>
+        <FormHelperText sx={{ fontWeight: 900, fontSize: 14 }}>
+          {helperText}
+        </FormHelperText>
       </FormControl>
     </Box>
   );

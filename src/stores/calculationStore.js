@@ -1,4 +1,4 @@
-import { observable, reaction, makeAutoObservable } from "mobx";
+import { makeAutoObservable, observable, reaction } from "mobx";
 
 class Store {
   calculation = observable({
@@ -18,7 +18,7 @@ class Store {
       seedingRate: "Не выбрано",
       phosphorusSupply: "Не выбрано",
       date: null,
-      comment: "",
+      comment: "Не выбрано",
       plannedFirstYield: { value: "", display: false },
       nitrateNitrogen: "Не выбрано",
       ammoniumNitrateRequired: 0,
@@ -168,6 +168,7 @@ class Store {
     if (
       this.calculation.step2.seedingRate !== "Не выбрано" &&
       this.calculation.step2.complexFertilizers !== "Не выбрано" &&
+      this.calculation.step2.comment !== "Не выбрано" &&
       this.calculation.step2.phosphorusSupply !== "Не выбрано" &&
       this.calculation.step2.ammoniumNitrate !== "" &&
       this.calculation.step1.moisture !== "" &&
@@ -180,6 +181,7 @@ class Store {
         complexFertilizers,
         ammoniumNitrate,
         phosphorusSupply,
+        comment,
       } = this.calculation.step2;
       const { moisture } = this.calculation.step1;
 
@@ -210,8 +212,10 @@ class Store {
 
       // Аммиачная селитра
       const ammoniumNitrateNumber = parseFloat(ammoniumNitrate);
-      const additionalYield = ammoniumNitrateNumber / 10;
-      plannedFirstYield += additionalYield;
+      if (ammoniumNitrateNumber !== 0) {
+        const additionalYield = ammoniumNitrateNumber / 10;
+        plannedFirstYield += additionalYield;
+      }
 
       // Норма высева
       const yieldCoefficients = {
@@ -242,6 +246,18 @@ class Store {
         phosphorusCoefficients[phosphorusSupplyAmount];
       plannedFirstYield *= phosphorusSupplyCoefficient;
 
+      // Развитие с осени
+      const commentsCoefficients = {
+        "Всходы": 0.75,
+        "2-3 листа": 0.85,
+        "Начало кущения": 1.0,
+        "Кущения 2-3 побега": 1.1,
+      };
+
+      const commentsValue = comment;
+      const commentsSelected = commentsCoefficients[commentsValue];
+      plannedFirstYield *= commentsSelected;
+
       // Влагообеспеченность
       const parsedMoisture = parseFloat(moisture); // Преобразуем уровень влаги в число
       const moistureLevel = Math.min(Math.max(parsedMoisture, 200), 800); // Корректируем уровень влаги в диапазоне от 200 до 800
@@ -256,8 +272,10 @@ class Store {
         plannedFirstYield -= moistureDeduction;
       }
 
+      plannedFirstYield = plannedFirstYield < 0 ? 0 : plannedFirstYield;
+
       // Обновляем plannedFirstYield
-      if (plannedFirstYield >= 0) {
+      if (plannedFirstYield != undefined) {
         this.calculation.step2.plannedFirstYield.value =
           Math.round(plannedFirstYield).toString();
         this.calculation.step3.step2result =
