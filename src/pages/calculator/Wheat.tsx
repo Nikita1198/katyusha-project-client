@@ -17,6 +17,10 @@ import { Link as RouterLink } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
 import ym from "react-yandex-metrika";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
 
 const steps = ["Поле", "Осень/Весна", "Расчет"];
 
@@ -59,6 +63,11 @@ export default function WheatCalculator() {
     setActiveStep(activeStep - 1);
   };
 
+  const handleRestart = () => {
+    store.resetCalculationWheat();
+    setActiveStep(0);
+  };
+
   return (
     <Container maxWidth="md" sx={{ mt: 10, mb: 4 }} ref={componentRef}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 2 }}>
@@ -73,51 +82,63 @@ export default function WheatCalculator() {
         <Typography color="text.primary">Озимая пшеница</Typography>
       </Breadcrumbs>
       <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 } }}>
-        <Stepper
-          activeStep={activeStep}
-          sx={{
-            pt: 1,
-            pb: 1.5,
-          }}
-        >
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+        {activeStep !== steps.length - 1 && (
+          <Stepper
+            activeStep={activeStep}
+            sx={{
+              pt: 1,
+              pb: 1.5,
+            }}
+          >
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        )}
         <Box>
-          <Box sx={{ m: 1, minHeight: "63vh" }}>
+          <Box sx={{ m: 1, minHeight: "64vh" }}>
             {getStepContent(activeStep)}
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            {/* Кнопка "Назад" отображается всегда, кроме первого шага */}
-            {activeStep > 0 && (
-              <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                Назад
-              </Button>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: activeStep == 0 ? "flex-end" : "space-between",
+              m: 1,
+              mt: 2,
+            }}
+          >
+            {activeStep != 0 && (
+              <Tooltip title="Начать расчет заново">
+                <IconButton
+                  aria-label="restart"
+                  sx={{ p: 0 }}
+                  onClick={handleRestart}
+                >
+                  <RestartAltIcon />
+                </IconButton>
+              </Tooltip>
             )}
-            {/* Кнопка "Далее" или "Рассчитать" отображается на всех шагах, кроме последнего */}
-            {activeStep < steps.length - 1 && (
-              <Button
-                variant="contained"
-                onClick={handleNext}
-                sx={{ mt: 3, ml: 1 }}
-              >
-                {activeStep === steps.length - 2 ? "Рассчитать" : "Далее"}
-              </Button>
-            )}
-            {/* Кнопка "Печать" отображается только на последнем шаге */}
-            {activeStep === steps.length - 1 && (
-              <Button
-                variant="contained"
-                onClick={handlePrint}
-                startIcon={<PrintIcon />}
-                sx={{ mt: 3, ml: 1 }}
-              >
-                Печать
-              </Button>
-            )}
+            <ButtonGroup variant="contained" aria-label="Basic button group">
+              {activeStep > 0 && (
+                <Button onClick={handleBack} variant="outlined">
+                  Назад
+                </Button>
+              )}
+              {activeStep < steps.length - 1 && (
+                <Button variant="contained" onClick={handleNext}>
+                  {activeStep === steps.length - 2 ? "Рассчитать" : "Далее"}
+                </Button>
+              )}
+              {activeStep === steps.length - 1 && (
+                <Tooltip title="Печатать результат">
+                  <Button onClick={handlePrint}>
+                    <PrintIcon />
+                  </Button>
+                </Tooltip>
+              )}
+            </ButtonGroup>
           </Box>
         </Box>
       </Paper>

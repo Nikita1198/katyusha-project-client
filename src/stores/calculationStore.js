@@ -1,38 +1,24 @@
 import { makeAutoObservable, observable, reaction } from "mobx";
 
-class Store {
-  calculationWheat = observable({
-    step1: {
-      company: "",
-      region: "Не выбрано",
-      variety: "",
-      field: "",
-      square: "",
-      predecessor: "",
-      moisture: "",
-      plannedYield: "",
-    },
-    step2: {
-      complexFertilizers: "Не выбрано",
-      ammoniumNitrate: "Не выбрано",
-      seedingRate: "Не выбрано",
-      phosphorusSupply: "Не выбрано",
-      date: null,
-      comment: "Не выбрано",
-      plannedFirstYield: { value: "", display: false },
-      nitrateNitrogen: "Не выбрано",
-      ammoniumNitrateRequired: 0,
-      moistureSpring: "Не выбрано",
-    },
-    step3: {
-      step1result: 0,
-      step2result: 0,
-      totalresult: 0,
-    },
-    invalidFields: [],
-  });
-
+class CalculationStore {
   constructor() {
+    this.calculationWheat = {
+      step1: {
+        company: "", region: "Не выбрано", variety: "",
+        field: "", square: "", predecessor: "", moisture: "",
+        plannedYield: "",
+      },
+      step2: {
+        complexFertilizers: "Не выбрано", ammoniumNitrate: "Не выбрано",
+        seedingRate: "Не выбрано", phosphorusSupply: "Не выбрано",
+        date: null, comment: "Не выбрано",
+        plannedFirstYield: { value: "", display: false },
+        nitrateNitrogen: "Не выбрано", ammoniumNitrateRequired: 0,
+        moistureSpring: "Не выбрано",
+      },
+      step3: { step1result: 0, step2result: 0, totalresult: 0 },
+      invalidFields: [],
+    };
     makeAutoObservable(this);
 
     reaction(
@@ -77,29 +63,15 @@ class Store {
     );
   }
 
-  getStep1() {
-    return this.calculationWheat.step1;
-  }
+  // Получение данных по шагам
+  getStep1() { return this.calculationWheat.step1; }
+  getStep2() { return this.calculationWheat.step2; }
+  getStep3() { return this.calculationWheat.step3; }
+  getCalculationWheat() { return this.calculationWheat; }
 
-  getStep2() {
-    return this.calculationWheat.step2;
-  }
-
-  getStep3() {
-    return this.calculationWheat.step3;
-  }
-
-  getCalculationWheat() {
-    return this.calculationWheat;
-  }
-
-  updateStep1Field(field, value) {
-    this.calculationWheat.step1[field] = value;
-  }
-
-  updateStep2Field(field, value) {
-    this.calculationWheat.step2[field] = value;
-  }
+  // Обновление полей шагов
+  updateStep1Field(field, value) { this.calculationWheat.step1[field] = value; }
+  updateStep2Field(field, value) { this.calculationWheat.step2[field] = value; }
 
   isStepComplete(step) {
     const fields = this.calculationWheat[`step${step + 1}`];
@@ -109,58 +81,24 @@ class Store {
   }
 
   getEmptyFields(step) {
-    let fields = {};
-    switch (step) {
-      case 0:
-        fields = this.calculationWheat.step1;
-        break;
-      case 1:
-        fields = this.calculationWheat.step2;
-        break;
-      case 2:
-        fields = this.calculationWheat.step3;
-        break;
-      default:
-        // Возвращаем пустой массив, так как неизвестный шаг не содержит полей для проверки
-        return [];
-    }
+    // Прямое присваивание без использования switch-case
+    const fields = this.calculationWheat[`step${step + 1}`] || {};
 
-    const invalidFields = [];
+    // Фильтрация недопустимых полей с помощью Object.entries и условий проверки
+    const invalidFields = Object.entries(fields)
+      .filter(([key, value]) =>
+        typeof value === 'string' && (value.trim() === "" || value === "Не выбрано") ||
+        typeof value === 'number' && (value === 0 || isNaN(value)) ||
+        typeof value === 'object' && (value === null || value === undefined)
+      )
+      .map(([key]) => key); // Извлекаем только ключи недопустимых полей
 
-    for (let key in fields) {
-      const value = fields[key];
-
-      // Добавляем условия проверки и добавляем название поля в массив invalidFields, если оно не соответствует условиям
-      if (
-        typeof value === "string" &&
-        (value.trim() === "" || value === "Не выбрано")
-      ) {
-        invalidFields.push(key);
-        continue;
-      }
-
-      if (typeof value === "number" && (value === 0 || isNaN(value))) {
-        invalidFields.push(key);
-        continue;
-      }
-
-      if (
-        typeof value === "object" &&
-        (value === null || value === undefined)
-      ) {
-        invalidFields.push(key);
-        continue;
-      }
-    }
-
+    // Сохраняем и возвращаем недопустимые поля
     this.calculationWheat.invalidFields = invalidFields;
-
     return invalidFields;
   }
 
-  getInvalidFields() {
-    return this.calculationWheat.invalidFields;
-  }
+  getInvalidFields() { return this.calculationWheat.invalidFields; }
 
   calculateFirstYield() {
     if (
@@ -345,39 +283,27 @@ class Store {
     }
   }
 
-  // Метод сброса calculationWheat
-  resetcalculationWheat() {
+  // Сброс данных расчета
+  resetCalculationWheat() {
     this.calculationWheat = {
       step1: {
-        company: "",
-        region: "Не выбрано",
-        variety: "",
-        field: "",
-        square: "",
-        predecessor: "",
-        moisture: "",
+        company: "", region: "Не выбрано", variety: "",
+        field: "", square: "", predecessor: "", moisture: "",
         plannedYield: "",
       },
       step2: {
-        complexFertilizers: "Не выбрано",
-        ammoniumNitrate: "Не выбрано",
-        seedingRate: "Не выбрано",
-        date: null,
-        comment: "",
+        complexFertilizers: "Не выбрано", ammoniumNitrate: "Не выбрано",
+        seedingRate: "Не выбрано", phosphorusSupply: "Не выбрано",
+        date: null, comment: "Не выбрано",
         plannedFirstYield: { value: "", display: false },
-        nitrateNitrogen: "Не выбрано",
-        ammoniumNitrateRequired: 0,
+        nitrateNitrogen: "Не выбрано", ammoniumNitrateRequired: 0,
         moistureSpring: "Не выбрано",
       },
-      step3: {
-        step1result: 0,
-        step2result: 0,
-        totalresult: 0,
-      },
+      step3: { step1result: 0, step2result: 0, totalresult: 0 },
       invalidFields: [],
     };
   }
 }
 
-const store = new Store();
+const store = new CalculationStore();
 export default store;
