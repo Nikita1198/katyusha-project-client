@@ -95,6 +95,7 @@ export default function NavBar(props) {
                 fontWeight: 400,
                 fontFamily: "Marck Script",
                 letterSpacing: ".05rem",
+                overflow: "visible",
                 textDecoration: "none",
                 fontSize: 40,
                 alignItems: "center",
@@ -165,6 +166,7 @@ export default function NavBar(props) {
                   fontFamily: "Marck Script",
                   letterSpacing: ".05rem",
                   textDecoration: "none",
+                  overflow: "visible",
                   alignItems: "center",
                 }}
               >
@@ -214,7 +216,7 @@ export default function NavBar(props) {
               <Tooltip title="Анализатор удобрений компании АМРИТЭКС">
                 <IconButton
                   sx={{ p: 0 }}
-                  // onClick={handleOpenUserMenu}
+                // onClick={handleOpenUserMenu}
                 >
                   <CustomLogo
                     alt="Анализатор удобрений"
