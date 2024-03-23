@@ -12,7 +12,7 @@ import store from "../../stores/calculationStore";
 import { lightTheme } from "../../themes/theme";
 
 export default observer(function Result() {
-  const result = store.getCalculation();
+  const result = store.getCalculationWheat();
   const rowColor = lightTheme.palette.secondary.light;
   return (
     <Box>

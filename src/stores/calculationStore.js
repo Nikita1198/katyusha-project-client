@@ -1,7 +1,7 @@
 import { makeAutoObservable, observable, reaction } from "mobx";
 
 class Store {
-  calculation = observable({
+  calculationWheat = observable({
     step1: {
       company: "",
       region: "Не выбрано",
@@ -37,14 +37,14 @@ class Store {
 
     reaction(
       () => [
-        this.calculation.step3.step1result,
-        this.calculation.step2.seedingRate,
-        this.calculation.step2.complexFertilizers,
-        this.calculation.step2.ammoniumNitrate,
-        this.calculation.step2.phosphorusSupply,
-        this.calculation.step2.date,
-        this.calculation.step1.moisture,
-        this.calculation.step2.comment,
+        this.calculationWheat.step3.step1result,
+        this.calculationWheat.step2.seedingRate,
+        this.calculationWheat.step2.complexFertilizers,
+        this.calculationWheat.step2.ammoniumNitrate,
+        this.calculationWheat.step2.phosphorusSupply,
+        this.calculationWheat.step2.date,
+        this.calculationWheat.step1.moisture,
+        this.calculationWheat.step2.comment,
       ],
       () => {
         this.calculateFirstYield();
@@ -53,21 +53,21 @@ class Store {
     );
 
     reaction(
-      () => [this.calculation.step2.nitrateNitrogen],
+      () => [this.calculationWheat.step2.nitrateNitrogen],
       () => {
         this.calculateRequiredAmmoniumNitrate();
       },
     );
 
     reaction(
-      () => [this.calculation.step2.moistureSpring],
+      () => [this.calculationWheat.step2.moistureSpring],
       () => {
         this.calculateYield();
       },
     );
 
     reaction(
-      () => this.calculation.step2.plannedFirstYield.value,
+      () => this.calculationWheat.step2.plannedFirstYield.value,
       (newValue, oldValue) => {
         if (newValue !== oldValue) {
           this.calculateRequiredAmmoniumNitrate();
@@ -78,31 +78,31 @@ class Store {
   }
 
   getStep1() {
-    return this.calculation.step1;
+    return this.calculationWheat.step1;
   }
 
   getStep2() {
-    return this.calculation.step2;
+    return this.calculationWheat.step2;
   }
 
   getStep3() {
-    return this.calculation.step3;
+    return this.calculationWheat.step3;
   }
 
-  getCalculation() {
-    return this.calculation;
+  getCalculationWheat() {
+    return this.calculationWheat;
   }
 
   updateStep1Field(field, value) {
-    this.calculation.step1[field] = value;
+    this.calculationWheat.step1[field] = value;
   }
 
   updateStep2Field(field, value) {
-    this.calculation.step2[field] = value;
+    this.calculationWheat.step2[field] = value;
   }
 
   isStepComplete(step) {
-    const fields = this.calculation[`step${step + 1}`];
+    const fields = this.calculationWheat[`step${step + 1}`];
     return Object.values(fields).every(
       (value) => value !== "" && value !== "Не выбрано" && value !== null,
     );
@@ -112,13 +112,13 @@ class Store {
     let fields = {};
     switch (step) {
       case 0:
-        fields = this.calculation.step1;
+        fields = this.calculationWheat.step1;
         break;
       case 1:
-        fields = this.calculation.step2;
+        fields = this.calculationWheat.step2;
         break;
       case 2:
-        fields = this.calculation.step3;
+        fields = this.calculationWheat.step3;
         break;
       default:
         // Возвращаем пустой массив, так как неизвестный шаг не содержит полей для проверки
@@ -153,37 +153,34 @@ class Store {
       }
     }
 
-    this.calculation.invalidFields = invalidFields;
+    this.calculationWheat.invalidFields = invalidFields;
 
     return invalidFields;
   }
 
   getInvalidFields() {
-    return this.calculation.invalidFields;
+    return this.calculationWheat.invalidFields;
   }
 
-  // Метод расчета предварительной урожайности во втором шаге
   calculateFirstYield() {
-    // Проверяем, что все необходимые поля заполнены (не равны пустой строке)
     if (
-      this.calculation.step2.seedingRate !== "Не выбрано" &&
-      this.calculation.step2.complexFertilizers !== "Не выбрано" &&
-      this.calculation.step2.comment !== "Не выбрано" &&
-      this.calculation.step2.phosphorusSupply !== "Не выбрано" &&
-      this.calculation.step2.ammoniumNitrate !== "" &&
-      this.calculation.step1.moisture !== "" &&
-      this.calculation.step2.comment !== "" &&
-      this.calculation.step2.date !== null
+      this.calculationWheat.step2.seedingRate !== "Не выбрано" &&
+      this.calculationWheat.step2.complexFertilizers !== "Не выбрано" &&
+      this.calculationWheat.step2.comment !== "Не выбрано" &&
+      this.calculationWheat.step2.phosphorusSupply !== "Не выбрано" &&
+      this.calculationWheat.step2.ammoniumNitrate !== "Не выбрано" &&
+      this.calculationWheat.step1.moisture !== "" &&
+      this.calculationWheat.step2.comment !== "" &&
+      this.calculationWheat.step2.date !== null
     ) {
-      // Переменные для расчетов
       const {
         seedingRate,
         complexFertilizers,
         ammoniumNitrate,
         phosphorusSupply,
         comment,
-      } = this.calculation.step2;
-      const { moisture } = this.calculation.step1;
+      } = this.calculationWheat.step2;
+      const { moisture } = this.calculationWheat.step1;
 
       // Аммофос 12:52 (фосфор в действующем веществе)
       const fertilizerYieldMap = {
@@ -276,27 +273,27 @@ class Store {
 
       // Обновляем plannedFirstYield
       if (plannedFirstYield != undefined) {
-        this.calculation.step2.plannedFirstYield.value =
+        this.calculationWheat.step2.plannedFirstYield.value =
           Math.round(plannedFirstYield).toString();
-        this.calculation.step3.step2result =
-          this.calculation.step2.plannedFirstYield.value;
-        this.calculation.step2.plannedFirstYield.display = true;
+        this.calculationWheat.step3.step2result =
+          this.calculationWheat.step2.plannedFirstYield.value;
+        this.calculationWheat.step2.plannedFirstYield.display = true;
       } else {
-        this.calculation.step2.plannedFirstYield.display = false;
+        this.calculationWheat.step2.plannedFirstYield.display = false;
       }
     } else {
-      this.calculation.step2.plannedFirstYield.display = false;
-      this.calculation.step2.ammoniumNitrateRequired = "";
-      this.calculation.step2.nitrateNitrogen = "Не выбрано";
-      this.calculation.step2.moistureSpring = "Не выбрано";
+      this.calculationWheat.step2.plannedFirstYield.display = false;
+      this.calculationWheat.step2.ammoniumNitrateRequired = "";
+      this.calculationWheat.step2.nitrateNitrogen = "Не выбрано";
+      this.calculationWheat.step2.moistureSpring = "Не выбрано";
     }
   }
 
   // Метод расчета требуемого количества аммиачной селитры
   calculateRequiredAmmoniumNitrate() {
-    if (this.calculation.step2.nitrateNitrogen !== "Не выбрано") {
-      const plannedYield = this.calculation.step3.totalresult;
-      const soilNitrate = this.calculation.step2.nitrateNitrogen;
+    if (this.calculationWheat.step2.nitrateNitrogen !== "Не выбрано") {
+      const plannedYield = this.calculationWheat.step3.totalresult;
+      const soilNitrate = this.calculationWheat.step2.nitrateNitrogen;
 
       const requiredNitrogen = plannedYield * 3;
 
@@ -308,7 +305,7 @@ class Store {
         ammoniumNitrateRequired = 0;
       }
 
-      this.calculation.step2.ammoniumNitrateRequired = Math.round(
+      this.calculationWheat.step2.ammoniumNitrateRequired = Math.round(
         ammoniumNitrateRequired,
       ).toString();
     }
@@ -316,9 +313,9 @@ class Store {
 
   // Метод расчета урожайности
   calculateYield() {
-    if (this.calculation.step2.moistureSpring != "Не выбрано") {
-      const plannedYieldAutumn = this.calculation.step3.step2result;
-      const moistureSpring = this.calculation.step2.moistureSpring;
+    if (this.calculationWheat.step2.moistureSpring != "Не выбрано") {
+      const plannedYieldAutumn = this.calculationWheat.step3.step2result;
+      const moistureSpring = this.calculationWheat.step2.moistureSpring;
 
       const moistureLevelsMap = {
         200: 1.3,
@@ -343,13 +340,14 @@ class Store {
         updatedYield = 120;
       }
 
-      this.calculation.step3.totalresult = Math.round(updatedYield).toString();
+      this.calculationWheat.step3.totalresult =
+        Math.round(updatedYield).toString();
     }
   }
 
-  // Метод сброса calculation
-  resetCalculation() {
-    this.calculation = {
+  // Метод сброса calculationWheat
+  resetcalculationWheat() {
+    this.calculationWheat = {
       step1: {
         company: "",
         region: "Не выбрано",
