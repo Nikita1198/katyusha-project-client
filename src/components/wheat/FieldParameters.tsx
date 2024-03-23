@@ -1,12 +1,13 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import store from "../../stores/calculationStore";
 import CustomField from "../wheat/fields/CustomField";
 import { observer } from "mobx-react-lite";
-import { Box, Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { regions } from "./constants/ranges";
+import TextField from "@mui/material/TextField";
 import CustomSelect from "../wheat/fields/CustomSelect";
 
 export default observer(function FieldParameters() {

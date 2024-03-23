@@ -1,18 +1,16 @@
 import * as React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Container,
-  Grid,
-  Divider,
-  Typography,
-  CardActionArea,
-  Grow,
-} from "@mui/material";
-import { LazyLoadComponent } from "react-lazy-load-image-component";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
+import CardActionArea from "@mui/material/CardActionArea";
+import Grow from "@mui/material/Grow";
+
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 const cards = [
   {

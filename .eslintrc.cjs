@@ -46,6 +46,11 @@ module.exports = {
     'react/prop-types': 'off', // Если вы не используете prop-types
     'react-hooks/rules-of-hooks': 'error', // Проверка правил хуков
     'react-hooks/exhaustive-deps': 'warn', // Проверка зависимостей эффектов
-    // Добавьте или измените правила ESLint здесь
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["@mui/*/*/*"]
+      }
+    ]
   },
 };

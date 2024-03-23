@@ -5,7 +5,8 @@ import store from "../../stores/calculationStore";
 import Collapse from "@mui/material/Collapse";
 import CustomSelect from "./fields/CustomSelect.tsx";
 import { observer } from "mobx-react-lite";
-import { Box, Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import {
   ammoniumNitrate,
   moisturevalues,
