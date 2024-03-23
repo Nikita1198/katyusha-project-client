@@ -5,13 +5,13 @@ const Calculator = React.lazy(() =>
   import("./pages/calculator/Calculator.tsx"),
 );
 const Wheat = React.lazy(() => import("./pages/calculator/Wheat.tsx"));
+const Home = React.lazy(() => import("./pages/Home.tsx"));
 import Loader from "./components/common/Loader.tsx";
 import Copyright from "./components/common/Copyright.tsx";
 import NavBar from "./components/common/NavBar.tsx";
 import Container from "@mui/material/Container";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme } from "./themes/theme.tsx";
-const Home = React.lazy(() => import("./pages/Home.tsx"));
 import { YMInitializer } from "react-yandex-metrika";
 import YOUR_COUNTER_ID from "../config.js";
 
