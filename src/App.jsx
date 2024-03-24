@@ -23,7 +23,7 @@ export default function App() {
         options={{ webvisor: true }}
       />
       <CssBaseline enableColorScheme />
-      <Container component="main" maxWidth="lg" sx={{ mt: 9 }}>
+      <Container component="main" maxWidth="lg" sx={{ mt: 11 }}>
         <BrowserRouter>
           <NavBar />
           <Suspense fallback={<Loader />}>
