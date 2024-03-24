@@ -7,7 +7,7 @@ function Features({}, ref) {
     <section ref={ref}>
       <div className="max-w-6xl mx-auto sm:px-6">
         {/* Feature section */}
-        <div className="mx-auto mb-12 mt-32 max-w-5xl sm:mt-56">
+        <div className="mx-auto mb-12 pt-14 max-w-5xl">
           <div
             className="mb-12 px-6 lg:px-8"
             data-aos="fade-down"
@@ -15,8 +15,11 @@ function Features({}, ref) {
           >
             <div className="mx-auto max-w-2xl sm:text-center flex flex-col items-center">
               <h2 className="mt-6 font-bold text-4xl text-gray-900 sm:text-5xl">
-                Расчет удобрений за считанные минуты
+                Хотите попробовать?
               </h2>
+              <h4 className="mt-3 font-bold text-2xl text-gray-900 sm:text-3xl">
+                Расчет удобрений за считанные минуты
+              </h4>
             </div>
           </div>
 
@@ -82,7 +85,7 @@ function Features({}, ref) {
                 <img
                   src="./images/wheat_resulltpage.png"
                   alt="uploading preview"
-                  width={1419}
+                  width={1219}
                   height={732}
                   className="rounded-md bg-white p-2 sm:p-8 md:p-20 shadow-2xl ring-1 ring-gray-900/10"
                 />
@@ -91,7 +94,7 @@ function Features({}, ref) {
             </div>
           </div>
           <div className="max-w-xs mx-auto pt-10 sm:pt-16 max-w-none flex justify-center">
-            <div data-aos="fade-up" data-aos-delay="400">
+            <div data-aos="fade-down" data-aos-delay="300">
               <Button
                 component={Link}
                 variant="contained"

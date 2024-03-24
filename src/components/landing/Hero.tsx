@@ -88,6 +88,8 @@ export default function Hero({ onClick }) {
         </div>
       </div>
       <div
+        data-aos="zoom-in"
+        data-aos-delay="500"
         style={{
           display: "flex",
           alignItems: "center",
@@ -95,7 +97,7 @@ export default function Hero({ onClick }) {
         }}
       >
         <div
-          className="self-center mt-8 sm:mt-40 animate-bounce"
+          className="self-center my-8 sm:my-10 animate-bounce"
           style={{ cursor: "pointer" }}
         >
           <div

@@ -3,6 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Features from "../components/landing/Features";
 import Hero from "../components/landing/Hero";
+import Products from "../components/landing/Products";
 
 export default function Home() {
   const section2Ref = React.useRef(null);
@@ -21,7 +22,8 @@ export default function Home() {
   return (
     <>
       <Hero onClick={() => scrollToRef(section2Ref)} />
-      <Features ref={section2Ref} />
+      <Products ref={section2Ref} />
+      <Features />
     </>
   );
 }

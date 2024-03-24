@@ -75,12 +75,12 @@ export default function NavBar(props) {
 
   return (
     <HideOnScroll {...props}>
-      <AppBar component="nav" elevation={1}>
-        <Container maxWidth="xl">
+      <AppBar component="nav" elevation={2}>
+        <Container maxWidth="lg">
           <Toolbar
             variant="dense"
             disableGutters
-            sx={{ justifyContent: "center", minHeight: 20, height: 56 }}
+            sx={{ justifyContent: "center", minHeight: 25, height: 66 }}
           >
             <Typography
               variant="h3"
@@ -216,7 +216,7 @@ export default function NavBar(props) {
               <Tooltip title="Анализатор удобрений компании АМРИТЭКС">
                 <IconButton
                   sx={{ p: 0 }}
-                // onClick={handleOpenUserMenu}
+                  // onClick={handleOpenUserMenu}
                 >
                   <CustomLogo
                     alt="Анализатор удобрений"
