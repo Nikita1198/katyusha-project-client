@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Hero({ onClick }) {
   return (
-    <section>
+    <section style={{ position: "relative", height: "100vh" }}>
       <div className="max-w-6xl mx-auto pt-6 py-2 px-4 sm:px-6 relative">
         {/* Illustration behind hero content */}
         <div
@@ -91,19 +91,18 @@ export default function Hero({ onClick }) {
         data-aos="zoom-in"
         data-aos-delay="500"
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          position: "absolute",
+          bottom: 160,
+          left: "50%",
+          transform: "translateX(-50%)",
         }}
       >
         <div
-          className="self-center my-8 sm:my-10 animate-bounce"
+          className="self-center animate-bounce"
           style={{ cursor: "pointer" }}
+          onClick={onClick}
         >
-          <div
-            className="bg-white dark:bg-slate-800 p-2 w-14 h-14 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center"
-            onClick={onClick}
-          >
+          <div className="bg-white dark:bg-slate-800 p-2 w-14 h-14 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center">
             <svg
               className="w-8 h-12 text-green-700"
               fill="none"
