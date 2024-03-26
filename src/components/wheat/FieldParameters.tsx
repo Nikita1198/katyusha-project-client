@@ -1,7 +1,7 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
-import store from "../../stores/calculationStore";
+import store from "../../stores/wheatStore";
 import CustomField from "../wheat/fields/CustomField";
 import { observer } from "mobx-react-lite";
 import Typography from "@mui/material/Typography";

@@ -5,6 +5,7 @@ const Calculator = React.lazy(() =>
   import("./pages/calculator/Calculator.tsx"),
 );
 const Wheat = React.lazy(() => import("./pages/calculator/Wheat.tsx"));
+const Sunflower = React.lazy(() => import("./pages/calculator/Sunflower.tsx"));
 const Home = React.lazy(() => import("./pages/Home.tsx"));
 import Loader from "./components/common/Loader.tsx";
 import Copyright from "./components/common/Copyright.tsx";
@@ -41,6 +42,7 @@ export default function App() {
               <Route path="/cultures" element={<CulturesPage />} />
               <Route path="/calculator" element={<Calculator />}>
                 <Route path="wheat" element={<Wheat />} />
+                <Route path="sunflower" element={<Sunflower />} />
               </Route>
             </Routes>
           </Suspense>

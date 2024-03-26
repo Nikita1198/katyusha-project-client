@@ -8,7 +8,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FieldParameters from "../../components/wheat/FieldParameters";
-import store from "../../stores/calculationStore";
+import store from "../../stores/wheatStore";
 import CustomizedSnackbars from "../../components/common/CustomizedSnackbars";
 import SeasonsParametrs from "../../components/wheat/SeasonsParametrs";
 import { Breadcrumbs, Link } from "@mui/material";
