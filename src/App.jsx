@@ -11,7 +11,7 @@ import Loader from "./components/common/Loader.tsx";
 import Copyright from "./components/common/Copyright.tsx";
 import NavBar from "./components/common/NavBar.tsx";
 import Container from "@mui/material/Container";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme } from "./themes/theme.tsx";
 import { YMInitializer } from "react-yandex-metrika";
 import YOUR_COUNTER_ID from "../config.js";
@@ -24,9 +24,9 @@ export default function App() {
         options={{ webvisor: true }}
       />
       <CssBaseline enableColorScheme />
-      <Container component="main" maxWidth="lg" sx={{ mt: 11 }}>
-        <BrowserRouter>
-          <NavBar />
+      <BrowserRouter>
+        <NavBar />
+        <Box sx={{ mt: 11 }}>
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<Navigate to="/home" />} />
@@ -46,8 +46,8 @@ export default function App() {
               </Route>
             </Routes>
           </Suspense>
-        </BrowserRouter>
-      </Container>
+        </Box>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

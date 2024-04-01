@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 
 export default function Hero({ onClick }) {
   return (
-    <section style={{ position: "relative", height: "100vh" }}>
+    <section
+      style={{
+        position: "relative",
+        height: "100vh",
+      }}
+    >
       <div className="max-w-6xl mx-auto pt-6 py-2 px-4 sm:px-6 relative">
         {/* Illustration behind hero content */}
         <div

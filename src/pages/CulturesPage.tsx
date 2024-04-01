@@ -56,7 +56,7 @@ export default function CulturesPage() {
   }, []);
 
   return (
-    <>
+    <Container component="main" maxWidth="lg">
       <Grow in={true} timeout={500}>
         <Container maxWidth="md">
           <Typography
@@ -131,6 +131,6 @@ export default function CulturesPage() {
           ))}
         </Grid>
       </Container>
-    </>
+    </Container>
   );
 }

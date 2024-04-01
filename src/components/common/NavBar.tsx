@@ -7,18 +7,25 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link as RouterLink } from "react-router-dom";
 import { styled } from "@mui/system";
-import {
-  Box,
-  Button,
-  Container,
-  Menu,
-  MenuItem,
-  Slide,
-  useScrollTrigger,
-} from "@mui/material";
 import PropTypes from "prop-types";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import Slide from "@mui/material/Slide";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 
-const pages = [{ title: "Главная", component: "/" }];
+const pages = [
+  {
+    title: "Новости",
+    url: "https://fugustim.ru/page12469998.html",
+    external: true,
+  },
+  { title: "Продукция", url: "https://fugustim.ru/", external: true },
+  { title: "Главная", url: "/", external: false },
+];
 const settings = ["Результаты"];
 
 function HideOnScroll(props) {
@@ -43,12 +50,6 @@ const CustomLogo = styled("img")({
   },
 });
 
-const styles = {
-  customizeToolbar: {
-    minHeight: 36,
-  },
-};
-
 HideOnScroll.propTypes = {
   children: PropTypes.element.isRequired,
   window: PropTypes.func,
@@ -60,9 +61,6 @@ export default function NavBar(props) {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -137,19 +135,36 @@ export default function NavBar(props) {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <MenuItem
-                    key={page.title}
-                    onClick={handleCloseNavMenu}
-                    component={RouterLink}
-                    sx={{ fontFamily: "Comfortaa" }}
-                    to={{
-                      pathname: page.component,
-                    }}
-                  >
-                    <Typography textAlign="center">{page.title}</Typography>
-                  </MenuItem>
-                ))}
+                {pages.map((page) =>
+                  page.external ? (
+                    <MenuItem
+                      key={page.title}
+                      onClick={handleCloseNavMenu}
+                      sx={{ fontFamily: "Comfortaa" }}
+                    >
+                      <Typography
+                        component="a"
+                        href={page.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        textAlign="center"
+                        sx={{ textDecoration: "none", color: "inherit" }}
+                      >
+                        {page.title}
+                      </Typography>
+                    </MenuItem>
+                  ) : (
+                    <MenuItem
+                      key={page.title}
+                      onClick={handleCloseNavMenu}
+                      component={RouterLink}
+                      to={page.url}
+                      sx={{ fontFamily: "Comfortaa" }}
+                    >
+                      <Typography textAlign="center">{page.title}</Typography>
+                    </MenuItem>
+                  ),
+                )}
               </Menu>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -181,43 +196,81 @@ export default function NavBar(props) {
             <Box
               sx={{
                 flexGrow: 1,
+                height: "100%",
                 flexDirection: "row-reverse",
                 display: { xs: "none", md: "flex" },
                 pr: 4,
               }}
             >
-              {pages.map((page) => (
-                <Button
-                  key={page.title}
-                  component={RouterLink}
-                  to={{
-                    pathname: page.component,
-                  }}
-                  sx={{
-                    my: 2,
-                    color: "white",
-                    display: "block",
-                    fontFamily: "Comfortaa",
-                  }}
-                >
-                  <Typography
-                    textAlign="center"
+              {pages.map((page) =>
+                page.external ? (
+                  <Box
                     sx={{
-                      pt: "3px",
+                      m: 0,
+                      p: 0,
+                      "&:hover": {
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        color: "#black",
+                      },
                     }}
                   >
-                    {page.title}
-                  </Typography>
-                </Button>
-              ))}
+                    <a
+                      key={page.title}
+                      href={page.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Button
+                        sx={{
+                          px: 2,
+                          color: "white",
+                          display: "block",
+                          fontFamily: "Comfortaa",
+                          width: "100%",
+                          height: "100%",
+                        }}
+                      >
+                        <Typography textAlign="center">{page.title}</Typography>
+                      </Button>
+                    </a>
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{
+                      m: 0,
+                      p: 0,
+                      "&:hover": {
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        color: "#black",
+                      },
+                    }}
+                  >
+                    <Button
+                      key={page.title}
+                      component={RouterLink}
+                      to={page.url}
+                      sx={{
+                        px: 2,
+                        borderRadius: 0,
+                        width: "100%",
+                        height: "100%",
+                        color: "white",
+                        fontFamily: "Comfortaa",
+                      }}
+                    >
+                      <Typography textAlign="center" sx={{ width: "100%" }}>
+                        {page.title}
+                      </Typography>
+                    </Button>
+                  </Box>
+                ),
+              )}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Анализатор удобрений компании АМРИТЭКС">
-                <IconButton
-                  sx={{ p: 0 }}
-                  // onClick={handleOpenUserMenu}
-                >
+                <IconButton sx={{ p: 0 }}>
                   <CustomLogo
                     alt="Анализатор удобрений"
                     src="/images/logo.png"
