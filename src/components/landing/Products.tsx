@@ -1,6 +1,13 @@
 import React, { forwardRef } from "react";
+import SimpleImageSlider from "react-simple-image-slider";
 
-function Products({}, ref) {
+const images1 = [
+  { url: "../images/product1.jpg" },
+  { url: "../images/product2.jpg" },
+  { url: "../images/product3.jpg" }
+];
+
+function Products({ }, ref) {
   return (
     <section
       className="bg-white border-b py-8 pt-4"
@@ -29,7 +36,16 @@ function Products({}, ref) {
             </p>
           </div>
           <div className="w-full sm:w-1/2 p-6">
-            <img src="..\images\product1.jpg" className="rounded-lg" />
+            <SimpleImageSlider
+              width={100}
+              height={100}
+              autoPlay={true}
+              images={images1}
+              showBullets={false}
+              autoPlayDelay={4}
+              showNavs={false}
+            />
+            {/* <img src="..\images\product1.jpg" className="rounded-lg" /> */}
           </div>
         </div>
         <div className="flex flex-wrap flex-col-reverse sm:flex-row">
