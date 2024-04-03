@@ -24,7 +24,7 @@ const cards = [
     id: 2,
     label: "Подсолнечник",
     displayText: "",
-    component: "/calculator/sunflower",
+    component: "/",
     img: "./images/sunflower.jpg",
   },
   {
