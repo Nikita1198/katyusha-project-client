@@ -205,6 +205,7 @@ export default function NavBar(props) {
               {pages.map((page) =>
                 page.external ? (
                   <Box
+                    key={page.title}
                     sx={{
                       m: 0,
                       p: 0,
@@ -215,7 +216,6 @@ export default function NavBar(props) {
                     }}
                   >
                     <a
-                      key={page.title}
                       href={page.url}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -237,6 +237,7 @@ export default function NavBar(props) {
                   </Box>
                 ) : (
                   <Box
+                    key={page.title}
                     sx={{
                       m: 0,
                       p: 0,
