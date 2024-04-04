@@ -22,12 +22,14 @@ VKID.Config.set({
   redirectUrl: "https://katyusha-project-client.vercel.app/home",
 });
 
-VKID.Auth.login({
-  scheme: "light",
-  lang: 0,
-});
-
 export default function App() {
+  React.useEffect(() => {
+    VKID.Auth.login({
+      scheme: "light",
+      lang: 0,
+    });
+  }, []);
+
   return (
     <ThemeProvider theme={lightTheme}>
       <YMInitializer
