@@ -17,19 +17,17 @@ import { YMInitializer } from "react-yandex-metrika";
 import YOUR_COUNTER_ID from "../config.js";
 import * as VKID from "@vkid/sdk";
 
-VKID.Config.set({
-  app: 51895129,
-  redirectUrl: "https://katyusha-project-client.vercel.app/home",
-});
+// VKID.Config.set({
+//   app: 51895129,
+//   redirectUrl: "https://katyusha-project-client.vercel.app/home",
+// });
+
+// VKID.Auth.login({
+//   scheme: "light",
+//   lang: 0,
+// });
 
 export default function App() {
-  React.useEffect(() => {
-    VKID.Auth.login({
-      scheme: "light",
-      lang: 0,
-    });
-  }, []);
-
   return (
     <ThemeProvider theme={lightTheme}>
       <YMInitializer
