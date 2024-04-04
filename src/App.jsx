@@ -19,6 +19,7 @@ import * as VKID from "@vkid/sdk";
 
 VKID.Config.set({
   app: 51895129,
+  redirectUrl: "https://katyusha-project-client.vercel.app/home",
 });
 
 VKID.Auth.login({
