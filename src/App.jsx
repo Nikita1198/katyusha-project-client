@@ -15,6 +15,16 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { lightTheme } from "./themes/theme.tsx";
 import { YMInitializer } from "react-yandex-metrika";
 import YOUR_COUNTER_ID from "../config.js";
+import * as VKID from "@vkid/sdk";
+
+VKID.Config.set({
+  app: 51895129,
+});
+
+VKID.Auth.login({
+  scheme: "light",
+  lang: 0,
+});
 
 export default function App() {
   return (
