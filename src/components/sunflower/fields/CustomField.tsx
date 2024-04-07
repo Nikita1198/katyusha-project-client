@@ -1,6 +1,6 @@
 import * as React from "react";
 import { InputAdornment, Box, TextField } from "@mui/material";
-import store from "../../../stores/calculationStore";
+import sunflowerStore from "../../../stores/sunflowerStore";
 
 export default function CustomField({
   id,
@@ -25,7 +25,7 @@ export default function CustomField({
     adjustedValue =
       max !== undefined ? Math.min(adjustedValue, max) : adjustedValue;
     setValue(adjustedValue.toString());
-    store.updateStep1Field(id, adjustedValue);
+    sunflowerStore.updateStep1Field(id, adjustedValue);
   };
 
   return (

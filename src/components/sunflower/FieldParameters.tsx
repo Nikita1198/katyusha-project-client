@@ -1,18 +1,18 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
-import store from "../../stores/wheatStore";
-import CustomField from "../wheat/fields/CustomField";
+import sunflowerStore from "../../stores/sunflowerStore";
+import CustomField from "../sunflower/fields/CustomField";
 import { observer } from "mobx-react-lite";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { regions } from "../../constants/regions";
 import TextField from "@mui/material/TextField";
-import CustomSelect from "../wheat/fields/CustomSelect";
+import CustomSelect from "../sunflower/fields/CustomSelect";
 
 export default observer(function FieldParameters() {
-  const step1Data = store.getStep1();
-  const invalidFields: string[] = store.getInvalidFields();
+  const step1Data = sunflowerStore.getStep1();
+  const invalidFields: string[] = sunflowerStore.getInvalidFields();
   return (
     <Box>
       <Typography variant="h6" sx={{ mb: 2 }}>
@@ -31,7 +31,7 @@ export default observer(function FieldParameters() {
             error={invalidFields.includes("company")}
             variant="outlined"
             onChange={(e) => {
-              store.updateStep1Field(e.target.id, e.target.value);
+              sunflowerStore.updateStep1Field(e.target.id, e.target.value);
             }}
           />
         </Grid>
@@ -44,21 +44,23 @@ export default observer(function FieldParameters() {
             id="region"
             label="Регион"
             size="medium"
-            onUpdate={(id, newValue) => store.updateStep1Field(id, newValue)}
+            onUpdate={(id, newValue) =>
+              sunflowerStore.updateStep1Field(id, newValue)
+            }
             units=""
           />
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
-            id="variety"
-            name="variety"
-            label="Сорт"
+            id="hybrid"
+            name="hybrid"
+            label="Гибрид"
             required
             type="text"
-            value={step1Data.variety}
-            error={invalidFields.includes("variety")}
+            value={step1Data.hybrid}
+            error={invalidFields.includes("hybrid")}
             onChange={(e) => {
-              store.updateStep1Field(e.target.id, e.target.value);
+              sunflowerStore.updateStep1Field(e.target.id, e.target.value);
             }}
             fullWidth
             variant="outlined"
@@ -74,7 +76,7 @@ export default observer(function FieldParameters() {
             error={invalidFields.includes("field")}
             label="Поле №:"
             onChange={(e) => {
-              store.updateStep1Field(e.target.id, e.target.value);
+              sunflowerStore.updateStep1Field(e.target.id, e.target.value);
             }}
             fullWidth
             variant="outlined"
@@ -94,7 +96,7 @@ export default observer(function FieldParameters() {
               endAdornment: <InputAdornment position="end">га</InputAdornment>,
             }}
             onChange={(e) => {
-              store.updateStep1Field(e.target.id, e.target.value);
+              sunflowerStore.updateStep1Field(e.target.id, e.target.value);
             }}
             fullWidth
             variant="outlined"
@@ -111,7 +113,7 @@ export default observer(function FieldParameters() {
             error={invalidFields.includes("predecessor")}
             type="text"
             onChange={(e) => {
-              store.updateStep1Field(e.target.id, e.target.value);
+              sunflowerStore.updateStep1Field(e.target.id, e.target.value);
             }}
             variant="outlined"
           />
@@ -146,7 +148,7 @@ export default observer(function FieldParameters() {
             placeholder="0"
             InputLabelProps={{ shrink: true }}
             onChange={(e) => {
-              store.updateStep1Field(e.target.id, e.target.value);
+              sunflowerStore.updateStep1Field(e.target.id, e.target.value);
             }}
             onFocus={(e) =>
               e.target.addEventListener(
@@ -156,7 +158,7 @@ export default observer(function FieldParameters() {
                 },
                 { passive: false },
               )
-            } // default убирает скролл
+            }
             fullWidth
             variant="outlined"
           />

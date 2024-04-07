@@ -8,11 +8,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
-import store from "../../stores/wheatStore";
+import sunflowerStore from "../../stores/sunflowerStore.js";
 import { lightTheme } from "../../themes/theme";
 
 export default observer(function Result() {
-  const result = store.getCalculationWheat();
+  const result = sunflowerStore.getCalculation();
   const rowColor = lightTheme.palette.secondary.light;
   return (
     <Box>
@@ -58,37 +58,16 @@ export default observer(function Result() {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>Норма сложных удобрений (Аммофос 12:52):</TableCell>
-              <TableCell align="center">{`${result.step2.complexFertilizers} кг/га`}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Норма аммиачной селитры:</TableCell>
-              <TableCell align="center">{`${result.step2.ammoniumNitrate} кг/га`}</TableCell>
-            </TableRow>
-            <TableRow>
               <TableCell component="th" scope="row">
-                Норма высева:
-              </TableCell>
-              <TableCell align="center">{`${result.step2.seedingRate} млн`}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">
-                Запас фосфора в почве:
+                Содержание фосфора в почве
               </TableCell>
               <TableCell align="center">{`${result.step2.phosphorusSupply} мг/кг`}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell component="th" scope="row">
-                Развитие посевов с оcени:
+              <TableCell>
+                Доза удобрений (фосфора) в действующем веществе
               </TableCell>
-              <TableCell align="center">{`${result.step2.comment}`}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">
-                Прогнозируемая урожайность согласно влагообеспеченности
-                хозяйства и уровня азотно фосфорного питания:
-              </TableCell>
-              <TableCell align="center">{`${result.step2.plannedFirstYield.value} ц/га`}</TableCell>
+              <TableCell align="center">{`${result.step2.complexFertilizers} кг/га`}</TableCell>
             </TableRow>
           </TableBody>
           <TableHead>
@@ -101,22 +80,15 @@ export default observer(function Result() {
           <TableBody>
             <TableRow>
               <TableCell component="th" scope="row">
-                Запас продуктивной влаги в метровом слое:
+                Запас продуктивной влаги в слое 0-100см
               </TableCell>
               <TableCell align="center">{`${result.step2.moistureSpring} мм`}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell component="th" scope="row">
-                Доза нитратного азота в почве (слой 0-40см):
+                Аммиачная селитра при/перед посевом
               </TableCell>
-              <TableCell align="center">{`${result.step2.nitrateNitrogen} кг`}</TableCell>
-            </TableRow>
-
-            <TableRow>
-              <TableCell component="th" scope="row">
-                Требуемое количество аммиачной селитры:
-              </TableCell>
-              <TableCell align="center">{`${result.step2.ammoniumNitrateRequired} кг`}</TableCell>
+              <TableCell align="center">{`${result.step2.ammoniumNitrate} кг`}</TableCell>
             </TableRow>
           </TableBody>
           <TableBody>

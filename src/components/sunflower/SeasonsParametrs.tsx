@@ -1,28 +1,24 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import CustomDataPicker from "./fields/CustomDataPicker.tsx";
-import store from "../../stores/wheatStore.js";
+import sunflowerStore from "../../stores/sunflowerStore.js";
 import Collapse from "@mui/material/Collapse";
 import CustomSelect from "./fields/CustomSelect.tsx";
 import { observer } from "mobx-react-lite";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { lightTheme } from "../../themes/theme.tsx";
 import {
   ammoniumNitrate,
-  moisturevalues,
-  nitrateNitrogen,
-  seedingRate,
   complexFertilizers,
+  moisturevalues,
   phosphorusSupply,
-  commentRange,
-} from "./constants/ranges";
-import { lightTheme } from "../../themes/theme.tsx";
+} from "./constants/ranges.js";
 
 export default observer(function SeasonsParametrs() {
-  const step2Data = store.getStep2();
-  const step3Data = store.getStep3();
+  const step2Data = sunflowerStore.getStep2();
+  const step3Data = sunflowerStore.getStep3();
   const rowColor = lightTheme.palette.secondary.light;
-  const invalidFields: string[] = store.getInvalidFields();
+  const invalidFields: string[] = sunflowerStore.getInvalidFields();
   return (
     <>
       <Box>
@@ -35,100 +31,42 @@ export default observer(function SeasonsParametrs() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <CustomSelect
-              value={step2Data.complexFertilizers}
-              error={invalidFields.includes("complexFertilizers")}
-              range={complexFertilizers}
-              disabled={false}
-              id="complexFertilizers"
-              label="Норма сложных удобрений"
-              helperText="* Фосфор в действующем веществе"
-              size="small"
-              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
-              units="кг/га"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <CustomSelect
-              value={step2Data.ammoniumNitrate}
-              error={invalidFields.includes("ammoniumNitrate")}
-              range={ammoniumNitrate}
-              disabled={false}
-              id="ammoniumNitrate"
-              label="Норма аммиачной селитры"
-              size="small"
-              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
-              units="кг/га"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <CustomSelect
-              value={step2Data.seedingRate}
-              error={invalidFields.includes("seedingRate")}
-              range={seedingRate}
-              disabled={false}
-              id="seedingRate"
-              label="Норма высева"
-              size="small"
-              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
-              units="млн"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <CustomDataPicker error={invalidFields.includes("date")} />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <CustomSelect
               value={step2Data.phosphorusSupply}
               error={invalidFields.includes("phosphorusSupply")}
               range={phosphorusSupply}
               disabled={false}
               id="phosphorusSupply"
-              label="Запас фосфора в почве"
+              label="Содержание фосфора в почве"
               size="small"
-              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
+              onUpdate={(id, newValue) =>
+                sunflowerStore.updateStep2Field(id, newValue)
+              }
               units="мг/кг"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <CustomSelect
-              value={step2Data.comment}
-              error={invalidFields.includes("comment")}
-              range={commentRange}
+              value={step2Data.complexFertilizers}
+              error={invalidFields.includes("complexFertilizers")}
+              range={complexFertilizers}
               disabled={false}
-              id="comment"
-              label="Укажите развитие посевов с оcени"
+              id="complexFertilizers"
+              label="Доза удобрений (фосфора) в действующем веществе"
               size="small"
-              onUpdate={(id, newValue) => store.updateStep2Field(id, newValue)}
-              units=""
+              onUpdate={(id, newValue) =>
+                sunflowerStore.updateStep2Field(id, newValue)
+              }
+              units="кг/га"
             />
-          </Grid>
-          <Grid item xs={12} sx={{ pt: "16px !important" }}>
-            <Collapse in={step2Data.plannedFirstYield.display}>
-              <Box
-                sx={{
-                  borderRadius: "4px",
-                  border: "1px solid rgba(0, 0, 0, 0.12)",
-                  backgroundColor: rowColor,
-                }}
-              >
-                <Typography
-                  variant="subtitle2"
-                  sx={{
-                    textAlign: { xs: "center", sm: "left" },
-                    my: { xs: 1, sm: 0 },
-                    p: 1,
-                  }}
-                >
-                  Прогнозируемая урожайность согласно влагообеспеченности
-                  хозяйства и уровня азотно фосфорного питания:{" "}
-                  {step2Data.plannedFirstYield.value} ц/га
-                </Typography>
-              </Box>
-            </Collapse>
           </Grid>
         </Grid>
       </Box>
-      <Collapse in={step2Data.plannedFirstYield.display}>
+      <Collapse
+        in={
+          step2Data.complexFertilizers !== "Не выбрано" &&
+          step2Data.phosphorusSupply !== "Не выбрано"
+        }
+      >
         <Box sx={{ mt: 2 }}>
           <Box sx={{ mb: 2, width: "100%" }}>
             <Typography
@@ -143,29 +81,29 @@ export default observer(function SeasonsParametrs() {
             <Grid item xs={12} sm={6}>
               <CustomSelect
                 value={step2Data.moistureSpring}
-                disabled={!step2Data.plannedFirstYield.display}
+                disabled={false}
                 error={invalidFields.includes("moistureSpring")}
                 range={moisturevalues}
                 id="moistureSpring"
-                label="Запас продуктивной влаги в метровом слое"
+                label="Запас продуктивной влаги в слое 0-100см"
                 size="small"
                 onUpdate={(id, newValue) =>
-                  store.updateStep2Field(id, newValue)
+                  sunflowerStore.updateStep2Field(id, newValue)
                 }
                 units="мм"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <CustomSelect
-                value={step2Data.nitrateNitrogen}
-                disabled={!step2Data.plannedFirstYield.display}
-                error={invalidFields.includes("nitrateNitrogen")}
-                range={nitrateNitrogen}
-                id="nitrateNitrogen"
-                label="Доза нитратного азота в почве (слой 0-40см)"
+                value={step2Data.ammoniumNitrate}
+                disabled={false}
+                error={invalidFields.includes("ammoniumNitrate")}
+                range={ammoniumNitrate}
+                id="ammoniumNitrate"
+                label="Аммиачная селитра при/перед посевом"
                 size="small"
                 onUpdate={(id, newValue) =>
-                  store.updateStep2Field(id, newValue)
+                  sunflowerStore.updateStep2Field(id, newValue)
                 }
                 units="кг"
               />
@@ -173,7 +111,7 @@ export default observer(function SeasonsParametrs() {
             <Grid item xs={12} sx={{ pt: "16px !important" }}>
               <Collapse
                 in={
-                  step2Data.nitrateNitrogen !== "Не выбрано" &&
+                  step2Data.ammoniumNitrate !== "Не выбрано" &&
                   step2Data.moistureSpring !== "Не выбрано"
                 }
               >
@@ -192,8 +130,6 @@ export default observer(function SeasonsParametrs() {
                       p: 1,
                     }}
                   >
-                    Требуемое количество аммиачной селитры:{" "}
-                    {step2Data.ammoniumNitrateRequired} кг/га <br />
                     Прогнозируемая урожайность согласно весенней
                     влагообеспеченности: {step3Data.totalresult} ц/га
                   </Typography>
