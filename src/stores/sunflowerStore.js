@@ -1,33 +1,32 @@
 import { makeAutoObservable, observable, reaction } from "mobx";
 
 class SunflowerStore {
+  calculation = {
+    step1: {
+      company: "",
+      region: "Не выбрано",
+      hybrid: "",
+      field: "",
+      square: "",
+      predecessor: "",
+      moisture: "",
+      plannedYield: "",
+    },
+    step2: {
+      phosphorusSupply: "Не выбрано",
+      complexFertilizers: "Не выбрано",
+      ammoniumNitrate: "Не выбрано",
+      moistureSpring: "Не выбрано",
+    },
+    step3: { step1result: 0, totalresult: 0 },
+    invalidFields: [],
+  };
+
   constructor() {
-    this.calculation = {
-      step1: {
-        company: "",
-        region: "Не выбрано",
-        hybrid: "",
-        field: "",
-        square: "",
-        predecessor: "",
-        moisture: "",
-        plannedYield: "",
-      },
-      step2: {
-        phosphorusSupply: "Не выбрано",
-        complexFertilizers: "Не выбрано",
-        ammoniumNitrate: "Не выбрано",
-        moistureSpring: "Не выбрано",
-      },
-      step3: { step1result: 0, totalresult: 0 },
-      invalidFields: [],
-    };
     makeAutoObservable(this);
 
     reaction(
-      () => [
-        this.calculation.step1.moisture,
-      ],
+      () => [this.calculation.step1.moisture],
       () => {
         this.calculateFirstYield();
         this.calculateYield();
@@ -110,23 +109,31 @@ class SunflowerStore {
 
       const actualMoisture = parseInt(moisture, 10);
       const moistureDeviation = Math.abs(optimalMoisture - actualMoisture);
-      const yieldChange = Math.floor(moistureDeviation / deviationStep) * moistureDeviationEffect;
+      const yieldChange =
+        Math.floor(moistureDeviation / deviationStep) * moistureDeviationEffect;
 
-      this.calculation.step3.step1result = actualMoisture < optimalMoisture
-        ? baseYield - yieldChange
-        : baseYield + yieldChange;
+      this.calculation.step3.step1result =
+        actualMoisture < optimalMoisture
+          ? baseYield - yieldChange
+          : baseYield + yieldChange;
     }
   }
 
   calculateYield() {
-    if (this.calculation.step2.phosphorusSupply != "Не выбрано" &&
+    if (
+      this.calculation.step2.phosphorusSupply != "Не выбрано" &&
       this.calculation.step2.complexFertilizers != "Не выбрано" &&
       this.calculation.step2.moistureSpring != "Не выбрано" &&
-      this.calculation.step2.ammoniumNitrate != "Не выбрано") {
-
+      this.calculation.step2.ammoniumNitrate != "Не выбрано"
+    ) {
       let plannedYield = this.calculation.step3.step1result;
 
-      const { phosphorusSupply, complexFertilizers, moistureSpring, ammoniumNitrate } = this.calculation.step2;
+      const {
+        phosphorusSupply,
+        complexFertilizers,
+        moistureSpring,
+        ammoniumNitrate,
+      } = this.calculation.step2;
 
       // Содержание фосфора в почве
       const phosphorusCoefficients = {
@@ -158,14 +165,14 @@ class SunflowerStore {
         complexFertilizersMap[complexFertilizersAmount];
       plannedYield *= complexFertilizersCoefficient;
 
-      // Влагообеспеченность весна 
+      // Влагообеспеченность весна
       const moistureSpringMap = {
         200: 1.1,
         180: 1.05,
         160: 1.0,
         140: 0.85,
         120: 0.7,
-        100: 0.5
+        100: 0.5,
       };
 
       const moistureSpringAmount = moistureSpring;
@@ -181,12 +188,13 @@ class SunflowerStore {
       };
 
       const ammoniumNitrateAmount = ammoniumNitrate;
-      const ammoniumNitrateСoefficient = ammoniumNitrateMap[ammoniumNitrateAmount];
+      const ammoniumNitrateСoefficient =
+        ammoniumNitrateMap[ammoniumNitrateAmount];
       if (ammoniumNitrateСoefficient != 0) {
         plannedYield *= ammoniumNitrateСoefficient;
       }
 
-      // Максиммум обрубаем 
+      // Максиммум обрубаем
       if (plannedYield > 120) {
         plannedYield = 120;
       }

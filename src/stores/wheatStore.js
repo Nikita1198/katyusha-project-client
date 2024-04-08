@@ -1,33 +1,34 @@
 import { makeAutoObservable, observable, reaction } from "mobx";
 
 class WheatStore {
+  calculationWheat = {
+    step1: {
+      company: "",
+      region: "Не выбрано",
+      variety: "",
+      field: "",
+      square: "",
+      predecessor: "",
+      moisture: "",
+      plannedYield: "",
+    },
+    step2: {
+      complexFertilizers: "Не выбрано",
+      ammoniumNitrate: "Не выбрано",
+      seedingRate: "Не выбрано",
+      phosphorusSupply: "Не выбрано",
+      date: null,
+      comment: "Не выбрано",
+      plannedFirstYield: { value: "", display: false },
+      nitrateNitrogen: "Не выбрано",
+      ammoniumNitrateRequired: 0,
+      moistureSpring: "Не выбрано",
+    },
+    step3: { step1result: 0, step2result: 0, totalresult: 0 },
+    invalidFields: [],
+  };
+
   constructor() {
-    this.calculationWheat = {
-      step1: {
-        company: "",
-        region: "Не выбрано",
-        variety: "",
-        field: "",
-        square: "",
-        predecessor: "",
-        moisture: "",
-        plannedYield: "",
-      },
-      step2: {
-        complexFertilizers: "Не выбрано",
-        ammoniumNitrate: "Не выбрано",
-        seedingRate: "Не выбрано",
-        phosphorusSupply: "Не выбрано",
-        date: null,
-        comment: "Не выбрано",
-        plannedFirstYield: { value: "", display: false },
-        nitrateNitrogen: "Не выбрано",
-        ammoniumNitrateRequired: 0,
-        moistureSpring: "Не выбрано",
-      },
-      step3: { step1result: 0, step2result: 0, totalresult: 0 },
-      invalidFields: [],
-    };
     makeAutoObservable(this);
 
     reaction(
