@@ -15,7 +15,6 @@ import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 
 const pages = [
   {
@@ -23,7 +22,7 @@ const pages = [
     url: "https://fugustim.ru/page12469998.html",
     external: true,
   },
-  { title: "Семена", url: "/", external: false },
+  // { title: "Семена", url: "/seeds", external: false },
   { title: "Удобрения", url: "https://fugustim.ru/", external: true },
   { title: "Главная", url: "/", external: false },
 ];
@@ -36,7 +35,7 @@ function HideOnScroll(props) {
   });
 
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide direction="down" in={!trigger} timeout={400}>
       {children}
     </Slide>
   );

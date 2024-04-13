@@ -199,6 +199,10 @@ class SunflowerStore {
         plannedYield = 120;
       }
 
+      if (plannedYield < 0) {
+        plannedYield = 0;
+      }
+
       this.calculation.step3.totalresult = plannedYield.toFixed(1);
     }
   }

@@ -28,8 +28,7 @@ export default observer(function Result() {
               <TableRow sx={{ backgroundColor: rowColor }}>
                 <TableCell colSpan={1}>
                   <Typography sx={{ fontSize: 14 }}>
-                    Поле №{`${result.step1.field}`} Гибрид:
-                    {`${result.step1.hybrid}`}
+                    Поле №{`${result.step1.field}`}
                   </Typography>
                 </TableCell>
                 <TableCell colSpan={1} sx={{ minWidth: 100 }}></TableCell>
@@ -128,8 +127,8 @@ export default observer(function Result() {
             p: 1,
           }}
         >
-          * Урожайность подсолнечника напрямую зависит от выбранного гибрида и
-          может колебаться в диапазоне от 20% до 30%.
+          * Итоговые цифры урожайности напрямую зависят от конкретного гибрида и
+          могут варьироваться от 20 % до 30%.
         </Typography>
       </Box>
     </>
