@@ -6,7 +6,7 @@ function Products({}, ref) {
       <div
         className="bg-white border-b rounded-lg drop-shadow-xl p-4 mb-12"
         data-aos="fade-up"
-        data-aos-delay="300"
+        data-aos-delay="200"
         style={{ marginTop: "-8rem" }}
       >
         <div className="container max-w-5xl mx-auto m-8">

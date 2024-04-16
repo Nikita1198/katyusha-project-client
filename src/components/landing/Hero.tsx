@@ -74,11 +74,11 @@ export default function Hero({ onClick }) {
         }}
       >
         <div
-          className="self-center animate-bounce"
-          style={{ cursor: "pointer" }}
+          className="self-center animate-bounce cursor-pointer"
           onClick={onClick}
+          style={{ cursor: "pointer" }}
         >
-          <div className="bg-white dark:bg-slate-800 p-2 w-14 h-14 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center">
+          <div className="bg-white dark:bg-slate-800 p-2 w-14 h-14 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300">
             <svg
               className="w-8 h-12 text-green-700"
               fill="none"
