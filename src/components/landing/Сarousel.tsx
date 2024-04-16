@@ -15,8 +15,9 @@ export default function Сarousel({ onClick }) {
     <section
       className="relative bg-center bg-cover bg-no-repeat border-b-2 border-b-[#fff8e8]"
       style={{
+        height: "120vh",
         backgroundImage:
-          "linear-gradient(rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 1)), url(./images/wall1.jpg)",
+          "linear-gradient(rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 1)), url(./images/wall2.jpeg)",
       }}
       data-aos="fade-zoom-in"
       data-aos-easing="ease-in-back"
