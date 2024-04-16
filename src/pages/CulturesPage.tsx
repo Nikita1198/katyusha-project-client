@@ -56,7 +56,7 @@ export default function CulturesPage() {
   }, []);
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container maxWidth="md" sx={{ mt: 12, mb: 4 }}>
       <Grow in={true} timeout={500}>
         <Container maxWidth="md">
           <Typography

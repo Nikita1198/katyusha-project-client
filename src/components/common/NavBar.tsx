@@ -42,9 +42,9 @@ function HideOnScroll(props) {
 }
 
 const CustomLogo = styled("img")({
-  width: 85,
-  height: 55,
+  display: "none",
   "@media (max-width:900px)": {
+    display: "block",
     width: 64,
     height: 48,
   },
@@ -80,32 +80,44 @@ export default function NavBar(props) {
             disableGutters
             sx={{ justifyContent: "center", minHeight: 25, height: 66 }}
           >
-            <Typography
-              variant="h3"
-              noWrap
-              component={RouterLink}
-              to={{
-                pathname: "/",
-              }}
+            <Box
+              component="span"
               sx={{
-                mr: 2,
+                ml: 1,
                 display: { xs: "none", md: "flex" },
-                fontWeight: 400,
-                fontFamily: "Marck Script",
-                letterSpacing: ".05rem",
-                overflow: "visible",
-                textDecoration: "none",
-                fontSize: 40,
                 alignItems: "center",
+                lineHeight: "normal",
+                alignSelf: "center",
               }}
             >
-              <Box
-                component="span"
-                sx={{ lineHeight: "normal", alignSelf: "flex-end" }}
+              <img
+                src="./images/wheat-icon.png"
+                alt="wheat-icon"
+                style={{
+                  width: 50,
+                  height: 50,
+                }}
+              />
+              <Typography
+                variant="h3"
+                noWrap
+                component={RouterLink}
+                to={{
+                  pathname: "/",
+                }}
+                sx={{
+                  fontWeight: 400,
+                  fontFamily: "Marck Script",
+                  letterSpacing: ".05rem",
+                  overflow: "visible",
+                  textDecoration: "none",
+                  fontSize: 40,
+                  alignItems: "center",
+                }}
               >
                 Катюша
-              </Box>
-            </Typography>
+              </Typography>
+            </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -199,7 +211,6 @@ export default function NavBar(props) {
                 height: "100%",
                 flexDirection: "row-reverse",
                 display: { xs: "none", md: "flex" },
-                pr: 4,
               }}
             >
               {pages.map((page) =>

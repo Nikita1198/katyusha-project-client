@@ -39,7 +39,7 @@ export default function App() {
       <CssBaseline enableColorScheme />
       <BrowserRouter>
         <NavBar />
-        <Box sx={{ mt: 11 }}>
+        <Box>
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<Navigate to="/home" />} />
