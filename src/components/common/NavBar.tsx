@@ -22,7 +22,7 @@ const pages = [
     url: "https://fugustim.ru/page12469998.html",
     external: true,
   },
-  // { title: "Семена", url: "/seeds", external: false },
+  { title: "Семена", url: "/seeds", external: false },
   { title: "Удобрения", url: "https://fugustim.ru/", external: true },
   { title: "Главная", url: "/", external: false },
 ];

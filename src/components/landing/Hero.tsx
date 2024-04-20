@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import StartButton from "./ui/StartButton";
 
 export default function Hero({ onClick }) {
   return (
@@ -14,8 +15,8 @@ export default function Hero({ onClick }) {
       data-aos-delay="300"
       data-aos-offset="0"
     >
-      <div className="relative max-w-6xl mx-auto pt-16 py-8 px-4 sm:px-6 ">
-        <div className="relative pb-8 pt-12 md:pt-12 md:pb-16">
+      <div className="relative max-w-6xl mx-auto pt-24 md:pt-40 py-8 px-4 sm:px-6 ">
+        <div className="relative pb-8 pt-12 md:pt-12 md:pb-16 bg-white/90 rounded-lg drop-shadow-xl ">
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 ">
             <Typography
               data-aos="fade-up"
@@ -32,32 +33,37 @@ export default function Hero({ onClick }) {
             >
               Катюша
             </Typography>
-            <p
+            <div
               className="text-xl mb-7 mt-2"
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              Ваш надежный помощник в расчете и планировании удобрений для
-              различных сельскохозяйственных культур.
-            </p>
+              <Typography
+                variant="h5"
+                component="h5"
+                sx={{
+                  fontWeight: 400,
+                  letterSpacing: ".05rem",
+                  textDecoration: "none",
+                  alignItems: "center",
+                  m: 2,
+                }}
+              >
+                Ваш надежный помощник в расчете и планировании удобрений для
+                различных сельскохозяйственных культур.
+              </Typography>
+            </div>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
-              <div data-aos="fade-up" data-aos-delay="400">
-                <Button
+              <div data-aos="fade-up" data-aos-delay="400" className="pt-4">
+                <StartButton
                   component={Link}
                   variant="contained"
                   to={{
                     pathname: "/cultures",
                   }}
                 >
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      pt: "3px",
-                    }}
-                  >
-                    Попробовать
-                  </Typography>
-                </Button>
+                  <Typography textAlign="center">Попробовать</Typography>
+                </StartButton>
               </div>
             </div>
           </div>
@@ -65,10 +71,10 @@ export default function Hero({ onClick }) {
       </div>
       <div
         data-aos="zoom-in"
-        data-aos-delay="500"
+        data-aos-delay="1000"
         style={{
           position: "absolute",
-          bottom: 150,
+          bottom: "5vh",
           left: "50%",
           transform: "translateX(-50%)",
         }}
