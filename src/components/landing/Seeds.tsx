@@ -9,8 +9,8 @@ export default function Seeds() {
       data-aos-delay="300"
       data-aos-offset="0"
     >
-      <div className="relative max-w-6xl mx-auto pt-24 md:pt-40 py-8 px-4 sm:px-6">
-        <div className="relative bg-white/90 rounded-lg drop-shadow-xl py-12 md:py-16 px-6">
+      <div className="relative max-w-6xl mx-auto py-8 md:pt-24">
+        <div className="relative p-10 md:py-36 bg-white/90 rounded-lg drop-shadow-xl ">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
             О нас
           </h2>

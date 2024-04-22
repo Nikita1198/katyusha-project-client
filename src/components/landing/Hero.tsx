@@ -12,11 +12,11 @@ export default function Hero({ onClick }) {
       }}
       data-aos="fade-zoom-in"
       data-aos-easing="ease-in-back"
-      data-aos-delay="300"
-      data-aos-offset="0"
+      data-aos-delay="100"
+      data-aos-offset="100"
     >
-      <div className="relative max-w-6xl mx-auto pt-24 md:pt-40 py-8 px-4 sm:px-6 ">
-        <div className="relative pb-8 pt-12 md:pt-12 md:pb-16 bg-white/90 rounded-lg drop-shadow-xl ">
+      <div className="relative max-w-6xl mx-auto py-8 md:pt-24">
+        <div className="relative py-10 md:py-36 bg-white/90 rounded-lg drop-shadow-xl ">
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16 ">
             <Typography
               data-aos="fade-up"
