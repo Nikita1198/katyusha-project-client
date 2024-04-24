@@ -14,7 +14,6 @@ export default function Home() {
 
   React.useEffect(() => {
     AOS.init({
-      once: true,
       duration: 600,
       easing: "ease-out-sine",
     });

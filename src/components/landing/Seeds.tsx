@@ -1,43 +1,48 @@
+import Typography from "@mui/material/Typography/Typography";
 import React from "react";
+import StartButton from "./ui/StartButton";
+import { Link } from "react-router-dom";
 
 export default function Seeds() {
   return (
     <section
-      className="relative h-screen"
-      data-aos="fade-zoom-in"
+      style={{ position: "relative", height: "100vh" }}
       data-aos-easing="ease-in-back"
-      data-aos-delay="300"
-      data-aos-offset="0"
-    >
-      <div className="relative max-w-6xl mx-auto py-8 md:pt-24">
-        <div className="relative p-10 md:py-36 bg-white/90 rounded-lg drop-shadow-xl ">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
-            О нас
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Наименование</h3>
-              <p>Озимая пшеница, яровой ячмень, лён...</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Сорт</h3>
-              <p>Гром, Алексеич, Юока, Степь, Бумба...</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Репродукция</h3>
-              <p>3С, РС-1, РС-2...</p>
+      data-aos="fade-up"
+      data-aos-delay="200"
+      className="bg-trading-tools relative max-w-full sm:mx-4 my-20 py-16 shadow rounded-2xl overflow-hidden bg-white/90">
+      <div className="relative max-w-screen-xl px-4 sm:px-2 mx-auto grid grid-cols-12 gap-x-6">
+        <div data-aos="fade-right" className="col-span-12 lg:col-span-6 space-y-8 sm:space-y-6 px-4 sm:px-6 mt-8">
+          <h2 className="text-4xl font-semibold">Advanced Trading <span className="text-header-gradient">Tools</span></h2>
+          <div className="space-y-2">
+            <h4 className="text-lg font-medium">Professional Access, Non-stop Availability</h4>
+            <p className="paragraph text-sm xl:text-base">
+              We provide premium access to crypto trading for both individuals and institutions through high liquidity,
+              reliable order execution and constant uptime.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <h4 className="text-lg font-medium">A Range of Powerful Apis</h4>
+            <p className="paragraph text-sm xl:text-base">
+              Set up your own trading interface or deploy your algorithmic strategy with our high-performance FIX and
+              HTTP APIs. Connect to our WebSocket for real-time data streaming.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <h4 className="text-lg font-medium">Customer Support</h4>
+            <p className="paragraph text-sm xl:text-base">
+              Premium 24/7 support available to all customers worldwide by phone or email. Dedicated account managers
+              for partners.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row">
+          </div>
+          <div className="col-span-12 lg:col-span-6" v-bind="$attrs">
+            <div className="w-full sm:mt-20 xl:mt-0">
+              <img src="..\images\logos-kk.webp" className="w-full" alt="Logo" />
             </div>
           </div>
-          <p className="mt-8">
-            Весь наш семенной материал выращивается на самых плодородных
-            полях...
-          </p>
-          <div className="mt-8">
-            <h3 className="text-xl font-semibold">
-              Качество семян - залог вашего высокого урожая!
-            </h3>
-          </div>
-          {/* Add images and additional content here */}
+
         </div>
       </div>
     </section>
