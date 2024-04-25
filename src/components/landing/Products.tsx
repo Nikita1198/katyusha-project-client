@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 
-function Products({}, ref) {
+function Products({ }, ref) {
   return (
     <section ref={ref}>
       <div
