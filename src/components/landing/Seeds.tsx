@@ -14,12 +14,12 @@ export default function Seeds() {
         <div
           className="mx-auto py-10 bg-white/90 rounded-2xl shadow">
           <div className="relative max-w-6xl mx-auto p-4 grid grid-cols-12 gap-x-6">
-            <div data-aos="fade-right" className="col-span-12 lg:col-span-6 space-y-8 sm:space-y-6 px-4 sm:px-6">
+            <div data-aos="fade-right" className="col-span-12 lg:col-span-6 space-y-8 sm:space-y-6 px-4 sm:px-6 text-center md:text-left">
               <h2 className="text-4xl font-semibold">Элитные Семена Кировского Завода</h2>
               <div className="space-y-2">
                 <h4 className="text-lg font-medium">Эксклюзивность и Качество</h4>
                 <p className="paragraph text-sm xl:text-base">
-                  Специализированный селекционный отбор обеспечивает высочайшее качество семян, гарантируя урожайность без аналогов.
+                  <Typography> Специализированный селекционный отбор обеспечивает высочайшее качество семян, гарантируя урожайность без аналогов.</Typography>
                 </p>
               </div>
               <div className="space-y-2 hidden sm:block">

@@ -4,9 +4,7 @@ const CulturesPage = React.lazy(() => import("./pages/CulturesPage.tsx"));
 const Calculator = React.lazy(() =>
   import("./pages/calculator/Calculator.tsx"),
 );
-const Seeds = React.lazy(() =>
-  import("./pages/Seeds.tsx"),
-);
+const Seeds = React.lazy(() => import("./pages/Seeds.tsx"));
 const Wheat = React.lazy(() => import("./pages/calculator/Wheat.tsx"));
 const Sunflower = React.lazy(() => import("./pages/calculator/Sunflower.tsx"));
 const Home = React.lazy(() => import("./pages/Home.tsx"));
@@ -52,8 +50,7 @@ export default function App() {
                   </>
                 }
               />
-              <Route path="/seeds" element={<Seeds />}
-              />
+              <Route path="/seeds" element={<Seeds />} />
               <Route path="/cultures" element={<CulturesPage />} />
               <Route path="/calculator" element={<Calculator />}>
                 <Route path="wheat" element={<Wheat />} />
