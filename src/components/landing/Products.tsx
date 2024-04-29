@@ -1,6 +1,15 @@
 import React, { forwardRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import ImageSwiper from "./ui/ImageSwiper";
 
-function Products({ }, ref) {
+function Products({}, ref) {
+  const swiperOptions = {
+    spaceBetween: 10,
+    speed: 2000,
+    centeredSlides: true,
+  };
+
   return (
     <section ref={ref}>
       <div
@@ -31,12 +40,20 @@ function Products({ }, ref) {
               </p>
             </div>
             <div className="w-full sm:w-1/2 p-6">
-              <img src="..\images\product1.jpg" className="rounded-lg" />
+              <ImageSwiper
+                folderPath="..\images\products"
+                autoplayDelay={2500}
+                slideOptions={swiperOptions}
+              />
             </div>
           </div>
           <div className="flex flex-wrap flex-col-reverse sm:flex-row">
             <div className="w-full sm:w-1/2 p-6 mt-6">
-              <img src="..\images\product2.jpg" className="rounded-lg" />
+              <ImageSwiper
+                folderPath="..\images\lifecycle"
+                autoplayDelay={3000}
+                slideOptions={swiperOptions}
+              />
             </div>
             <div className="w-full sm:w-1/2 p-6 mt-6">
               <div className="align-middle">
@@ -67,7 +84,11 @@ function Products({ }, ref) {
               </p>
             </div>
             <div className="w-full sm:w-1/2 p-6">
-              <img src="..\images\product3.jpg" className="rounded-lg" />
+              <ImageSwiper
+                folderPath="..\images\seedlings"
+                autoplayDelay={3500}
+                slideOptions={swiperOptions}
+              />
             </div>
           </div>
         </div>

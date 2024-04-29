@@ -1,7 +1,7 @@
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import Hero from "./Hero";
 import { useProgressiveImage } from "../../hooks/useProgressiveImage";
 
@@ -25,8 +25,9 @@ export default function Сarousel({ onClick }) {
       className="relative bg-center bg-cover bg-no-repeat border-b-2 border-b-[#fff8e8]"
       style={{
         height: "123vh",
-        backgroundImage: `linear-gradient(rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 1)), url(${loaded || placeholder
-          })`,
+        backgroundImage: `linear-gradient(rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 1)), url(${
+          loaded || placeholder
+        })`,
       }}
       data-aos="fade-zoom-in"
       data-aos-easing="ease-in-back"
@@ -46,10 +47,10 @@ export default function Сarousel({ onClick }) {
           navigation={
             isDesktop
               ? {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-                disabledClass: "swiper-button-disabled",
-              }
+                  nextEl: ".swiper-button-next",
+                  prevEl: ".swiper-button-prev",
+                  disabledClass: "swiper-button-disabled",
+                }
               : false
           }
         >
