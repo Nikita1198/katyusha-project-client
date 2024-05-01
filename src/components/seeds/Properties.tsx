@@ -1,118 +1,148 @@
-import React from 'react'
-import { useState, useRef, useEffect } from 'react'
-import ImageToggle from './ImageToggle'
+import React, { useState, useRef, useEffect } from "react";
+import { Box, Typography } from "@mui/material";
 
-export default function Features() {
+const links = [
+  {
+    id: 1,
+    title: "Элитный семенной материал",
+    description: "Лучшие семена для максимального урожая",
+    image: "./images/seeds_landing/image1.jpg",
+    active: true,
+  },
+  {
+    id: 2,
+    title: "Инновационный семенной завод Петкус",
+    description: "Технологии высокой чистоты и качества семян",
+    image: "./images/seeds_landing/image2.jpg",
+    active: false,
+  },
+  {
+    id: 3,
+    title: "Оптовые поставки",
+    description: "Оперативные и надёжные поставки семян",
+    image: "./images/seeds_landing/image3.jpg",
+    active: false,
+  },
+  {
+    id: 4,
+    title: "Качество семян, не имеющее аналогов",
+    description: "Уникальные семена, превосходящие стандарты",
+    image: "./images/seeds_landing/image4.jpg",
+    active: false,
+  },
+];
 
-    const [tab, setTab] = useState<number>(1)
+export default function Properties() {
+  const [tab, setTab] = useState<number>(1);
+  const [currentImage, setCurrentImage] = useState(links[0].image);
 
-    const tabs = useRef<HTMLDivElement>(null)
+  const tabs = useRef<HTMLDivElement>(null);
 
-    const heightFix = () => {
-        if (tabs.current && tabs.current.parentElement) tabs.current.parentElement.style.height = `${tabs.current.clientHeight}px`
+  useEffect(() => {
+    if (tabs.current && tabs.current.parentElement) {
+      tabs.current.parentElement.style.height = `${tabs.current.clientHeight}px`;
     }
+  }, []);
 
-    useEffect(() => {
-        heightFix()
-    }, [])
+  const bgImage =
+    "https://priroda.club/uploads/posts/2022-12/1670601410_priroda-club-p-krasivoe-pole-pshenitsi-krasivo-foto-15.jpg";
 
+  const handleTabClick = (id, image) => {
+    setTab(id);
+    setCurrentImage(image);
+  };
 
-    const bgImage =
-        "https://priroda.club/uploads/posts/2022-12/1670601410_priroda-club-p-krasivoe-pole-pshenitsi-krasivo-foto-15.jpg";
-
-    return (
-        <section
-            className="relative"
-            style={{
-                backgroundImage: `linear-gradient(rgba(255, 248, 232, 1), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 1)), url(${bgImage})`,
-            }}
-        >
-            <div className="relative max-w-6xl mx-auto px-4 sm:px-6"
-                data-aos="fade-zoom-in"
-                data-aos-easing="ease-in-back"
-                data-aos-delay="100"
-                data-aos-offset="100">
-                <div className="pt-12 md:pt-20">
-
-                    {/* Section header */}
-                    <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                        <h1 className="h2 mb-4">Explore the solutions</h1>
-                        <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+  return (
+    <section
+      className="relative bg-center bg-cover bg-no-repeat"
+      style={{
+        minHeight: "100vh",
+        maxHeight: "123vh",
+        backgroundImage: `linear-gradient(rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 0.05), rgba(255, 248, 232, 1)), url(${bgImage})`,
+      }}
+    >
+      <div
+        className="relative max-w-6xl mx-auto px-4 sm:px-6"
+        data-aos="fade-zoom-in"
+        data-aos-easing="ease-in-back"
+        data-aos-delay="200"
+        data-aos-offset="100"
+      >
+        <div className="pt-20 lg:pt-22">
+          <div className="md:grid md:grid-cols-12 md:gap-6">
+            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6">
+              <div className="md:pr-4 lg:pr-12 xl:pr-16 sm:text-left mb-7">
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    lineHeight: "normal",
+                    alignSelf: "center",
+                  }}
+                >
+                  <img
+                    src="./images/seed.png"
+                    alt="wheat-icon"
+                    style={{ width: 50, height: 50 }}
+                  />
+                  <h1 className="mt-3 text-2xl font-mono font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+                    Семена.Элита
+                  </h1>
+                </Box>
+              </div>
+              <div className="mb-8 md:mb-0">
+                {links.map((link) => (
+                  <a
+                    key={link.id}
+                    className={`flex items-center justify-between text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${
+                      tab !== link.id
+                        ? "bg-white shadow-md border-gray-200 hover:shadow-lg"
+                        : "bg-gray-200 border-transparent"
+                    }`}
+                    href="#0"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleTabClick(link.id, link.image);
+                    }}
+                  >
+                    <div>
+                      <div className="font-bold leading-snug tracking-tight mb-1">
+                        {link.title}
+                      </div>
+                      <div className="text-gray-600">{link.description}</div>
                     </div>
-
-                    {/* Section content */}
-                    <div className="md:grid md:grid-cols-12 md:gap-6">
-
-                        {/* Content */}
-                        <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
-                            <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
-                                <h3 className="h3 mb-3">Powerful suite of tools</h3>
-                                <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p>
-                            </div>
-                            {/* Tabs buttons */}
-                            <div className="mb-8 md:mb-0">
-                                <a
-                                    className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                                    href="#0"
-                                    onClick={(e) => { e.preventDefault(); setTab(1); }}
-                                >
-                                    <div>
-                                        <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                                        <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                                    </div>
-                                    <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                                        <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11.953 4.29a.5.5 0 00-.454-.292H6.14L6.984.62A.5.5 0 006.12.173l-6 7a.5.5 0 00.379.825h5.359l-.844 3.38a.5.5 0 00.864.445l6-7a.5.5 0 00.075-.534z" />
-                                        </svg>
-                                    </div>
-                                </a>
-                                <a
-                                    className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                                    href="#0"
-                                    onClick={(e) => { e.preventDefault(); setTab(2); }}
-                                >
-                                    <div>
-                                        <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                                        <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                                    </div>
-                                    <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                                        <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z" fillRule="nonzero" />
-                                        </svg>
-                                    </div>
-                                </a>
-                                <a
-                                    className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                                    href="#0"
-                                    onClick={(e) => { e.preventDefault(); setTab(3); }}
-                                >
-                                    <div>
-                                        <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                                        <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                                    </div>
-                                    <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                                        <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11.334 8.06a.5.5 0 00-.421-.237 6.023 6.023 0 01-5.905-6c0-.41.042-.82.125-1.221a.5.5 0 00-.614-.586 6 6 0 106.832 8.529.5.5 0 00-.017-.485z" fill="#191919" fillRule="nonzero" />
-                                        </svg>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        {/* Tabs items */}
-                        <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1">
-                            <div className="transition-all">
-                                <div className="relative flex flex-col text-center lg:text-right" data-aos="zoom-y-out" ref={tabs}>
-                                    {/* Item 1 */}
-                                    <img className="relative rounded-full" src="../../../public/images/sunflower.jpg" width={96} height={96} alt="Testimonial 01" />
-                                </div>
-                            </div>
-                        </div>
-
+                    <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
+                      <svg
+                        className="w-3 h-3 fill-current"
+                        viewBox="0 0 12 12"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M11.953 4.29a.5.5 0 00-.454-.292H6.14L6.984.62A.5.5 0 006.12.173l-6 7a.5.5 0 00.379.825h5.359l-.844 3.38a.5.5 0 00.864.445l6-7a.5.5 0 00.075-.534z" />
+                      </svg>
                     </div>
-
-                </div>
+                  </a>
+                ))}
+              </div>
             </div>
-        </section>
-    )
+            <div className="max-w-xl flex items-center md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:order-1 md:mt-6">
+              <div className="relative hidden sm:block text-center lg:text-right pt-7 m-6">
+                <div className="-m-4 rounded-md ring-white ring-8 lg:-m-4 transition-opacity duration-900">
+                  <img
+                    src={currentImage}
+                    alt="Current Seed"
+                    className="rounded-md ring-1 ring-white h-full max-h-full"
+                    style={{
+                      opacity: 0.5,
+                      transition: "opacity 0.5s ease-in-out",
+                    }}
+                    onLoad={(e) => (e.currentTarget.style.opacity = "1")}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
